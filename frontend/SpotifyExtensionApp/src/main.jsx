@@ -8,7 +8,9 @@ import Discover from "./roots/Discover.jsx";
 import Inbox from "./roots/Inbox.jsx";
 import Forum from "./roots/Forum.jsx";
 import Library from "./roots/Library.jsx";
+import Landing from "./roots/Landing.jsx";
 
+// import { AuthProvider } from "./components/AuthContext.jsx";
 //import { AuthProvider } from "./components/AuthContext.jsx";
 
 const router = createBrowserRouter([
@@ -28,20 +30,16 @@ const router = createBrowserRouter([
 		path: "/Library",
 		element: <Library />,
 	},
+  {
+    path: "/landing",
+    element: <Landing />
+  }
 ]);
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <AuthProvider>
-// 				<RouterProvider router={router} />
-// 		</AuthProvider>
-//   </React.StrictMode>,
-// )
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
 				<RouterProvider router={router} />
-		
+		</AuthProvider>
   </React.StrictMode>,
 )
