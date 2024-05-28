@@ -10,7 +10,7 @@ import Forum from "./roots/Forum.jsx";
 import Library from "./roots/Library.jsx";
 import Landing from "./roots/Landing.jsx";
 
-// import { AuthProvider } from "./components/AuthContext.jsx";
+import { AuthProvider } from "./components/AuthContext.jsx";
 //import { AuthProvider } from "./components/AuthContext.jsx";
 
 const router = createBrowserRouter([

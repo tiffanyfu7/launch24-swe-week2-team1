@@ -68,9 +68,10 @@ const SidebarContent = () => (
 
 const NavBar = () => {
   return (
-    <Box minH="100vh" bg='black'>
+    // <Box minH="100vh" bg='black'>
+    //   <SidebarContent />
+    // </Box>
       <SidebarContent />
-    </Box>
   );
 };
 
