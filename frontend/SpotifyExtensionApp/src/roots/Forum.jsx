@@ -5,6 +5,7 @@ const Forum = () => {
   return (
     <div>
       <NavBar />
+
     </div>
   )
 }
