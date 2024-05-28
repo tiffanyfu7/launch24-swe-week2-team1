@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '../components/NavBar.jsx';
+import axios from "axios";
 
 const Discover = () => {
   return (
