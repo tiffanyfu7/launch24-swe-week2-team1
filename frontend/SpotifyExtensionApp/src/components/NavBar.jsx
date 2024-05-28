@@ -23,7 +23,7 @@ const LinkItems = [
   { name: 'Inbox', icon: IoIosPaperPlane },
   { name: 'Library', icon: FaRegHeart },
 ];
-c
+
 const NavItem = ({ icon, children, ...rest }) => (
   <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
     <Flex
