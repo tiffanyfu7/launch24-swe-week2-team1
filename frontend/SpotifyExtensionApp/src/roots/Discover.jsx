@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react'
+import NavBar from '../components/NavBar.jsx';
 
-export const Discover = () => {
-
-
-    return (
-        <> 
-            <h1> Discover Page </h1>
-            <button a href=""> Login with spotify </button>
-        </>
-    )
+const Discover = () => {
+  return (
+    <div>
+      <NavBar />
+    </div>
+  )
 }
+
+export default Discover
