@@ -7,7 +7,9 @@ const Forum = () => {
   return (
     <>
       <NavBar />
-      
+      <div className="page-container">
+        <h1>Get The Scoop</h1>
+      </div>
     </>
   )
 }

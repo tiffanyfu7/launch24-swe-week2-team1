@@ -5,7 +5,9 @@ const Inbox = () => {
   return (
     <>
       <NavBar />
-      
+      <div className="page-container">
+        <h1>Inbox</h1>
+      </div>
     </>
   )
 }

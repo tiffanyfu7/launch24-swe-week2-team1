@@ -5,8 +5,8 @@ const Library = () => {
   return (
     <>
       <NavBar />
-      <div> 
-        <h1 align="center"> Hello </h1>
+      <div className="page-container">
+        <h1>Your Library</h1>
       </div>
     </>
   )
