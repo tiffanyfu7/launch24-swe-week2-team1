@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from 'react'
 import NavBar from '../components/NavBar.jsx';
 import SearchBar from '../components/SearchBar.jsx'
 import ProfileCard from '../components/ProfileCard.jsx';
 import axios from 'axios';
+import { AuthContext } from '../components/AuthContext.jsx';
   
 const Discover = () => {
   //fetch all users from Firestore and set to userData
@@ -20,6 +21,8 @@ const Discover = () => {
     fetchUsers();
   }, []);
 
+  const { userID, userName } = useContext(AuthContext);
+
   return (
     
     <>
@@ -31,6 +34,8 @@ const Discover = () => {
         </div>
         <div>
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
+          <h3> {userID} </h3>
+          <h3> {userName} </h3>
           <div className="user-cards-container">
             {userData && userData.map((user, index) => 
               <ProfileCard key={index} profileData={user} variant="user"/>

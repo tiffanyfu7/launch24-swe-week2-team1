@@ -88,15 +88,23 @@ app.get('/callback', function(req, res) {
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
           console.log(body);
-        });
 
-        // we can also pass the token to the browser to make requests from there
-        res.redirect('http://localhost:5173/#' +
+          // adding info from JSON returned when you log in
+          var user_name = body.display_name;
+          var user_id = body.id;
+
+          // we can also pass the token to the browser to make requests from there
+          res.redirect('http://localhost:5173/#' +
           querystring.stringify({
             access_token: access_token,
-            refresh_token: refresh_token
+            refresh_token: refresh_token,
+            user_id: user_id,
+            user_name: user_name,
           }));
-      } else {
+
+        });
+      } 
+      else {
         res.redirect('http://localhost:5173/#' +
           querystring.stringify({
             error: 'invalid_token'
