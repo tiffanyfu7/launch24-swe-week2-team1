@@ -11,6 +11,8 @@ import { IoIosPaperPlane } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import '../NavBar.css';
 import { AuthContext } from './AuthContext';
+import { useMediaQuery } from '@chakra-ui/react';
+
 
 const LinkItems = [
   { name: 'Discover', icon: LuCompass },
@@ -19,6 +21,7 @@ const LinkItems = [
   { name: 'Library', icon: FaRegHeart },
    { name: 'Landing'}
 ];
+
 
 const iconStyle = { color: "black" };
 const iconStyleHover = { color: "white" };
@@ -54,7 +57,7 @@ const NavItem = ({ icon, ...rest }) => (
   </Link>
 );
 
-const SidebarContent = ({ handleLogout }) => (
+const SideBarContent = ({ handleLogout }) => (
   
   <Box
     bg={useColorModeValue('white', 'gray.900')}
@@ -84,13 +87,78 @@ const SidebarContent = ({ handleLogout }) => (
   </Box>
 );
 
-const NavBar = () => {
 
-  const { handleLogout } = useContext(AuthContext);
-
-  return (
-    <SidebarContent handleLogout={handleLogout}/>
+const BottomBarContent = () => (
+    <Box
+      bg={useColorModeValue('white', 'gray.900')}
+      borderTop="1px"
+      borderTopColor={useColorModeValue('gray.200', 'gray.700')}
+      w="100%"
+      paddingRight="5px"
+      paddingLeft="5px"
+      paddingTop="8px"
+      position="fixed" // Use position: fixed
+      bottom="0"
+      left="0"
+      zIndex="1000"
+      display="flex"
+      flexDirection="row"
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      {LinkItems.map((link) => (
+        <Link key={link.name} href={link.name} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+          <Flex
+            align="center"
+            p="6"
+            borderRadius="lg"
+            role="group"
+            cursor="pointer"
+            _hover={{
+              bg: '#2B6361',
+              color: 'white',
+              borderRadius: '25px',
+            }}
+            mr="3"
+            style={{ ...iconStyle }}
+          >
+            {link.icon && (
+              <Icon
+                fontSize="25"
+                as={link.icon}
+                mr="3"
+            ml="3"
+            mt="2"
+              />
+            )}
+          </Flex>
+        </Link>
+      ))}
+      <button style={{ 
+        padding: '10px',
+        backgroundColor: '#2B6361',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        textAlign: 'center',
+        marginBottom: '6px',
+      }}>
+        Log out
+      </button>
+    </Box>
   );
+  
+
+const NavBar = () => {
+    const [isMobile] = useMediaQuery("(max-width: 600px)");
+    const { handleLogout } = useContext(AuthContext);
+
+    return (
+      <>
+        {isMobile ? <BottomBarContent /> : <SideBarContent handleLogout={handleLogout}/>}
+      </>
+    );
 };
 
 export default NavBar;

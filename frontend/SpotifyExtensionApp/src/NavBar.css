@@ -25,26 +25,3 @@ html, body {
 .logout-button:hover {
   background-color: #3e8078;
 }
-
-@media only screen and (max-width: 600px) {
-  .sidebar {
-    display: flex;
-    flex-direction: row;
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    z-index: 10;
-    width: 15%;
-  }
-  .nav-item {
-    bottom: auto;
-  }
-
-  .sidebar .chakra-link {
-    text-align: center;
-  }
-  .logout-button {
-    width: 100%;
-  
-  }
-}
