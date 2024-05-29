@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import React from 'react'
 import NavBar from '../components/NavBar.jsx';
 import SearchBar from '../components/SearchBar.jsx'
 import ProfileCard from '../components/ProfileCard.jsx';
+import axios from 'axios';
   
 const Discover = () => {
 
@@ -41,6 +43,35 @@ const Discover = () => {
   }
   ]
 
+  const [allSongs, setAllSongs] = useState(null);
+  const [allMessages, setAllMessages] = useState(null);
+  const [forums, setForums] = useState(null);
+
+  const fetchUsers = async () => {
+    const response = await axios.get("http://localhost:8000/user");
+    console.log("all songs",  response.data);
+    setAllSongs(response.data);
+  };
+
+  const fetchMessages = async () => {
+    const response = await axios.get("http://localhost:8000/chatmessages");
+    console.log("all messages",response.data);
+    setAllMessages(response.data);
+  };
+
+  const fetchForums = async () => {
+    const response = await axios.get("http://localhost:8000/forum");
+    console.log("forums", response.data);
+    setForums(response.data);
+  };
+
+
+  useEffect(() => {
+    fetchUsers();
+    fetchMessages();
+    fetchForums();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -53,7 +84,7 @@ const Discover = () => {
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
           <div className="user-cards-container">
             {users.map((user, index) => 
-              <ProfileCard key={index} data={user} variant="user"/>
+              <ProfileCard key={index} profileData={user} variant="user"/>
             )}
           </div>
         </div>

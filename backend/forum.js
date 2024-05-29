@@ -7,8 +7,8 @@ const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("fire
 router.get("/", async (req, res) => {
     try {
         let ret = [];
-        const docRef = await getDocs(collection(db, "messages"));
-        console.log("docRef from messages in backend", docRef);
+        const docRef = await getDocs(collection(db, "forum"));
+        console.log("docRef in get", docRef);
 
         docRef.forEach((doc) => {
             ret.push({
