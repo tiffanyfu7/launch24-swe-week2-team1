@@ -16,14 +16,15 @@ const LinkItems = [
   { name: 'Forum', icon: LuMessagesSquare },
   { name: 'Inbox', icon: IoIosPaperPlane },
   { name: 'Library', icon: FaRegHeart },
-  { name: 'Landing'}
+   { name: 'Landing'}
 ];
 
 const iconStyle = { color: "black" };
 const iconStyleHover = { color: "white" };
 
+
 const NavItem = ({ icon, ...rest }) => (
-  <Link href={icon.href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+  <Link href={icon.name} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
     <Flex
       align="center"
       p="6"
