@@ -58,19 +58,7 @@ const Forum = () => {
           forumData &&
           forumData.map((forum) => (
             <div key={forum.id}>
-              <ForumCard data={forum} />
-              <button 
-                onClick={() => handleForumCardClick(forum.id)} 
-                className="enter-forum-button" 
-                style={{ 
-                  backgroundColor: 'transparent', 
-                  border: 'none', 
-                  cursor: 'pointer', 
-                  padding: '10px' 
-                }}
-              >
-                <FaArrowRight color="white" size={45} />
-              </button>
+              <ForumCard data={forum} handleForumCardClick={handleForumCardClick}/>
             </div>
           ))
         )}

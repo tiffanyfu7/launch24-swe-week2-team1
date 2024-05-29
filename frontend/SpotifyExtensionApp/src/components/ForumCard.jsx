@@ -1,9 +1,9 @@
 import React from 'react'
-import '../roots/forum.css'
+import '../styles/forum.css'
 
-const ForumCard = ({data}) => {
+const ForumCard = ({data, handleForumCardClick}) => {
   return (
-    <div className="forum-card-container">
+    <button className="forum-card-container" onClick={() => handleForumCardClick(forum.id)}>
         <img className="album-cover" src={data.albumcover} />
         <h2 className="album-name"> {data.albumname} </h2>
          <div className="right-side"> 
@@ -15,8 +15,9 @@ const ForumCard = ({data}) => {
                 <h5>{data.replies.length}</h5>
                   <h5>Replies</h5>  
             </div>
+            <FaArrowRight color="white" size={45} />
         </div> 
-    </div>
+    </button>
   )
 }
 
