@@ -11,20 +11,27 @@ const Inbox = () => {
   //const { userID } = useContext(AuthContext);
   const userID = "heSbXlYFOjsIL9XYO6ty";
 
-  const [chatId, setChatId] = useState("");
+  const [selectedChatId, setSelectedChatId] = useState("");
   const [chatData, setChatData] = useState(null);
   const userChatIds = [];
 
-  const fetchChats = async () => {
+  const [tempChat, setTempChat] = useState(null);
+  const fetchChatId = async (chatId) => {
+    const response = await axios.get(`http://localhost:8000/chat/${chatId}`);
+    setTempChat(response.data);
+    //console.log(tempData);
+  }
+
+  const fetchAllChats = async () => {
     const response = await axios.get("http://localhost:8000/chat");
-    console.log("chats: ", response.data);
     setChatData(response.data);
   };
 
   useEffect(() => {
-    fetchChats();
+    fetchAllChats();
   }, []);
 
+  //find all chats current user is in
   useEffect(() => {
     if (chatData !== null) {
       chatData.forEach((chat) => {
@@ -34,14 +41,21 @@ const Inbox = () => {
           userChatIds.push(chat.id)
         }
       })
-      console.log(userChatIds);
     }
   }, [chatData])
 
+  const chatsWithUser = []
+
   useEffect(() => {
     if (userChatIds !== null) {
-      for (const chatId in userChatIds) {
-        //get the chat from 
+      for (const chatId of userChatIds) {
+        //get the chat information from database
+        console.log(chatId);
+        fetchChatId(chatId);
+        if (tempChat !== null) {
+          console.log(tempChat);
+          
+        }
       }
     }
 
@@ -50,14 +64,12 @@ const Inbox = () => {
   // https://stackoverflow.com/questions/46568850/what-is-firebase-firestore-reference-data-type-good-for
   // if chat.messengers contains user.id ()
 
-  // 1. see if our referenceid is in the chat
-  // 2. get subset of chats we are in
   // 3. for each chat push to a new chatWithUser array
     // recievers: loop through messengers, add ids of messengers that aren't you (referenecId)
   // recent message: get last messageId in message array, find message of that messageId
   
   
-  const chatsWithUser = [{
+  const chatsWithUser1 = [{
     id: "chatID1",
     recievers: [
       {
@@ -88,9 +100,9 @@ const Inbox = () => {
         <div>
             <h1>Inbox</h1>
         </div> 
-        {chatId === "" && (
+        {selectedChatId === "" && (
           <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', marginBottom: '70px' }}>
-              <SearchBar placeholder="Search by username..." />
+              <SearchBar placeholder="Search Conversations..." />
               {/* <button
                 style={{ 
                   marginLeft: '10px', 
@@ -110,14 +122,14 @@ const Inbox = () => {
               </button> */}
           </div>
         )}
-        {chatId === "" ? (
-            chatsWithUser.map((chat) =>
-              <ChatCard key={chat.id} chat={chat} setChatId={setChatId}/>
+        {selectedChatId === "" ? (
+            chatsWithUser1.map((chat) =>
+              <ChatCard key={chat.id} chat={chat} setSelectedChatId={setSelectedChatId}/>
             )
           ) : (
             <>
               <button 
-                onClick={ () => setChatId("") }
+                onClick={ () => setSelectedChatId("") }
                 className="back-button" 
                 style={{ 
                   backgroundColor: 'transparent', 
@@ -128,7 +140,7 @@ const Inbox = () => {
               >
                 <FaArrowLeft color="white" size={45} />
               </button>
-              <h1 >You have entered chat {chatId} </h1>
+              <h1 >You have entered chat {selectedChatId} </h1>
             </>
           )
         }

@@ -2,10 +2,10 @@ import React from 'react'
 import '../styles/inbox.css'
 import { FaArrowRight } from "react-icons/fa";
 
-const ChatCard = ({ chat, setChatId }) => {
+const ChatCard = ({ chat, setSelectedChatId }) => {
 
     return (
-        <button onClick={ ()=> setChatId(chat.id) } className="chat-card-container">
+        <button onClick={ ()=> setSelectedChatId(chat.id) } className="chat-card-container">
             {chat.recievers.map((u, index) => 
                 <div key={index} className="receiver-info">
                     <img src={u.profilepic} width="50px" className="chat-profile-pic"/>
