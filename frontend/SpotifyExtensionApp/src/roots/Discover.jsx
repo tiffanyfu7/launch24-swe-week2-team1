@@ -21,15 +21,16 @@ const Discover = () => {
   //   setAllMessages(response.data);
   // };
 
-  const postUser = async () => {
-    const response = await axios.post("http://localhost:8000/user");
-    console.log("forums", response.data);
-    // setForums(response.data);
-  };
+  // const postUser = async () => {
+  //   const response = await axios.post("http://localhost:8000/user");
+  //   console.log("forums", response.data);
+  //   // setForums(response.data);
+  // };
 
 
   useEffect(() => {
     fetchUsers();
+    // postUser();
   }, []);
 
   return (

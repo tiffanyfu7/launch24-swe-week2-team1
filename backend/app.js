@@ -138,5 +138,14 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+const userRouter = require("./user");
+const chatmessagesRouter = require("./chatmessages");
+const forumsRouter = require("./forum");
+
+
+app.use("/user", userRouter);
+app.use("/chatmessages", chatmessagesRouter);
+app.use("/forum", forumsRouter);
+
 console.log('Listening on 8000');
 app.listen(8000); // port -> 8000
