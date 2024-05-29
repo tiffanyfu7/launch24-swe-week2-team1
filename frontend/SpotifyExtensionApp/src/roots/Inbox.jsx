@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar.jsx';
 import ChatCard from '../components/ChatCard.jsx';
-import SearchBar from '../components/SearchBar.jsx';
 import { FaArrowLeft } from "react-icons/fa";
 import SearchBar from '../components/SearchBar.jsx';
 
@@ -45,7 +44,6 @@ const Inbox = () => {
     recentmessage: "We have to go to his concert!"
   }]
 
-
   return (
     <>
       <NavBar />
@@ -54,28 +52,34 @@ const Inbox = () => {
         <div>
             <h1>Inbox</h1>
         </div> 
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', marginBottom: '70px' }}>
-            <SearchBar placeholder="Search by username..." />
-            <button
-            style={{ marginLeft: '10px' 
-            ,padding: '12px',
-            backgroundColor: '#F9BC60',
-            color: 'black',
-            border: 'none',
-            borderRadius: '5px',
-            fontSize: '20px',
-            cursor: 'pointer',
-            textAlign: 'center',
-            marginBottom: '6px', }}
-            className="filter-button"
-            >Filter</button>
-        </div>
-        {chatId === "" ?
+        {chatId === "" && (
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', marginBottom: '70px' }}>
+              <SearchBar placeholder="Search by username..." />
+              {/* <button
+                style={{ 
+                  marginLeft: '10px', 
+                  padding: '12px',
+                  backgroundColor: '#F9BC60',
+                  color: 'black',
+                  border: 'none',
+                  borderRadius: '5px',
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  marginBottom: '6px', 
+                }}
+                className="filter-button"
+              >
+                Sort By
+              </button> */}
+          </div>
+        )}
+        {chatId === "" ? (
             chatsWithUser.map((chat) =>
-              <ChatCard chat={chat} setChatId={setChatId}/>
+              <ChatCard chat={chat} setChatId={setChatId} key={chat.id}/>
             )
-          :
-          <>
+          ) : (
+            <>
               <button 
                 onClick={ () => setChatId("") }
                 className="back-button" 
@@ -88,13 +92,14 @@ const Inbox = () => {
               >
                 <FaArrowLeft color="white" size={45} />
               </button>
-              <h1>You have entered chat {chatId}</h1>
+              <h1 >You have entered chat {chatId} </h1>
+              
             </>
+          )
         }
       </div>
     </>
   )
-  
 }
 
 export default Inbox;
