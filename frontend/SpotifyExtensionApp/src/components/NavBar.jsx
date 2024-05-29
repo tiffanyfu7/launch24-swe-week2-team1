@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Flex,
@@ -10,6 +10,7 @@ import { LuMessagesSquare, LuCompass } from "react-icons/lu";
 import { IoIosPaperPlane } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import '../NavBar.css';
+import { AuthContext } from './AuthContext';
 
 const LinkItems = [
   { name: 'Discover', icon: LuCompass },
@@ -53,7 +54,8 @@ const NavItem = ({ icon, ...rest }) => (
   </Link>
 );
 
-const SidebarContent = () => (
+const SidebarContent = ({ handleLogout }) => (
+  
   <Box
     bg={useColorModeValue('white', 'gray.900')}
     borderRight="1px"
@@ -77,14 +79,17 @@ const SidebarContent = () => (
     </Box>
     {/*  TODO: ahbinav implement logout functionality */}
     <Box marginBottom={20} >
-      <button className="logout-button">Log out</button>
+      <button className="logout-button" onClick={handleLogout}>Log out</button>
     </Box>
   </Box>
 );
 
 const NavBar = () => {
+
+  const { handleLogout } = useContext(AuthContext);
+
   return (
-    <SidebarContent />
+    <SidebarContent handleLogout={handleLogout}/>
   );
 };
 
