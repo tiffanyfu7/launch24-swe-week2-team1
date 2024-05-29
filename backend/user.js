@@ -1,3 +1,4 @@
+
 var request = require("request");
 const express = require("express");
 const router = express.Router();
@@ -35,13 +36,12 @@ async function getTrackInfo(access_token) {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + access_token },
     });
-    // console.log(response.json())
   
     return await response.json();
 }
 
-async function getUserTopTracks(access_token) {
-  const response = await fetch("https://api.spotify.com/v1/me/top/tracks", {
+async function getUserTopAllTimeTracks(access_token) {
+  const response = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=long_term", {
     method: "GET",
     headers: { Authorization: "Bearer " + access_token },
   });
@@ -49,6 +49,16 @@ async function getUserTopTracks(access_token) {
   return await response.json();
 }
 
+async function getUserTopAllTimeTracks(access_token) {
+    const response = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=long_term", {
+      method: "GET",
+      headers: { Authorization: "Bearer " + access_token },
+    });
+  
+    return await response.json();
+  }
+
+// get user info
 getToken().then((response) => {
   getUserInfo(response.access_token).then((profile) => {
     addDoc(collection(db, "users"), {
@@ -60,8 +70,9 @@ getToken().then((response) => {
   });
 });
 
+// get all time top
 getToken().then((response) => {
-  getUserTopTracks(response.access_token).then((topTracks) => {
+    getUserTopAllTimeTracks(response.access_token).then((topTracks) => {
     const usersRef = collection(db, "users");
     const q = query(
       usersRef,
@@ -69,21 +80,15 @@ getToken().then((response) => {
     );
 
     const querySnapshot = getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
+    const userToUpdate = querySnapshot[0].id;
 
-    updateDoc(doc(db, "users"), {
-        topTracks
+    updateDoc(doc(db, "users", userToUpdate), {
+        topSongs: topTracks.items
     });
   });
 });
 
-getToken().then((response) => {
-    getUserTopTracks(response.access_token).then((topTracks) => {
-      console.log(topTracks);
-    });
-  });
+
 
 router.get("/", async (req, res) => {
   try {
