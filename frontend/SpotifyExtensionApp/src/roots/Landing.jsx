@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { AuthContext } from '../components/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 // import NavBar from '../components/NavBar.jsx';
 
 const Landing = () => {
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
-  const location = useLocation();
+  
+  const { accessToken } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const hash = location.hash;
-    if (hash) {
-      const params = new URLSearchParams(hash.slice(1));
-      const _accessToken = params.get('access_token');
-      const _refreshToken = params.get('refresh_token');
-      if (_accessToken && _refreshToken) {
-        setAccessToken(_accessToken);
-        setRefreshToken(_refreshToken);
-        window.location.hash = ''; // Remove the hash from the URL
-      }
+    if (accessToken) {
+      navigate('/Discover');
     }
-  }, [location]);
+  }, [accessToken, navigate])
+
 
   const handleLogin = () => {
     window.location.href = 'http://localhost:8000/login';
@@ -28,16 +24,17 @@ const Landing = () => {
   return (
     <div>
       {/* <NavBar /> */}
-      <h1>Spotify Authentication</h1>
-      {!accessToken ? (
+      <h1> Welcome Back </h1>
+      <h3> Find your Groove </h3>
+      {!accessToken && (
         <button onClick={handleLogin}>Log in with Spotify</button>
-      ) : (
-        <div>
-          <h2>Logged in</h2>
-          <p>Access Token: {accessToken}</p>
-          <p>Refresh Token: {refreshToken}</p>
-        </div>
-      )}
+      )} 
+      {/* : (
+         <div>
+           <h2>Logged in</h2>
+           <button onClick={handleLogout}> Logout </button>
+         </div>
+       ) */}
     </div>
   );
   
