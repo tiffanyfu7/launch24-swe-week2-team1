@@ -4,6 +4,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 const ChatCard = ({ chat, setChatId }) => {
 
+    const handleBackClick = () => {
+        setChatId("");
+    };
+
     return (
         <button onClick={ ()=> setChatId(chat.id) } className="chat-card-container">
             <div className="receiver-info">
