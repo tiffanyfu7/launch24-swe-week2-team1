@@ -18,7 +18,6 @@
 
 .receiver-info {
     width: 25%;
-    /* background-color: green; */
     overflow-x: scroll;
     display: inline-flex;
     gap: 10px;
