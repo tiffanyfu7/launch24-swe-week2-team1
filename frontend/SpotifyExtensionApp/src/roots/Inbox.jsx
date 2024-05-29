@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar.jsx';
 import ChatCard from '../components/ChatCard.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import { FaArrowLeft } from "react-icons/fa";
+import SearchBar from '../components/SearchBar.jsx';
 
 const Inbox = () => {
   const [chatId, setChatId] = useState("");
@@ -50,8 +51,26 @@ const Inbox = () => {
       <NavBar />
   
       <div className="page-container">
-        <h1>Inbox</h1>
-        {chatId == "" ?
+        <div>
+            <h1>Inbox</h1>
+        </div> 
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', marginBottom: '70px' }}>
+            <SearchBar placeholder="Search by username..." />
+            <button
+            style={{ marginLeft: '10px' 
+            ,padding: '12px',
+            backgroundColor: '#F9BC60',
+            color: 'black',
+            border: 'none',
+            borderRadius: '5px',
+            fontSize: '20px',
+            cursor: 'pointer',
+            textAlign: 'center',
+            marginBottom: '6px', }}
+            className="filter-button"
+            >Filter</button>
+        </div>
+        {chatId === "" ?
             chatsWithUser.map((chat) =>
               <ChatCard chat={chat} setChatId={setChatId}/>
             )
