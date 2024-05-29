@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
     try {
         let ret = [];
         const docRef = await getDocs(collection(db, "users"));
+        console.log("docRef in get", docRef);
 
         docRef.forEach((doc) => {
             ret.push({

@@ -17,7 +17,7 @@ const userRouter = require("./user");
 const chatmessagesRouter = require("./chatmessages");
 
 app.use("/posts", postsRouter);
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 app.use("/chatmessages", chatmessagesRouter);
 
 app.listen(port, () => {console.log(`successfully connected to port ${port}`)})
