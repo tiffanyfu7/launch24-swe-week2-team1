@@ -25,8 +25,24 @@
 
 .recent-message {
     margin-left: 5%;
+    color: #ABD1C6;
 }
 
 .arrow {
     margin: 7px 10px 0px auto;
 }
+
+.filter-button {
+    width: auto;
+    padding: 10px;
+    background-color: #2B6361;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .filter-button:hover {
+    background-color: #ae8342;
+  }

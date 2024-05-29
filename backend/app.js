@@ -39,7 +39,7 @@ app.get('/login', function(req, res) {
       scope: scope,
       redirect_uri: redirect_uri,
       state: state,
-      show_dialog: true
+      show_dialog: true // to make sure you always go to spotify log-in everytime log in button is clicked
     }));
 });
 

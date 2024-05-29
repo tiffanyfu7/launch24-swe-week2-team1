@@ -1,15 +1,10 @@
 import { createContext, useState, useEffect } from "react";
-// import { useLocation } from 'react-router-dom';
 
 const AuthContext = createContext();
 
-const AuthProvider = ({ children, location }) => {
-	// const [user, setUser] = useState(null);
+const AuthProvider = ({ children, location, navigate }) => {
 	const [accessToken, setAccessToken] = useState(null);
 	const [refreshToken, setRefreshToken] = useState(null);
-	
-	// can't useLocation() because it is only allowed for Router components
-	//const location = useLocation();
 
 	useEffect(() => {
 		const hash = location.hash;
@@ -43,6 +38,7 @@ const AuthProvider = ({ children, location }) => {
 		setRefreshToken(null);
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
+		navigate("/"); // navigate back to landing page
 	  }
 
 	  return (
@@ -50,16 +46,6 @@ const AuthProvider = ({ children, location }) => {
 			{children}
 		</AuthContext.Provider>
 	  )
-
-	// const login = (userData) => {
-	// 	setUser(userData);
-	// };
-
-	// const logout = () => {
-	// 	setUser(null);
-	// };
-
-	// return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext, AuthProvider };

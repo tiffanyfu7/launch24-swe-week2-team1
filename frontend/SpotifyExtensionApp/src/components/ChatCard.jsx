@@ -17,6 +17,7 @@ const ChatCard = ({ chat, setChatId }) => {
             <h4 className="recent-message"> {chat.recentmessage} </h4>
             <FaArrowRight color="white" className="arrow"size={45} />
         </button>
+        
     )
 }
 
