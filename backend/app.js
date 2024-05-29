@@ -5,6 +5,9 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
+const db = require("./firebase");
+const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
+
 require("dotenv").config();
 var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -136,27 +139,20 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8000');
-app.listen(8000); // port -> 8000
 
-const express = require("express");
-const app = express();
-const port = 5000;
+const port = 8000;
 app.use(express.json());
 
-const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
 
-const cors = require("cors");
-app.use(cors());
-
-const postsRouter = require("./posts");
 const userRouter = require("./user");
 const chatmessagesRouter = require("./chatmessages");
+const forumsRouter = require("./forum");
 
-app.use("/posts", postsRouter);
+
 app.use("/user", userRouter);
 app.use("/chatmessages", chatmessagesRouter);
+app.use("/forum", forumsRouter);
+
 
 app.listen(port, () => {console.log(`successfully connected to port ${port}`)})
 

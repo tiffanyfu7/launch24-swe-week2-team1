@@ -3,6 +3,7 @@ import React from 'react'
 import NavBar from '../components/NavBar.jsx';
 import SearchBar from '../components/SearchBar.jsx'
 import ProfileCard from '../components/ProfileCard.jsx';
+import axios from 'axios';
   
 const Discover = () => {
 
@@ -43,21 +44,32 @@ const Discover = () => {
   ]
 
   const [allSongs, setAllSongs] = useState(null);
+  const [allMessages, setAllMessages] = useState(null);
+  const [forums, setForums] = useState(null);
 
   const fetchUsers = async () => {
-    const response = await axios.get("http://localhost:5000/user");
-    console.log("response", response.data);
+    const response = await axios.get("http://localhost:8000/user");
+    console.log("all songs",  response.data);
     setAllSongs(response.data);
   };
 
   const fetchMessages = async () => {
-    const response = await axios.get("http://localhost:5000/user");
-    console.log("response", response.data);
-    setAllSongs(response.data);
+    const response = await axios.get("http://localhost:8000/chatmessages");
+    console.log("all messages",response.data);
+    setAllMessages(response.data);
   };
+
+  const fetchForums = async () => {
+    const response = await axios.get("http://localhost:8000/forum");
+    console.log("forums", response.data);
+    setForums(response.data);
+  };
+
 
   useEffect(() => {
     fetchUsers();
+    fetchMessages();
+    fetchForums();
   }, []);
 
   return (

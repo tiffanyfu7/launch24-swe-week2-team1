@@ -1,5 +1,3 @@
-// require(“dotenv”).config()
-
 const express = require("express");
 const router = express.Router();
 
@@ -8,8 +6,9 @@ const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("fire
 
 router.get("/", async (req, res) => {
     try {
-        // let ret = [];
-        const docRef = await getDocs(collection(db, "users"));
+        let ret = [];
+        const docRef = await getDocs(collection(db, "forum"));
+        console.log("docRef in get", docRef);
 
         docRef.forEach((doc) => {
             ret.push({
@@ -18,15 +17,11 @@ router.get("/", async (req, res) => {
             })
         }) 
 
-        console.log(ret);
-
         res.status(200).json(ret)
     } catch(e) {
         res.status(400).json({error: `Error fetching user data ${e}`})
     }
 })
-
-
 
 
 module.exports = router;

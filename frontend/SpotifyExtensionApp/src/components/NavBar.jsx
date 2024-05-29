@@ -18,16 +18,12 @@ const LinkItems = [
   { name: 'Landing'}
 ];
 
-<<<<<<< HEAD
-const NavItem = ({ icon, children, ...rest }) => (
-  <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-=======
+
 const iconStyle = { color: "black" };
 const iconStyleHover = { color: "white" };
 
 const NavItem = ({ icon, ...rest }) => (
   <Link href={icon.name} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} >
->>>>>>> main
     <Flex
       align="center"
       p="4"
