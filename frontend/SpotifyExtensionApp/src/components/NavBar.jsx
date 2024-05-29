@@ -21,7 +21,7 @@ const iconStyle = { color: "black" };
 const iconStyleHover = { color: "white" };
 
 const NavItem = ({ icon, ...rest }) => (
-  <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} >
+  <Link href={icon.name} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} >
     <Flex
       align="center"
       p="4"
@@ -35,7 +35,7 @@ const NavItem = ({ icon, ...rest }) => (
         borderRadius: '25',
       }}
       {...rest}>
-      {icon && (
+      {icon.icon && (
         <Icon
           mr="4"
           fontSize="45"
@@ -43,7 +43,7 @@ const NavItem = ({ icon, ...rest }) => (
           paddingBottom={12}
           style={iconStyle}
           _groupHover={iconStyleHover}
-          as={icon}
+          as={icon.icon}
           paddingRight={10}
           paddingLeft={10}
         />
@@ -59,9 +59,12 @@ const SidebarContent = () => (
     borderRightColor={useColorModeValue('gray.200', 'gray.700')}
     w={{ base: 'full', md: 60 }}
     pos="fixed"
-    h="100vh">
+    h="100vh"
+  
+  >
+    
     {LinkItems.map((link) => (
-      <NavItem key={link.name} icon={link.icon} />
+      <NavItem key={link.name} icon={link} />
     ))}
   </Box>
 );
@@ -71,7 +74,7 @@ const NavBar = () => {
     // <Box minH="100vh" bg='black'>
     //   <SidebarContent />
     // </Box>
-      <SidebarContent />
+    <SidebarContent />
   );
 };
 
