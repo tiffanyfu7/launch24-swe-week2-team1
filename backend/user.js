@@ -21,7 +21,7 @@ async function getToken() {
       },
     });
   
-    return await response.json();
+    return response.json();
 
   }
 
@@ -50,20 +50,26 @@ async function getTrackInfo(access_token) {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + access_token },
     });
-    console.log(response.json())
+    // console.log(response.json())
   
-    // return await response.json();
+    return response.json();
 }
 
-async function getUserInfo(access_token) {
-    const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + access_token },
-    });
+// getToken().then(response => {
+//     getTrackInfo(resp)
+// })
+
+// async function getUserInfo(access_token) {
+//     const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
+//       method: 'GET',
+//       headers: { 'Authorization': 'Bearer ' + access_token },
+//     });
 
   
-    return await response.json();
-}
+//     return await response.json();
+// }
+
+
 
 // const getTrackInfo = async () => {
 //     const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
@@ -79,13 +85,27 @@ async function getUserInfo(access_token) {
 // })
 
 
-  
-  getToken().then(response => {
-    getTrackInfo(response.access_token).then(profile => {
-      console.log(profile)
-    })
-  });
+  router.post("/", async (req, res) => {
+    try {
+        let profileInfo = null;
+        getToken().then(response => {
+            getTrackInfo(response.access_token).then(profile => {
+              profileInfo = profile
+            })
+          });
 
+        const docRef = await addDoc(collection(db, "users"), {
+            username: "name",
+        });
+        console.log(docRef.data());
+
+        res.status(200).json({message: "profileInfo"})
+        
+    } catch (e) {
+        res.status(400).json({error: `Error setting user data ${e}`})
+    }
+  })
+ 
 
 
 

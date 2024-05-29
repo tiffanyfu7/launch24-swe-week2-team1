@@ -66,6 +66,13 @@ const Discover = () => {
   };
 
 
+  const postUser = async () => {
+    const response = await axios.post("http://localhost:8000/user");
+    console.log("forums", response.data);
+    // setForums(response.data);
+  };
+
+
   useEffect(() => {
     fetchUsers();
     fetchMessages();
