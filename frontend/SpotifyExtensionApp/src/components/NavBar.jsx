@@ -12,10 +12,11 @@ import { FaRegHeart } from "react-icons/fa";
 import '../NavBar.css';
 
 const LinkItems = [
-  { name: 'Discover', icon: LuCompass, href: '/discover' },
-  { name: 'Forum', icon: LuMessagesSquare, href: '/forum' },
-  { name: 'Inbox', icon: IoIosPaperPlane, href: '/inbox' },
-  { name: 'Library', icon: FaRegHeart, href: '/library' },
+  { name: 'Discover', icon: LuCompass },
+  { name: 'Forum', icon: LuMessagesSquare },
+  { name: 'Inbox', icon: IoIosPaperPlane },
+  { name: 'Library', icon: FaRegHeart },
+  { name: 'Landing'}
 ];
 
 const iconStyle = { color: "black" };
