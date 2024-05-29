@@ -1,18 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar.jsx';
 import ChatCard from '../components/ChatCard.jsx';
 import { FaArrowLeft } from "react-icons/fa";
 import SearchBar from '../components/SearchBar.jsx';
-
+import axios from 'axios';
+import { AuthContext } from '../components/AuthContext.jsx';
+import '../styles/inbox.css';
 
 const Inbox = () => {
-  const [chatId, setChatId] = useState("");
-  // chats in Firestore = [{
-  //    id: "id"
-  //   messages: ["referenceToChat"],
-  //   messengers: ["referenceToUser","referenceToUser"]
-  // }]
+  //const { userID } = useContext(AuthContext);
+  const userID = "heSbXlYFOjsIL9XYO6ty";
 
+  const [chatId, setChatId] = useState("");
+  const [chatData, setChatData] = useState(null);
+  const userChatIds = [];
+
+  const fetchChats = async () => {
+    const response = await axios.get("http://localhost:8000/chat");
+    console.log("chats: ", response.data);
+    setChatData(response.data);
+  };
+
+  useEffect(() => {
+    fetchChats();
+  }, []);
+
+  useEffect(() => {
+    if (chatData !== null) {
+      chatData.forEach((chat) => {
+        let messengers = chat.messengers;
+        console.log(messengers)
+        if (messengers.includes(userID)) {
+          userChatIds.push(chat.id)
+        }
+      })
+      console.log(userChatIds);
+    }
+  }, [chatData])
+
+  useEffect(() => {
+    if (userChatIds !== null) {
+      for (const chatId in userChatIds) {
+        //get the chat from 
+      }
+    }
+
+  }, [userChatIds])
   // using reference strings and queries
   // https://stackoverflow.com/questions/46568850/what-is-firebase-firestore-reference-data-type-good-for
   // if chat.messengers contains user.id ()
@@ -79,7 +112,7 @@ const Inbox = () => {
         )}
         {chatId === "" ? (
             chatsWithUser.map((chat) =>
-              <ChatCard chat={chat} setChatId={setChatId} key={chat.id}/>
+              <ChatCard key={chat.id} chat={chat} setChatId={setChatId}/>
             )
           ) : (
             <>
@@ -96,7 +129,6 @@ const Inbox = () => {
                 <FaArrowLeft color="white" size={45} />
               </button>
               <h1 >You have entered chat {chatId} </h1>
-              
             </>
           )
         }

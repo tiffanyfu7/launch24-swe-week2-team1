@@ -41,8 +41,8 @@
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-  }
-  
+}
+
 .filter-button:hover {
     background-color: #ae8342;
 }
