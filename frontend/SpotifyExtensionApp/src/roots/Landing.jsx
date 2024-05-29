@@ -3,9 +3,14 @@ import NavBar from '../components/NavBar.jsx';
 
 const Landing = () => {
   return (
-    <div>
+    <>
       <NavBar />
-    </div>
+      <div> 
+        <a href="http://localhost:8000/login"> 
+            <button> Log in with spotify </button>
+        </a>
+      </div>
+    </>
   )
 }
 

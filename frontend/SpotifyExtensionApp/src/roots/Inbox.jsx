@@ -3,9 +3,10 @@ import NavBar from '../components/NavBar.jsx';
 
 const Inbox = () => {
   return (
-    <div>
+    <>
       <NavBar />
-    </div>
+      
+    </>
   )
 }
 

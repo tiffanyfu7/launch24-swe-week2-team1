@@ -2,11 +2,14 @@ import React from 'react'
 import NavBar from '../components/NavBar.jsx';
 
 const Discover = () => {
-  return (
-    <div>
-      <NavBar />
-    </div>
-  )
+
+    return (
+        <>
+            <NavBar />
+            
+            
+        </>
+    )
 }
 
 export default Discover
