@@ -1,4 +1,3 @@
-
 var request = require('request');
 const express = require("express");
 const router = express.Router();
@@ -10,41 +9,20 @@ var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 
 async function getToken() {
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      body: new URLSearchParams({
-        'grant_type': 'client_credentials',
-      }),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
-      },
-    });
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    body: new URLSearchParams({
+      'grant_type': 'client_credentials',
+    }),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+    },
+  });
   
-    return response.json();
-
-  }
-
-// var authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
-//     headers: {
-//       'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
-//     },
-//     form: {
-//       grant_type: 'client_credentials'
-//     },
-//     json: true
-//   };
+  return await response.json();
+}
   
-//   request.post(authOptions, function(error, response, body) {
-//     if (!error && response.statusCode === 200) {
-//       var token = body.access_token;
-//       console.log(body);
-//     }
-//   });
-
-
-
 async function getTrackInfo(access_token) {
     const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
       method: 'GET',
@@ -52,9 +30,14 @@ async function getTrackInfo(access_token) {
     });
     // console.log(response.json())
   
-    return response.json();
+    return await response.json();
 }
 
+getToken().then(response => {
+  getTrackInfo(response.access_token).then(profile => {
+    console.log(profile)
+  })
+});
 // getToken().then(response => {
 //     getTrackInfo(resp)
 // })
