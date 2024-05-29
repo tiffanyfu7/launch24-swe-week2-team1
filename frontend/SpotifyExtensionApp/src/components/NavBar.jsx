@@ -10,13 +10,13 @@ import { LuMessagesSquare, LuCompass } from "react-icons/lu";
 import { IoIosPaperPlane } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 
-// const LinkItems = [
-//   { name: 'Discover', icon: LuCompass },
-//   { name: 'Forum', icon: LuMessagesSquare },
-//   { name: 'Inbox', icon: IoIosPaperPlane },
-//   { name: 'Library', icon: FaRegHeart },
-//   { name: 'Landing'}
-// ];
+const LinkItems = [
+  { name: 'Discover', icon: LuCompass },
+  { name: 'Forum', icon: LuMessagesSquare },
+  { name: 'Inbox', icon: IoIosPaperPlane },
+  { name: 'Library', icon: FaRegHeart },
+  { name: 'Landing'}
+];
 
 const iconStyle = { color: "black" };
 const iconStyleHover = { color: "white" };
