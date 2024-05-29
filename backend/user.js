@@ -24,8 +24,8 @@ async function getToken() {
   return await response.json();
 }
 
-async function getTrackInfo(access_token) {
-  const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
+async function getUser(access_token) {
+  const response = await fetch("https://api.spotify.com/v1/users/2i3jv3jp56h1tburma5d38v98", {
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + access_token },
   });
@@ -34,8 +34,8 @@ async function getTrackInfo(access_token) {
 }
 
 getToken().then(response => {
-  getTrackInfo(response.access_token).then(profile => {
-    console.log(profile)
+    getUser(response.access_token).then(profile => {
+        addDoc(collection(db, "users"), profile);
   })
 });
 
