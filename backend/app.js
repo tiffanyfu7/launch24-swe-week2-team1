@@ -5,15 +5,10 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
-
 require("dotenv").config();
 var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 8000
-
-
 
 const generateRandomString = (length) => {
   return crypto
@@ -140,19 +135,19 @@ app.get('/refresh_token', function(req, res) {
 });
 
 
-const port = 8000;
+/* --------------------------------- EXPRESS ROUTES ------------------------------------- */
 app.use(express.json());
 
-
+const chatRouter = require("./chat");
 const userRouter = require("./user");
-const chatmessagesRouter = require("./chatmessages");
+const messagesRouter = require("./messages");
 const forumsRouter = require("./forum");
 
-
+app.use("/chat", chatRouter);
 app.use("/user", userRouter);
-app.use("/chatmessages", chatmessagesRouter);
+app.use("/messages", messagesRouter);
 app.use("/forum", forumsRouter);
+/* ---------------------------------------------------------------------------------------- */ 
 
-
-app.listen(port, () => {console.log(`successfully connected to port ${port}`)})
-
+console.log('Listening on 8000');
+app.listen(8000); // port -> 8000
