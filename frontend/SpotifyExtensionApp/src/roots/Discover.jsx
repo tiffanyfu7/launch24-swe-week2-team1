@@ -53,7 +53,7 @@ const Discover = () => {
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
           <div className="user-cards-container">
             {users.map((user, index) => 
-              <ProfileCard key={index} data={user} variant="user"/>
+              <ProfileCard key={index} profileData={user} variant="user"/>
             )}
           </div>
         </div>

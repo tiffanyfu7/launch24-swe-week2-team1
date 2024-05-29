@@ -1,0 +1,16 @@
+.chat-card-container {
+    background-color: #3A6160;
+    display: inline-flex;
+    margin: 15px;
+    padding: 10px;
+    width: 90%;
+    border-radius: 20px;
+    border: 1px solid;
+    filter: drop-shadow(2px 2px 4px #000000);
+}
+
+.chat-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
