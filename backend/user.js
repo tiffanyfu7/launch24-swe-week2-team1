@@ -16,32 +16,28 @@ var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 
 async function getToken() {
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
     body: new URLSearchParams({
-      grant_type: "client_credentials",
+      'grant_type': 'client_credentials',
     }),
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization:
-        "Basic " +
-        Buffer.from(client_id + ":" + client_secret).toString("base64"),
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
     },
   });
-
+  
   return await response.json();
 }
-
-async function getUserInfo(access_token) {
-  const response = await fetch(
-    "https://api.spotify.com/v1/users/2i3jv3jp56h1tburma5d38v98",
-    {
-      method: "GET",
-      headers: { Authorization: "Bearer " + access_token },
-    }
-  );
-
-  return await response.json();
+  
+async function getTrackInfo(access_token) {
+    const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + access_token },
+    });
+    // console.log(response.json())
+  
+    return await response.json();
 }
 
 async function getUserTopTracks(access_token) {

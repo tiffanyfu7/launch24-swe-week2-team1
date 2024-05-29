@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar.jsx';
 import axios from 'axios';
 import ForumCard from '../components/ForumCard.jsx';
 
+
 const Forum = () => {
   
   const [forumData, setForumData] = useState(null);

@@ -10,10 +10,6 @@ var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 8000
 
-
-
-
-
 const generateRandomString = (length) => {
   return crypto
   .randomBytes(60)
@@ -43,7 +39,7 @@ app.get('/login', function(req, res) {
       scope: scope,
       redirect_uri: redirect_uri,
       state: state,
-      show_dialog: true
+      show_dialog: true // to make sure you always go to spotify log-in everytime log in button is clicked
     }));
 });
 
@@ -138,14 +134,20 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+
+/* --------------------------------- EXPRESS ROUTES ------------------------------------- */
+app.use(express.json());
+
+const chatRouter = require("./chat");
 const userRouter = require("./user");
-const chatmessagesRouter = require("./chatmessages");
+const messagesRouter = require("./messages");
 const forumsRouter = require("./forum");
 
-
+app.use("/chat", chatRouter);
 app.use("/user", userRouter);
-app.use("/chatmessages", chatmessagesRouter);
+app.use("/messages", messagesRouter);
 app.use("/forum", forumsRouter);
+/* ---------------------------------------------------------------------------------------- */ 
 
 console.log('Listening on 8000');
 app.listen(8000); // port -> 8000

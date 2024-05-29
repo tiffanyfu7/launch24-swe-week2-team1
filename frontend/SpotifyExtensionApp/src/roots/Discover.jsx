@@ -21,6 +21,7 @@ const Discover = () => {
   }, []);
 
   return (
+    
     <>
       <NavBar />
       <div className="page-container">
