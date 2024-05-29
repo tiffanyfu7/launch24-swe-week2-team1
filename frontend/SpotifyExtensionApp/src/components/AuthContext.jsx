@@ -5,6 +5,8 @@ const AuthContext = createContext();
 const AuthProvider = ({ children, location, navigate }) => {
 	const [accessToken, setAccessToken] = useState(null);
 	const [refreshToken, setRefreshToken] = useState(null);
+	const [userID, setUserID] = useState(null);
+	const [userName, setUserName] = useState(null);
 
 	useEffect(() => {
 		const hash = location.hash;
@@ -13,12 +15,18 @@ const AuthProvider = ({ children, location, navigate }) => {
 		  const params = new URLSearchParams(hash.slice(1));
 		  const _accessToken = params.get('access_token');
 		  const _refreshToken = params.get('refresh_token');
+		  const _userID = params.get('user_id');
+		  const _userName = params.get('user_name');
 		  if (_accessToken && _refreshToken) {
 			setAccessToken(_accessToken);
 			setRefreshToken(_refreshToken);
+			setUserID(_userID);
+			setUserName(_userName);
 			window.location.hash = ''; // removing hash from the URL
 			localStorage.setItem('access_token', _accessToken);
 			localStorage.setItem('refresh_token', _refreshToken);
+			localStorage.setItem('user_id', _userID);
+			localStorage.setItem('user_name', _userName);
 		  }
 		}
 		/* when user goes to different pages of website and location URL changes, 
@@ -26,9 +34,13 @@ const AuthProvider = ({ children, location, navigate }) => {
 		else {
 		  const storedAccessToken = localStorage.getItem('access_token');
 		  const storedRefreshToken = localStorage.getItem('refresh_token');
+		  const storedUserID = localStorage.getItem('user_id');
+		  const storedUserName = localStorage.getItem('user_name');
 		  if (storedAccessToken && storedRefreshToken) {
 			setAccessToken(storedAccessToken);
 			setRefreshToken(storedRefreshToken);
+			setUserID(storedUserID);
+			setUserName(storedUserName);
 		  }
 		}
 	  }, [location]);
@@ -42,7 +54,7 @@ const AuthProvider = ({ children, location, navigate }) => {
 	  }
 
 	  return (
-		<AuthContext.Provider value={{ accessToken, refreshToken, handleLogout }}> 
+		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout }}> 
 			{children}
 		</AuthContext.Provider>
 	  )
