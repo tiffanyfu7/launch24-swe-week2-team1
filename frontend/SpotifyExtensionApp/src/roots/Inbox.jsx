@@ -44,58 +44,38 @@ const Inbox = () => {
     recentmessage: "We have to go to his concert!"
   }]
 
-  const handleBackClick = () => {
-    setChatId(""); // Reset chatId
-  };
 
   return (
     <>
       <NavBar />
+  
       <div className="page-container">
-        <div>
-          <h1>Inbox</h1>
-        </div> 
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', marginBottom: '70px' }}>
-          <SearchBar placeholder="Search by username..." />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '12px',
-              backgroundColor: '#F9BC60',
-              color: 'black',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '20px',
-              cursor: 'pointer',
-              textAlign: 'center',
-              marginBottom: '6px',
-            }}
-            className="filter-button"
-          >
-            Filter
-          </button>
-        </div>
-        {chatId === "" ?
-          chatsWithUser.map((chat) =>
-            <ChatCard chat={chat} setChatId={setChatId} key={chat.id}/>
-          ) : (
-            <>
-              <button style={{ 
+        <h1>Inbox</h1>
+        {chatId == "" ?
+            chatsWithUser.map((chat) =>
+              <ChatCard chat={chat} setChatId={setChatId}/>
+            )
+          :
+          <>
+              <button 
+                onClick={ () => setChatId("") }
+                className="back-button" 
+                style={{ 
                   backgroundColor: 'transparent', 
                   border: 'none', 
                   cursor: 'pointer', 
                   padding: '10px' 
                 }}
-                onClick={ ()=> setChatId("") } className="arrow">
+              >
                 <FaArrowLeft color="white" size={45} />
               </button>
               <h1>You have entered chat {chatId}</h1>
             </>
-          )
         }
       </div>
     </>
   )
+  
 }
 
 export default Inbox;
