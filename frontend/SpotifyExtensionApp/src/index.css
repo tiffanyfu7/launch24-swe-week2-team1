@@ -1,3 +1,17 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #004643;
+}
+
+h1 {
+  font-size: 40px;
+  color: white;
+  font-weight: normal;
+}
+/*left margin for nav bar in landscape view*/
+.page-container {
+  margin-left: 120px;
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

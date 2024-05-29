@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-//import './index.css'
+import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Discover from "./roots/Discover.jsx";
@@ -11,11 +11,14 @@ import Library from "./roots/Library.jsx";
 import Landing from "./roots/Landing.jsx";
 
 import { AuthProvider } from "./components/AuthContext.jsx";
-//import { AuthProvider } from "./components/AuthContext.jsx";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
+		element: <Discover />,
+	},
+	{
+		path: "/Discover",
 		element: <Discover />,
 	},
 	{
@@ -37,9 +40,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <AuthProvider>
-				<RouterProvider router={router} />
+  	<React.StrictMode>
+    	<AuthProvider>
+			<RouterProvider router={router} />
 		</AuthProvider>
-  </React.StrictMode>,
+  	</React.StrictMode>,
 )
