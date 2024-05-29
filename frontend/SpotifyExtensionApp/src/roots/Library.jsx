@@ -3,9 +3,12 @@ import NavBar from '../components/NavBar.jsx';
 
 const Library = () => {
   return (
-    <div>
+    <>
       <NavBar />
-    </div>
+      <div className="page-container">
+        <h1>Your Library</h1>
+      </div>
+    </>
   )
 }
 
