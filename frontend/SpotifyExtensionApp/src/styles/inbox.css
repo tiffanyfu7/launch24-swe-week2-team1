@@ -43,6 +43,10 @@
     text-align: center;
   }
   
-  .filter-button:hover {
+.filter-button:hover {
     background-color: #ae8342;
-  }
+}
+
+.enter-forum-icon {
+    margin-top: 15%;
+}
