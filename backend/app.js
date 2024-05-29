@@ -5,13 +5,12 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
-
 require("dotenv").config();
 var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 8000
+
+
 
 
 
@@ -139,20 +138,36 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+console.log('Listening on 8000');
+app.listen(8000); // port -> 8000
 
-const port = 8000;
-app.use(express.json());
+async function getToken() {
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    body: new URLSearchParams({
+      'grant_type': 'client_credentials',
+    }),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+    },
+  });
+  
+  return await response.json();
+}
+  
+async function getTrackInfo(access_token) {
+    const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + access_token },
+    });
+    // console.log(response.json())
+  
+    return await response.json();
+}
 
-
-const userRouter = require("./user");
-const chatmessagesRouter = require("./chatmessages");
-const forumsRouter = require("./forum");
-
-
-app.use("/user", userRouter);
-app.use("/chatmessages", chatmessagesRouter);
-app.use("/forum", forumsRouter);
-
-
-app.listen(port, () => {console.log(`successfully connected to port ${port}`)})
-
+getToken().then(response => {
+  getTrackInfo(response.access_token).then(profile => {
+    console.log(profile)
+  })
+});
