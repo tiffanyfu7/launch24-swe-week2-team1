@@ -1,17 +1,22 @@
 import React from 'react'
 import '../roots/inbox.css'
+import { FaArrowRight } from "react-icons/fa";
 
-const ChatCard = ({ chat }) => {
+const ChatCard = ({ chat, setChatId }) => {
+
     return (
-        <div className="chat-card-container">
+        <button onClick={ ()=> setChatId(chat.id) } className="chat-card-container">
+            <div className="receiver-info">
             {chat.recievers.map((i) => 
                 <>
                     <img src={i.profilepic} width="50px" className="chat-profile-pic"/>
-                    <p> {i.username}</p>
+                    <p> {i.username} </p>
                 </>
             )}
-            
-        </div>
+            </div>
+            <h4 className="recent-message"> {chat.recentmessage} </h4>
+            <FaArrowRight color="white" className="arrow"size={45} />
+        </button>
     )
 }
 
