@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import SearchBar from '../components/SearchBar.jsx';
 import axios from 'axios';
 import { AuthContext } from '../components/AuthContext.jsx';
-
+import '../styles/inbox.css';
 
 const Inbox = () => {
   //const { userID } = useContext(AuthContext);

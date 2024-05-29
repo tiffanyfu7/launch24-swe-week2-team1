@@ -1,5 +1,5 @@
 import React from 'react'
-import '../roots/forum.css'
+import '../styles/forum.css'
 
 const ForumCard = ({data}) => {
   return (

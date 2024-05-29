@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar.jsx'
 import ProfileCard from '../components/ProfileCard.jsx';
 import axios from 'axios';
 import { AuthContext } from '../components/AuthContext.jsx';
+import '../styles/discover.css'
   
 const Discover = () => {
   //fetch all users from Firestore and set to userData

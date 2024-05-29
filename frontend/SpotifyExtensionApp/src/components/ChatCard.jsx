@@ -1,5 +1,5 @@
 import React from 'react'
-import '../roots/inbox.css'
+import '../styles/inbox.css'
 import { FaArrowRight } from "react-icons/fa";
 
 const ChatCard = ({ chat, setChatId }) => {
