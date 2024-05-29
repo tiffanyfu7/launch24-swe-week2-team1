@@ -10,10 +10,6 @@ var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 8000
 
-
-
-
-
 const generateRandomString = (length) => {
   return crypto
   .randomBytes(60)
@@ -138,36 +134,20 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+
+/* --------------------------------- EXPRESS ROUTES ------------------------------------- */
+app.use(express.json());
+
+const chatRouter = require("./chat");
+const userRouter = require("./user");
+const messagesRouter = require("./messages");
+const forumsRouter = require("./forum");
+
+app.use("/chat", chatRouter);
+app.use("/user", userRouter);
+app.use("/messages", messagesRouter);
+app.use("/forum", forumsRouter);
+/* ---------------------------------------------------------------------------------------- */ 
+
 console.log('Listening on 8000');
 app.listen(8000); // port -> 8000
-
-async function getToken() {
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    body: new URLSearchParams({
-      'grant_type': 'client_credentials',
-    }),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
-    },
-  });
-  
-  return await response.json();
-}
-  
-async function getTrackInfo(access_token) {
-    const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
-      method: 'GET',
-      headers: { 'Authorization': 'Bearer ' + access_token },
-    });
-    // console.log(response.json())
-  
-    return await response.json();
-}
-
-getToken().then(response => {
-  getTrackInfo(response.access_token).then(profile => {
-    console.log(profile)
-  })
-});
