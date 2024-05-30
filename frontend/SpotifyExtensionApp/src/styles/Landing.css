@@ -1,3 +1,51 @@
-.login {
-    align-content: center; 
-}
+.landingpage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    /* padding: 20px; */
+    margin-bottom: 20px;
+    text-align: center;
+    flex-direction: column; 
+    
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight:bold;
+    cursor: pointer;
+    background-color: #F9BC60;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    filter: drop-shadow(2px 2px 4px #000000);
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 4em;
+    margin: 0; /* Removes default margin */
+    margin-bottom: 5px; 
+  }
+
+  h3 {
+    color: white;
+    font-size: 1.7em;
+  }
+  
+  button:hover {
+    background-color: #d6a153;
+  }
+
+  html, body {
+    overflow: hidden;
+  }
+  
+  @media (max-width: 600px) {
+    .landingpage-container {
+      margin: auto;
+    }
+  }
