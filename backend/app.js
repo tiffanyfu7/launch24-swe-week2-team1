@@ -66,7 +66,7 @@ app.get('/callback', function(req, res) {
       form: {
         code: code,
         redirect_uri: redirect_uri,
-        grant_type: 'authorization_code'
+        grant_type: "authorization_code",
       },
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
@@ -149,12 +149,12 @@ app.get('/refresh_token', function(req, res) {
 app.use(express.json());
 
 const chatRouter = require("./chat");
-const userRouter = require("./user");
+const userRouter = require("./users");
 const messagesRouter = require("./messages");
 const forumsRouter = require("./forum");
 
 app.use("/chat", chatRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/messages", messagesRouter);
 app.use("/forum", forumsRouter);
 /* ---------------------------------------------------------------------------------------- */ 
