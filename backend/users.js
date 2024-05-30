@@ -109,11 +109,11 @@ getToken().then((response) => {
 });
 });
 
-  router.post("/", async (req, res) => {
-    try {
-        let profileInfo = null;
-        getToken().then(response => {
-            getTrackInfo(response.access_token).then(profile => {
+router.post("/", async (req, res) => {
+  try {
+    let profileInfo = null;
+    getToken().then(response => {
+      getTrackInfo(response.access_token).then(profile => {
               profileInfo = profile
             })
           });
@@ -128,10 +128,7 @@ getToken().then((response) => {
     } catch (e) {
         res.status(400).json({error: `Error setting user data ${e}`})
     }
-  })
- 
-
-
+})
 
 router.get("/", async (req, res) => {
   try {

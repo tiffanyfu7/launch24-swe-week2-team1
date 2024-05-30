@@ -9,10 +9,10 @@ import '../styles/inbox.css';
 import ChatBox from '../components/ChatBox.jsx';
 
 const Inbox = () => {
-  //const { userID } = useContext(AuthContext);
-  //For John Johnson
+  // const { userID } = useContext(AuthContext);
+  // For John Johnson
   // const userID = "heSbXlYFOjsIL9XYO6ty";
-  //For Jane Doe
+  // For Jane Doe
   const userID = "McXs6673kv4Udhw7OenL";
 
   const [selectedChatId, setSelectedChatId] = useState("");
@@ -42,13 +42,20 @@ const Inbox = () => {
   }, []);
 
   //find all chats current user is in
+  //save all recievers of the chat
+  const receivers = [];
   useEffect(() => {
     if (chatData) {
       chatData.forEach((chat) => {
         let messengers = chat.messengers;
-        console.log(messengers)
+        console.log("messengers", messengers)
         if (messengers.includes(userID)) {
           userChatIds.push(chat.id)
+          for (var id of messengers) {
+            if (id !== userID) {
+              receivers.push(id);
+            }
+          }
         }
       })
     }
@@ -71,7 +78,8 @@ const Inbox = () => {
           console.log(lastMessage);
 
           //this will get userId of reciever of LAST message, instead get user from chatId :,(
-          for (let userId of tempMessage.data.receiverId) {
+          // for (let userId of tempMessage.data.receiverId) {
+          for (let userId of receivers) {
             fetchUserId(userId).then((tempUser) => {
               console.log("helllo")
               receiversArr.push({
