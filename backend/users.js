@@ -68,11 +68,11 @@ getToken().then(response => {
 // })
 
 
-  router.post("/", async (req, res) => {
-    try {
-        let profileInfo = null;
-        getToken().then(response => {
-            getTrackInfo(response.access_token).then(profile => {
+router.post("/", async (req, res) => {
+  try {
+    let profileInfo = null;
+    getToken().then(response => {
+      getTrackInfo(response.access_token).then(profile => {
               profileInfo = profile
             })
           });
@@ -87,10 +87,7 @@ getToken().then(response => {
     } catch (e) {
         res.status(400).json({error: `Error setting user data ${e}`})
     }
-  })
- 
-
-
+})
 
 router.get("/", async (req, res) => {
   try {
@@ -113,12 +110,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    console.log("TRYNAA GET USERRR");
     const docRef = doc(db, "users", req.params.id);
-    console.log("docref")
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("exits");
       res.status(200).json(docSnap.data());
     } else {
       console.log("Document does not exist");
