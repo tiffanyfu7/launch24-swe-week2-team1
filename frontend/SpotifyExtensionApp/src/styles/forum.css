@@ -43,7 +43,7 @@
 }
 
 .back-button {
-    background-color: transparent;
+    background-color: transparent !important;
     border: none;
     cursor: pointer;
     padding: 10px;
@@ -123,3 +123,4 @@
     border-radius: 25px;
     margin: 15px 30px 15px 30px;
 }
+
