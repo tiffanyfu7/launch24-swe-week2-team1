@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 require("dotenv").config();
 var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
-var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 8000
+var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri -> port = 9000
 
 const generateRandomString = (length) => {
   return crypto
