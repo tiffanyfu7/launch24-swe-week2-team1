@@ -37,4 +37,21 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+// like a discussion post
+router.put("/:id", async (req, res) => {
+    try {
+        const forumId = req.params.id;
+        const currentLikes = req.body.currentLikes;
+        console.log(req)
+        console.log(forumId)
+        console.log(currentLikes);
+        await updateDoc(doc(db, "forum", forumId), {
+            likes: currentLikes + 1,
+        });
+        res.status(200).json({ message: "success" });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+});
+
 module.exports = router;

@@ -23,7 +23,6 @@ const Reply = ({ reply }) => {
                         <p style={{fontWeight: "bold"}}>{user.username}: </p>
                         <p style={{ fontSize: "20px" }}>{reply.message}</p>
                     </div>
-                    <p>{reply.timestamp}</p>
                 </div>
             }
         </>

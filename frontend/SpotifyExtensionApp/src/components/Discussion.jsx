@@ -17,6 +17,18 @@ const Discussion = ({ forumId }) => {
         fetchForum();
     }, []);
 
+    const likeDiscussion = async () => {
+        const response = await axios.put(`http://localhost:8000/forum/${forumId}`,{
+            currentLikes: forumData.likes,
+        });
+        fetchForum();
+    };
+
+    const handelLike = () => {
+        setLike(!like);
+        likeDiscussion();
+    }
+
     return (
         <>
             {/* <h1>You have entered discussion {forumId} </h1> */}
@@ -31,9 +43,9 @@ const Discussion = ({ forumId }) => {
                             </span>
                         </div>
                         <div className="like-and-reply" >
-                            <button onClick={() => setLike(!like)}>
-                                {like ? <FaHeart color="white"/> : <FaRegHeart color="white"/>}
-                                <p style={{color: "white"}}>{forumData.likes}</p>
+                            <button className="like-button" onClick={() => handelLike()}>
+                                {like ? <FaHeart color="white" size={25} /> : <FaRegHeart color="white" size={25} />}
+                                <p style={{color: "white"}} id="likes-text">{forumData.likes}</p>
                             </button>
                             <button className="reply-button">Reply</button>
                         </div>
