@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import '../styles/editprofilemodal.css';
 import Switch from 'react-switch';
+import { IoMdClose } from "react-icons/io";
 
 const EditProfileModal = ({ toggleModal }) => {
   
@@ -61,6 +62,9 @@ return (
         <button className="close-modal" onClick={handleSaveChanges}>
           Save Changes
         </button>
+        <button class = "X-button" onClick = {toggleModal} >
+            <IoMdClose />
+            </button>
       </div>
     </div>
   );
