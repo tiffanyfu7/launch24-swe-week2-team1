@@ -1,0 +1,30 @@
+.header-filter:hover {
+    text-decoration: underline #f9bc60;
+}
+
+.song-container {
+    background-color: #3a6160;
+    border-radius: 20px;
+    width: 400px;
+    height: 60px;
+    padding: 10px;
+    display: "flex";
+}
+
+.artist-container {
+    background-color: #3a6160;
+    border-radius: 20px;
+    width: 400px;
+    height: 60px;
+    padding: 10px;
+    display: "flex";
+}
+
+.album-container {
+    background-color: #3a6160;
+    border-radius: 20px;
+    width: 400px;
+    height: 60px;
+    padding: 10px;
+    display: "flex";
+}
