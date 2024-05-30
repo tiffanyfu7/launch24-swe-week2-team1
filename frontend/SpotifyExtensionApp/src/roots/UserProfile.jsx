@@ -32,7 +32,7 @@ const UserProfile = ({ userId }) => {
                 </div>
               </div>
         </div>
-        {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+        
         <h4 className="content-header"> Top Liked Songs </h4> 
         <div className="content-container"> 
           {/* map songs and add div within map */}
@@ -73,6 +73,7 @@ const UserProfile = ({ userId }) => {
           </div>
         </div>
       </div>
+      {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
     </>
   )
 }
