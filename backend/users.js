@@ -154,12 +154,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    console.log("TRYNAA GET USERRR");
     const docRef = doc(db, "users", req.params.id);
-    console.log("docref")
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("exits");
       res.status(200).json(docSnap.data());
     } else {
       console.log("Document does not exist");

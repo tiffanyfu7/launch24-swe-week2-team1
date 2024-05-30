@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar.jsx';
 import axios from 'axios';
 import ForumCard from '../components/ForumCard.jsx';
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import '../styles/forum.css'
+import Discussion from '../components/Discussion.jsx';
 
 const Forum = () => {
   const [forumData, setForumData] = useState(null);
@@ -41,19 +42,10 @@ const Forum = () => {
         
         {individualForumId ? (
           <>
-            <button 
-              onClick={handleBackButtonClick}
-              className="back-button" 
-              style={{ 
-                backgroundColor: 'transparent', 
-                border: 'none', 
-                cursor: 'pointer', 
-                padding: '10px' 
-              }}
-            >
+            <button  onClick={handleBackButtonClick} className="back-button" >
               <FaArrowLeft color="white" size={45} />
             </button>
-            <h1>You have entered discussion {individualForumId} </h1>
+            <Discussion forumId={individualForumId} />
           </>
         ) : (
           forumData &&
