@@ -13,29 +13,6 @@ import Landing from "./roots/Landing.jsx";
 
 import { AuthProvider } from "./components/AuthContext.jsx";
 
-// const router = createBrowserRouter([
-// 	{
-// 		path: "/",
-// 		element: <Landing />,
-// 	},
-// 	{
-// 		path: "/Discover",
-// 		element: <Discover />,
-// 	},
-// 	{
-// 		path: "/Inbox",
-// 		element: <Inbox />,
-// 	},
-// 	{
-// 		path: "/Forum",
-// 		element: <Forum/>,
-// 	},
-// 	{
-// 		path: "/Library",
-// 		element: <Library />,
-// 	},
-// ]);
-
 const RootApp = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -60,3 +37,27 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
   	</React.StrictMode>,
 )
+
+
+// const router = createBrowserRouter([
+// 	{
+// 		path: "/",
+// 		element: <Landing />,
+// 	},
+// 	{
+// 		path: "/Discover",
+// 		element: <Discover />,
+// 	},
+// 	{
+// 		path: "/Inbox",
+// 		element: <Inbox />,
+// 	},
+// 	{
+// 		path: "/Forum",
+// 		element: <Forum/>,
+// 	},
+// 	{
+// 		path: "/Library",
+// 		element: <Library />,
+// 	},
+// ]);
