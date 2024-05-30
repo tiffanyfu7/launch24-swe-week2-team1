@@ -24,6 +24,7 @@
     filter: drop-shadow(2px 2px 4px #000000);
   }
 
+  /* avoid using header and button tags in page css*/
   h1 {
     font-weight: bold;
     font-size: 4em;

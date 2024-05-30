@@ -18,11 +18,11 @@ const Reply = ({ reply }) => {
         <>
             {user &&
                 <div className="reply-container">
-                    <div className="reply-user-info">
-                        <img className="reply-pp" src={user.profilepic} />
-                        <p>{user.username}</p>
+                    <img className="reply-pp" src={user.profilepic} />
+                    <div style={{lineHeight: "0.1", marginTop:"8px"}}>
+                        <p style={{fontWeight: "bold"}}>{user.username}: </p>
+                        <p style={{ fontSize: "20px" }}>{reply.message}</p>
                     </div>
-                    <p style={{fontSize: "20px"}}>{reply.message}</p>
                     <p>{reply.timestamp}</p>
                 </div>
             }

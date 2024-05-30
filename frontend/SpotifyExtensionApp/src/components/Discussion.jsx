@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Reply from './Reply';
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 const Discussion = ({ forumId }) => {
-    const [forumData, setForumData] = useState(null);
+    const [ forumData, setForumData ] = useState(null);
+    const [ like, setLike ] = useState(false);
 
     const fetchForum = async () => {
         const response = await axios.get(`http://localhost:8000/forum/${forumId}`);
@@ -29,7 +31,10 @@ const Discussion = ({ forumId }) => {
                             </span>
                         </div>
                         <div className="like-and-reply" >
-                            <h4>Likes: {forumData.likes} </h4> {/*add like button*/}
+                            <button onClick={() => setLike(!like)}>
+                                {like ? <FaHeart color="white"/> : <FaRegHeart color="white"/>}
+                                <p style={{color: "white"}}>{forumData.likes}</p>
+                            </button>
                             <button className="reply-button">Reply</button>
                         </div>
                     </div>
