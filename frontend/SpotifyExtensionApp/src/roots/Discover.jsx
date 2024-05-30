@@ -42,17 +42,24 @@ const Discover = () => {
       <NavBar />
       <div className="page-container">
         <div>
-          <h1>Find Your Band</h1>
-          <SearchBar placeholder="Search Spotify Users..."/>
+          <div>
+            <h1>Find Your Band</h1>
+            <SearchBar placeholder="Search Spotify Users..." />
+          </div>
+          <div>
+            <a href="/UserProfile" userId={userID}>View Your Profile {userName}</a>
+          </div>
         </div>
         <div>
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
           <h3> {userID} </h3>
           <h3> {userName} </h3>
           <div className="user-cards-container">
-            {userData && userData.map((user, index) => 
-              <ProfileCard key={index} profileData={user} variant="user"/>
-            )}
+            {userData && userData.map((user, index) =>
+              ((user.id !== userID && user.public) ?
+                <ProfileCard key={index} profileData={user} variant="user" />
+                : null
+            ))}
           </div>
         </div>
       </div>
