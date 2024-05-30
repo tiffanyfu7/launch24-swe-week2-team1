@@ -10,18 +10,18 @@ Authors: Tiffany Fu, Pine Netcharussaeng, Abhinav Attaluri, Anna Batman , Anh Ng
 ### Installation
 To run our app follow these steps
 
-1. Clone the repo<br></br>
-```
+1. Clone the repo
+```bash
 git clone {repo url}
 ```
-2. Run the frontend code<br></br>
-```
+2. Run the frontend code
+```bash
 cd frontend/SpotifyExtensionApp
 npm install
 npm run dev
 ```
 2. Run the backend code
-```
+```bash
 cd backend
 npm install
 npm install dotenv cors express cookie-parser request firebase
@@ -35,7 +35,7 @@ Retrieve Client Secret and Client ID by registering an app with
 <a href="https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app">
 Spotify for Developers </a>
 
-```
+```js
 CLIENT_ID = {Client ID}
 CLIENT_SECRET = {Client Secret}
 ```
@@ -47,7 +47,7 @@ Set up a project with Firebase to setup permissions.json file
 3. Create a Firestore Database
 4. Add Web App to Firebase Project
 5. Go to Project Settings and Generate New Private Key
-```
+```js
 {
     "type": {type},
     "projectId": {project ID},
