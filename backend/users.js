@@ -14,18 +14,6 @@ const {
 } = require("firebase/firestore");
 const router = express.Router();
 
-const db = require("./firebase");
-const {
-  collection,
-  getDocs,
-  updateDoc,
-  doc,
-  addDoc,
-  deleteDoc,
-  getDoc,
-  query,
-  where,
-} = require("firebase/firestore");
 
 router.get("/", async (req, res) => {
   try {

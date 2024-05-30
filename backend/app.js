@@ -450,6 +450,7 @@ app.get("/callback", function (req, res) {
               allAlbums.map((album) =>
                 albumInfoToPush.push({
                   albumname: album.album.name,
+                  albumimage: album.album.images[0].url,
                   artistname: album.album.artists,
                   albumid: album.album.id,
                 })

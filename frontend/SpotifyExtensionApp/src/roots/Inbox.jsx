@@ -34,7 +34,6 @@ const Inbox = () => {
 
   const fetchAllChats = async () => {
     const response = await axios.get("http://localhost:8000/chat");
-    console.log("all chats", response.data)
     setChatData(response.data);
   };
 
@@ -61,6 +60,7 @@ const Inbox = () => {
       });
     }
     console.log("userChatIds: ", userChatIds);
+    console.log("receivers", receivers);
   }, [chatData]);
 
   const chatsWithUser = [];
@@ -79,7 +79,7 @@ const Inbox = () => {
 
             console.log("temp message: ", tempMessage.data);
             lastMessage = tempMessage.data.message;
-            console.log(lastMessage);
+            console.log("last message: ", lastMessage);
 
             //this will get userId of reciever of LAST message, instead get user from chatId :,(
             // for (let userId of tempMessage.data.receiverId) {
