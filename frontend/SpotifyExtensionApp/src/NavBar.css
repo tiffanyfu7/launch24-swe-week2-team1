@@ -20,8 +20,16 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  font-weight:bold;
 }
 
 .logout-button:hover {
   background-color: #3e8078;
+}
+
+.logo {
+  margin-bottom:5px;
+  width:65px;
+  height:65px;
+  align-items:center;
 }
