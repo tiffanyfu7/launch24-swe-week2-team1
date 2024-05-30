@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
+const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc, getDoc } = require("firebase/firestore");
 
 router.get("/", async (req, res) => {
     try {
@@ -23,5 +23,18 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get("/:id", async (req, res) => {
+    try {
+        const docRef = doc(db, "messages", req.params.id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            res.status(200).json(docSnap.data());
+        } else {
+            console.log("Document does not exist");
+        }
+    } catch (e) {
+        res.status(400).json({error: `Error fetching user data ${e}`})
+    }
+})
 
 module.exports = router;
