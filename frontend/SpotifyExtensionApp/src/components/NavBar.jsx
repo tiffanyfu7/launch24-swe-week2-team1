@@ -146,7 +146,7 @@ const BottomBarContent = () => (
       }}>
         Log out
       </button>
-      <img src="/spotifylogosmaller.png" alt="spotify logo"></img>
+      <img class = "spotifylogo" src="/spotifylogosmaller.png" alt="spotify logo"></img>
     </Box>
   );
   
