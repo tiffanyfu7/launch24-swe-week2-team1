@@ -3,7 +3,7 @@ import '../styles/forum.css'
 import { AuthContext } from './AuthContext';
 import axios from 'axios';
 
-const ReplyBox = ({ setClickReply, forumId }) => {
+const ReplyBox = ({ setClickReply, forumId, setNewPost }) => {
     const [inputValue, setInputValue] = useState('');
     const { docID } = useContext(AuthContext);
     
@@ -26,14 +26,13 @@ const ReplyBox = ({ setClickReply, forumId }) => {
             message: inputValue,
             userId: docID,
         });
-        console.log(response);
     }
 
     const handelPost = () => {
-        console.log(inputValue);
         if (inputValue) {
             postReply();
         }
+        setNewPost(true);
         setClickReply(false);
     }
 

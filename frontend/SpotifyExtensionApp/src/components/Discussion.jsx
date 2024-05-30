@@ -5,9 +5,10 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import ReplyBox from './ReplyBox';
 
 const Discussion = ({ forumId }) => {
-    const [ forumData, setForumData ] = useState(null);
+    const [forumData, setForumData ] = useState(null);
     const [like, setLike] = useState(false);
     const [clickReply, setClickReply] = useState(false);
+    const [newPost, setNewPost] = useState(false);
 
     const fetchForum = async () => {
         const response = await axios.get(`http://localhost:8000/forum/${forumId}`);
@@ -17,10 +18,11 @@ const Discussion = ({ forumId }) => {
 
     useEffect(() => {
         fetchForum();
-    }, [ ]);
+    }, []);
+
     useEffect(() => {
-        fetchForum();
-    }, [ setClickReply ]);
+        setTimeout(() => { fetchForum() }, 500);
+    }, [newPost]);
 
     const likeDiscussion = async () => {
         const response = await axios.put(`http://localhost:8000/forum/${forumId}`,{
@@ -59,7 +61,7 @@ const Discussion = ({ forumId }) => {
             }
 
             {clickReply &&
-                <ReplyBox setClickReply={setClickReply} forumId={forumId} />
+                <ReplyBox setClickReply={setClickReply} forumId={forumId} setNewPost={setNewPost} />
             }
             
             {forumData && 
