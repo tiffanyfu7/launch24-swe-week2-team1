@@ -53,6 +53,7 @@ const AuthProvider = ({ children, location, navigate }) => {
 		navigate("/"); // navigate back to landing page
 	  }
 
+	  // userID represents spotify username, not database ID
 	  return (
 		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout }}> 
 			{children}

@@ -56,6 +56,8 @@ app.get("/login", function (req, res) {
   );
 });
 
+
+
 app.get("/callback", function (req, res) {
   // your application requests refresh and access tokens
   // after checking the state parameter
@@ -101,6 +103,8 @@ app.get("/callback", function (req, res) {
         };
 
         var user_id = null;
+        // variable that has the document ID for firebase
+        // var userToUpdate = null;
 
         // use the access token to access the Spotify Web API
         request.get(options, async function (error, response, body) {
@@ -116,6 +120,7 @@ app.get("/callback", function (req, res) {
                 refresh_token: refresh_token,
                 user_id: user_id,
                 user_name: user_name,
+                // userToUpdate: userToUpdate,
               })
           );
 

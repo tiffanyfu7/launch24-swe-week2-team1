@@ -2,16 +2,24 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
 import EditProfileModal from '../components/EditProfileModal';
+import axios from 'axios';
 
 const UserProfile = ({ userId }) => {
   const { userID, userName } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const 
+  const fetchUserData = async () => {
+    const response = await axios.get()
+  }
+
+  useEffect(() => {
+    fetchUserData();
+  }, [])
 
   
   
