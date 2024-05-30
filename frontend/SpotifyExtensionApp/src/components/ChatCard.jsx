@@ -8,7 +8,7 @@ const ChatCard = ({ chat, setSelectedChatId }) => {
         <button onClick={() => setSelectedChatId(chat.id)} className="chat-card-container">
             {chat.receivers.map((u, index) => 
                 <div key={index} className="receiver-info">
-                    <img src={u.profilepic} width="50px" className="chat-profile-pic"/>
+                    <img src={u.profilepic} width="50px" className="chat-card-profile-pic"/>
                     <p id="username"> {u.username} </p>
                 </div>
             )}

@@ -38,35 +38,76 @@ getToken().then(response => {
     console.log(profile)
   })
 });
-// getToken().then(response => {
-//     getTrackInfo(resp)
-// })
 
-// async function getUserInfo(access_token) {
-//     const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
-//       method: 'GET',
-//       headers: { 'Authorization': 'Bearer ' + access_token },
-//     });
+async function getUserInfo(access_token) {
+  const response = await fetch("https://api.spotify.com/v1/me", {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + access_token },
+  });
+  // console.log(response.json())
 
-  
-//     return await response.json();
-// }
+  return await response.json();
+}
+
+getToken().then(response => {
+  getUserInfo(response.access_token).then(profile => {
+    console.log(profile)
+  })
+});
+
+
+async function getUserTopYearTracks(access_token) {
+  const response = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=medium_term", {
+    method: "GET",
+    headers: { Authorization: "Bearer " + access_token },
+  });
+
+  return await response.json();
+}
+
+async function getUserTopMonthlyTracks(access_token) {
+  const response = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=short_term", {
+    method: "GET",
+    headers: { Authorization: "Bearer " + access_token },
+  });
+
+  return await response.json();
+}
+
+
+// get user info
+getToken().then((response) => {
+getUserInfo(response.access_token).then((profile) => {
+  // addDoc(collection(db, "users"), {
+  //   username: profile.display_name,
+  //   profilepic: profile.images[1].url,
+  //   followercount: profile.followers.total,
+  //   userid: profile.id,
+  // });
+  console.log("profile", profile);
+});
+});
 
 
 
-// const getTrackInfo = async () => {
-//     const response = await fetch("https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT", {
-//       method: 'GET',
-//       headers: { 'Authorization': 'Bearer ' + accessToken },
-//     });
+// get all time top songs
+getToken().then((response) => {
+  getUserTopYearTracks(response.access_token).then((topTracks) => {
+  // const usersRef = collection(db, "users");
+  // const q = query(
+  //   usersRef,
+  //   where("userid", "==", "2i3jv3jp56h1tburma5d38v98")
+  // );
 
-//     console.log(response.body);
-// }
+  // const querySnapshot = getDocs(q);
+  // const userToUpdate = querySnapshot[0].id;
 
-// getToken().then(response => {
-//     getTrackInfo(response.access_token).then(profile)
-// })
-
+  // updateDoc(doc(db, "users", userToUpdate), {
+  //     topSongs: topTracks.items
+  // });
+  console.log("topTracks", topTracks);
+});
+});
 
 router.post("/", async (req, res) => {
   try {
