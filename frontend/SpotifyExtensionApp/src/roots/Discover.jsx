@@ -17,19 +17,6 @@ const Discover = () => {
     setUserData(response.data);
   };
 
-  // const fetchMessages = async () => {
-  //   const response = await axios.get("http://localhost:8000/chatmessages");
-  //   console.log("all messages",response.data);
-  //   setAllMessages(response.data);
-  // };
-
-  // const postUser = async () => {
-  //   const response = await axios.post("http://localhost:8000/users");
-  //   console.log("forums", response.data);
-  //   // setForums(response.data);
-  // };
-
-
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -37,7 +24,6 @@ const Discover = () => {
   const { userID, userName } = useContext(AuthContext);
 
   return (
-    
     <>
       <NavBar />
       <div className="page-container">
@@ -47,7 +33,7 @@ const Discover = () => {
             <SearchBar placeholder="Search Spotify Users..." />
           </div>
           <div>
-            <a href="/UserProfile" userId={userID}>View Your Profile {userName}</a>
+            <a href="/UserProfile">View Your Profile {userName}</a>
           </div>
         </div>
         <div>
