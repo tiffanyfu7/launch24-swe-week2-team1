@@ -19,7 +19,7 @@ const Landing = () => {
 
 
   const handleLogin = () => {
-    window.location.href = 'http://localhost:8000/login';
+    window.location.href = 'http://localhost:9000/login';
   };
 
   return (
