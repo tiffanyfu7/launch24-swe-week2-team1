@@ -11,10 +11,6 @@ const UserProfile = ({ userId }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const 
-
-  
-  
   return (
     <>
       <a href="/Discover" className="back-button-link"> 
