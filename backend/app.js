@@ -398,7 +398,6 @@ app.get("/callback", function (req, res) {
 
           const usersRef = collection(db, "users");
           const q = query(usersRef, where("userid", "==", user_id));
-          console.log("followed artist body", body);
 
           try {
             const querySnapshot = await getDocs(q);
@@ -414,8 +413,6 @@ app.get("/callback", function (req, res) {
                   artistid: artist.id,
                 })
               );
-
-              console.log("followed artist", artistInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
                 followedArtistsCount: body.artists.total,
@@ -448,8 +445,6 @@ app.get("/callback", function (req, res) {
             if (!querySnapshot.empty) {
               const userToUpdate = querySnapshot.docs[0].id;
 
-              console.log("all albums body", body);
-
               var allAlbums = body.items;
               var albumInfoToPush = [];
               allAlbums.map((album) =>
@@ -459,8 +454,6 @@ app.get("/callback", function (req, res) {
                   albumid: album.album.id,
                 })
               );
-
-              console.log("saved album info to push", albumInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
                 savedalbums: albumInfoToPush,
@@ -492,8 +485,6 @@ app.get("/callback", function (req, res) {
             if (!querySnapshot.empty) {
               const userToUpdate = querySnapshot.docs[0].id;
 
-              console.log("all songs body", body);
-
               var allSongsInfo = body.items;
               var allSongsInfoToPush = [];
               allSongsInfo.map((song) =>
@@ -505,8 +496,6 @@ app.get("/callback", function (req, res) {
                   songid: song.track.id,
                 })
               );
-
-              console.log("all songs info to push", allSongsInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
                 allsongs: allSongsInfoToPush,
