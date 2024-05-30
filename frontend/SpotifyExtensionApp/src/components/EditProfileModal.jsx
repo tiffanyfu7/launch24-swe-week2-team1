@@ -27,6 +27,9 @@ const EditProfileModal = ({ toggleModal }) => {
       default:
         break;
     }
+    // TODO: Save changes to the user's profile in firebase
+    //hide display for top artists or top songs
+    toggleModal();
 }
 
 return (
