@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
 import EditProfileModal from '../components/EditProfileModal';
@@ -11,7 +11,7 @@ const UserProfile = ({ userId }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  
+  const 
 
   
   
