@@ -68,4 +68,20 @@ router.get("/:id", async (req, res) => {
   }
 })
 
+router.put("/query/:query", async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const q = query(collection(db,"users"), where("userid", "==", userId));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot) {
+      res.status(200).json(querySnapshot.docs[0].id);
+    } else {
+      console.log("Document does not exist");
+    }
+  } catch (e) {
+    res.status(400).json({error: `Error fetching user data ${e}`})
+  }
+})
+
 module.exports = router;
