@@ -93,6 +93,42 @@ const Library = () => {
                         placeholder={"Search your " + activeTab + "..."}
                         //onSubmit={search(activeTab,input)}
                     />
+                    {(activeTab === "songs" || activeTab === "artists") && (
+                        <Select
+                            bg="#f9bc60"
+                            placeholder={"View top " + activeTab}
+                            className="select"
+                            style={{ paddingInlineEnd: "0px" }}
+                            icon=""
+                        >
+                            {activeTab === "songs" && (
+                                <>
+                                    <option value="option3">
+                                        Top songs for last year
+                                    </option>
+                                    <option value="option1">
+                                        Top songs for last 6 months
+                                    </option>
+                                    <option value="option2">
+                                        Top songs for last month
+                                    </option>
+                                </>
+                            )}
+                            {activeTab === "artists" && (
+                                <>
+                                    <option value="option3">
+                                        Top artists for last year
+                                    </option>
+                                    <option value="option1">
+                                        Top artists for last 6 months
+                                    </option>
+                                    <option value="option2">
+                                        Top artists for last month
+                                    </option>
+                                </>
+                            )}
+                        </Select>
+                    )}
 
                     <div style={divStyle}>
                         <h2
@@ -122,42 +158,6 @@ const Library = () => {
                         >
                             Songs
                         </h2>
-                        {(activeTab === "songs" || activeTab === "artists") && (
-                            <Select
-                                bg="#f9bc60"
-                                placeholder={"View top " + activeTab}
-                                className="select"
-                                style={{ paddingInlineEnd: "0px" }}
-                                icon=""
-                            >
-                                {activeTab === "songs" && (
-                                    <>
-                                        <option value="option3">
-                                            Top songs for last year
-                                        </option>
-                                        <option value="option1">
-                                            Top songs for last 6 months
-                                        </option>
-                                        <option value="option2">
-                                            Top songs for last month
-                                        </option>
-                                    </>
-                                )}
-                                {activeTab === "artists" && (
-                                    <>
-                                        <option value="option3">
-                                            Top artists for last year
-                                        </option>
-                                        <option value="option1">
-                                            Top artists for last 6 months
-                                        </option>
-                                        <option value="option2">
-                                            Top artists for last month
-                                        </option>
-                                    </>
-                                )}
-                            </Select>
-                        )}
                     </div>
                 </div>
                 {activeTab === "songs" &&
@@ -170,11 +170,7 @@ const Library = () => {
                                 alt="Album cover"
                             />
                             <div className="text">
-                                <h3>
-                                    {item.songname.length > 20
-                                        ? item.songname.substring(0, 20) + "..."
-                                        : item.songname}
-                                </h3>
+                                <h3>{item.songname}</h3>
                                 <p>{item.artistname[0].name}</p>
                             </div>
                         </div>
@@ -186,16 +182,11 @@ const Library = () => {
                             <img
                                 width="55"
                                 height="55"
-                                src={item.image}
+                                src={item.albumimage}
                                 alt="Album cover"
                             />
                             <div className="text">
-                                <h3>
-                                    {item.albumname.length > 20
-                                        ? item.albumname.substring(0, 20) +
-                                          "..."
-                                        : item.albumname}
-                                </h3>
+                                <h3>{item.albumname}</h3>
                                 <p>{item.artistname[0].name}</p>
                             </div>
                         </div>
@@ -210,7 +201,7 @@ const Library = () => {
                                 src={item.artistimage}
                                 alt="Artist photo"
                             />
-                            <h4>{item.artistname}</h4>
+                            <h3>{item.artistname}</h3>
                         </div>
                     ))}
             </div>
