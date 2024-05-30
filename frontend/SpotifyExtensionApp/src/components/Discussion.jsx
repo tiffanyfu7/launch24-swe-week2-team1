@@ -1,9 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Reply from './Reply';
+import ReplyCard from './ReplyCard';
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import ReplyBox from './ReplyBox';
 
 const Discussion = ({ forumId }) => {
-    const [forumData, setForumData] = useState(null);
+    const [ forumData, setForumData ] = useState(null);
+    const [like, setLike] = useState(false);
+    const [clickReply, setClickReply] = useState(false);
 
     const fetchForum = async () => {
         const response = await axios.get(`http://localhost:8000/forum/${forumId}`);
@@ -15,9 +19,20 @@ const Discussion = ({ forumId }) => {
         fetchForum();
     }, []);
 
+    const likeDiscussion = async () => {
+        const response = await axios.put(`http://localhost:8000/forum/${forumId}`,{
+            currentLikes: forumData.likes,
+        });
+        fetchForum();
+    };
+
+    const handelLike = () => {
+        setLike(!like);
+        likeDiscussion();
+    }
+
     return (
         <>
-            {/* <h1>You have entered discussion {forumId} </h1> */}
             {forumData &&
                 <div>
                     <div className="discussion-title-card">
@@ -29,14 +44,27 @@ const Discussion = ({ forumId }) => {
                             </span>
                         </div>
                         <div className="like-and-reply" >
-                            <h4>Likes: {forumData.likes} </h4> {/*add like button*/}
-                            <button className="reply-button">Reply</button>
+                            <button className="like-button" onClick={() => handelLike()}>
+                                {like ? <FaHeart color="white" size={25} /> : <FaRegHeart color="white" size={25} />}
+                                <p style={{color: "white"}} id="likes-text">{forumData.likes}</p>
+                            </button>
+                            <button onClick={() => setClickReply(true)}
+                                className = "reply-button" > Reply</button>
                         </div>
                     </div>
+                </div>
+            }
+
+            {clickReply &&
+                <ReplyBox setClickReply={setClickReply}/>
+            }
+            
+            {forumData && 
+                <div>
                     <h1 style={{margin: "20px 0px 8px 10px"}}>Replies</h1>
                     <div className="replies-container">
                         {forumData.replies.map((reply, index) => 
-                            <Reply key={index} reply={reply} />
+                            <ReplyCard key={index} reply={reply} />
                         )}
                     </div>
                 </div>
