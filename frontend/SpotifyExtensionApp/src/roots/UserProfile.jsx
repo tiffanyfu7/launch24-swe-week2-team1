@@ -5,31 +5,12 @@ import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
 
 const UserProfile = ({ userId }) => {
-  const { userID, userName } = useContext(AuthContext);
-  console.log("userid: ", userID);
+  const { userID, userName, docID } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [docId, setDocId] = useState(null);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
-  const getDocId = async () => {
-    console.log(userID);
-    if (userID) {
-      const response = await axios.put(`http://localhost:8000/users/query/${userID}`, {
-        userId: userID
-      }).then((t) => {
-        console.log(t.data);
-        setDocId(t.data);
-      })
-    }
-  }
-  
-  useEffect(() => {
-    getDocId();
-  },[userID])
-  
   
   return (
     <>

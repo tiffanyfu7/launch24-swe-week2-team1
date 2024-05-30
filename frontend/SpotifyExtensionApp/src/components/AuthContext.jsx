@@ -55,9 +55,23 @@ const AuthProvider = ({ children, location, navigate }) => {
 		localStorage.removeItem('refresh_token');
 		navigate("/"); // navigate back to landing page
 	}
+
+	const getDocId = async () => {
+		if (userID) {
+			const response = await axios.put(`http://localhost:8000/users/query/${userID}`, {
+				userId: userID
+			}).then((t) => {
+				setDocID(t.data);
+			})
+		}
+	}
 	
+	useEffect(() => {
+		getDocId();
+	}, [userID]);
+
 	  return (
-		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout }}> 
+		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout, docID }}> 
 			{children}
 		</AuthContext.Provider>
 	  )
