@@ -37,7 +37,7 @@ return (
     <div className="modal">
       <div onClick={toggleModal} className="overlay"></div>
       <div className="modal-content">
-        <h2>Edit Profile</h2>
+        <h2 style={{ fontSize: "2em"}}>Edit Profile</h2>
         <div className="option">
           <p>Private account</p>
           <Switch

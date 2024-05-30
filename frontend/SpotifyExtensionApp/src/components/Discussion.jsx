@@ -17,7 +17,10 @@ const Discussion = ({ forumId }) => {
 
     useEffect(() => {
         fetchForum();
-    }, []);
+    }, [ ]);
+    useEffect(() => {
+        fetchForum();
+    }, [ setClickReply ]);
 
     const likeDiscussion = async () => {
         const response = await axios.put(`http://localhost:8000/forum/${forumId}`,{
@@ -56,7 +59,7 @@ const Discussion = ({ forumId }) => {
             }
 
             {clickReply &&
-                <ReplyBox setClickReply={setClickReply}/>
+                <ReplyBox setClickReply={setClickReply} forumId={forumId} />
             }
             
             {forumData && 
