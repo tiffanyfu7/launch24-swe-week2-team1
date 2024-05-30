@@ -38,7 +38,7 @@ const Forum = () => {
     <>
       <NavBar />
       <div className="page-container">
-        <h1>Get The Scoop</h1>
+        <h1>Join The Chorus</h1>
         
         {individualForumId ? (
           <>
