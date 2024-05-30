@@ -40,7 +40,7 @@ const ChatBox = ({ chatId }) => {
                 })
             }
         });
-        //console.log(response.data);
+        console.log(response.data);
         //setChatData(response.data);
     }
 

@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
 import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
 
 const UserProfile = ({ userId }) => {
-  const { userID, userName } = useContext(AuthContext);
+  const { userID, userName, docID } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState(null);
 
@@ -44,7 +44,7 @@ const UserProfile = ({ userId }) => {
                 </div>
               </div>
         </div>
-        {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+        
         <h4 className="content-header"> Top Liked Songs </h4> 
         <div className="content-container"> 
           {/* map songs and add div within map */}
@@ -85,6 +85,7 @@ const UserProfile = ({ userId }) => {
           </div>
         </div>
       </div>
+      {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
     </>
   )
 }
