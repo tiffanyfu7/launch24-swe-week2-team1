@@ -1,19 +1,17 @@
 import React from 'react'
-import '../roots/inbox.css'
+import '../styles/inbox.css'
 import { FaArrowRight } from "react-icons/fa";
 
-const ChatCard = ({ chat, setChatId }) => {
+const ChatCard = ({ chat, setSelectedChatId }) => {
 
     return (
-        <button onClick={ ()=> setChatId(chat.id) } className="chat-card-container">
-            <div className="receiver-info">
-            {chat.recievers.map((i) => 
-                <>
-                    <img src={i.profilepic} width="50px" className="chat-profile-pic"/>
-                    <p> {i.username} </p>
-                </>
+        <button onClick={() => setSelectedChatId(chat.id)} className="chat-card-container">
+            {chat.receivers.map((u, index) => 
+                <div key={index} className="receiver-info">
+                    <img src={u.profilepic} width="50px" className="chat-profile-pic"/>
+                    <p id="username"> {u.username} </p>
+                </div>
             )}
-            </div>
             <h4 className="recent-message"> {chat.recentmessage} </h4>
             <FaArrowRight color="white" className="arrow"size={45} />
         </button>

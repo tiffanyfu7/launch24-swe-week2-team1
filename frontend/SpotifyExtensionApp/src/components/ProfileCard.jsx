@@ -1,5 +1,5 @@
 import React from 'react'
-import '../roots/discover.css'
+import '../styles/discover.css'
 import { IoIosPaperPlane } from "react-icons/io";
 
 const ProfileCard = ({ profileData, variant }) => {    

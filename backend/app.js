@@ -149,12 +149,12 @@ app.get('/refresh_token', function(req, res) {
 app.use(express.json());
 
 const chatRouter = require("./chat");
-const userRouter = require("./user");
+const userRouter = require("./users");
 const messagesRouter = require("./messages");
 const forumsRouter = require("./forum");
 
 app.use("/chat", chatRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/messages", messagesRouter);
 app.use("/forum", forumsRouter);
 /* ---------------------------------------------------------------------------------------- */ 

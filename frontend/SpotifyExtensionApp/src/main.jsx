@@ -10,6 +10,7 @@ import Inbox from "./roots/Inbox.jsx";
 import Forum from "./roots/Forum.jsx";
 import Library from "./roots/Library.jsx";
 import Landing from "./roots/Landing.jsx";
+import UserProfile from "./roots/UserProfile.jsx";
 
 import { AuthProvider } from "./components/AuthContext.jsx";
 
@@ -25,6 +26,7 @@ const RootApp = () => {
 				<Route path="/Inbox" element={<Inbox />} />
 				<Route path="/Forum" element={<Forum />} />
 				<Route path="/Library" element={<Library />} />
+				<Route path="/UserProfile" element={<UserProfile />} />
 			</Routes>
 		</AuthProvider>
 	);
