@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import '../styles/editprofilemodal.css';
-import Switch from 'react-switch';
+//import Switch from 'react-switch';
 import { IoMdClose } from "react-icons/io";
 
 const EditProfileModal = ({ toggleModal }) => {

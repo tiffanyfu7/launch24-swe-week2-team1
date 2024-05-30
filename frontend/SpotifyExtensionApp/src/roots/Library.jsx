@@ -7,16 +7,16 @@ import "./library.css";
 import { Select } from "@chakra-ui/react";
 
 const Library = () => {
-    const userID = "heSbXlYFOjsIL9XYO6ty";
+   // const userID = "heSbXlYFOjsIL9XYO6ty";
     const [userData, setUserData] = useState("");
     const [savedSongs, setSavedSongs] = useState([]);
-    const [artists, setTopArtists] = useState([]);
+    const [artists, setArtists] = useState([]);
     const [albums, setAlbums] = useState([]);
     const headerStyle = { margin: "30px 30px 30px 0px", color: "#FFFFFF" };
     const [activeTab, setActiveTab] = React.useState("artists");
     const divStyle = { display: "flex" };
     const [searchResults, setSearchResults] = useState([]);
-    //const { userID } = useContext(AuthContext);
+    const { userID } = useContext(AuthContext);
 
     const fetchUser = async () => {
         const response = await axios.get(
@@ -24,7 +24,8 @@ const Library = () => {
         );
         setUserData(response.data);
         setSavedSongs(response.data.allsongs);
-        setTopArtists(response.data.topartists);
+        setArtists(response.data.allFollowedArtists);
+        console.log(savedSongs)
     };
 
     function search(category, input) {
