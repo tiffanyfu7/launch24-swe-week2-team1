@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import '../styles/editprofilemodal.css';
 import Switch from 'react-switch';
+import { IoMdClose } from "react-icons/io";
 
 const EditProfileModal = ({ toggleModal }) => {
   
@@ -27,6 +28,9 @@ const EditProfileModal = ({ toggleModal }) => {
       default:
         break;
     }
+    // TODO: Save changes to the user's profile in firebase
+    //hide display for top artists or top songs
+    toggleModal();
 }
 
 return (
@@ -58,6 +62,9 @@ return (
         <button className="close-modal" onClick={handleSaveChanges}>
           Save Changes
         </button>
+        <button class = "X-button" onClick = {toggleModal} >
+            <IoMdClose />
+            </button>
       </div>
     </div>
   );
