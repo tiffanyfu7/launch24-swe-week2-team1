@@ -126,8 +126,22 @@
 
 .reply-box-container {
     width: 100%;
+    max-width: 1200px;
+    margin-left: 100px;
+    margin-right: auto;
     background-color: #3A6160;
     border-radius: 30px;
     border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
+}
+
+.reply-input {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: white;
+}
+
+.reply-input:focus {
+    outline: none
 }

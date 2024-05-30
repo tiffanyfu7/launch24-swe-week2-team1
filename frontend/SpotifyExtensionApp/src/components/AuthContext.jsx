@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -7,6 +8,7 @@ const AuthProvider = ({ children, location, navigate }) => {
 	const [refreshToken, setRefreshToken] = useState(null);
 	const [userID, setUserID] = useState(null);
 	const [userName, setUserName] = useState(null);
+	const [docID, setDocID] = useState(null);
 
 	useEffect(() => {
 		const hash = location.hash;
@@ -42,17 +44,18 @@ const AuthProvider = ({ children, location, navigate }) => {
 			setUserID(storedUserID);
 			setUserName(storedUserName);
 		  }
+		  
 		}
-	  }, [location]);
+	}, [location]);
 
-	  const handleLogout = () => {
+	const handleLogout = () => {
 		setAccessToken(null);
 		setRefreshToken(null);
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('refresh_token');
 		navigate("/"); // navigate back to landing page
-	  }
-
+	}
+	
 	  return (
 		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout }}> 
 			{children}
