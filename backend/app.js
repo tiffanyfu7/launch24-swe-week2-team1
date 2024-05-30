@@ -41,7 +41,8 @@ app.get("/login", function (req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = "user-read-private user-read-email user-top-read";
+  var scope =
+    "user-read-private user-read-email user-top-read user-follow-read user-library-read";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -120,17 +121,23 @@ app.get("/callback", function (req, res) {
 
           // add user info to firebase
           try {
-            await addDoc(collection(db, "users"), {
-              username: body.display_name,
-              profilepic: body.images[1] ? body.images[1].url : null,
-              followercount: body.followers.total,
-              userid: body.id,
-            });
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("userid", "==", user_id));
+            const querySnapshot = await getDocs(q);
+
+            if(querySnapshot.empty){
+              await addDoc(collection(db, "users"), {
+                public: true,
+                username: body.display_name,
+                profilepic: body.images[1] ? body.images[1].url : null,
+                followercount: body.followers.total,
+                userid: body.id,
+              });
+            }            
           } catch (e) {
             console.error("Error adding user: ", e);
           }
         });
-        
 
         // Fetch top year artists
         var topArtistsYear = {
@@ -162,8 +169,6 @@ app.get("/callback", function (req, res) {
                   artistid: artist.id,
                 })
               );
-
-              console.log("artistInfoToPush", artistInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
                 topArtistYear: artistInfoToPush,
@@ -286,8 +291,6 @@ app.get("/callback", function (req, res) {
                 })
               );
 
-              console.log("songInfoToPush", songInfoToPush);
-
               updateDoc(doc(db, "users", userToUpdate), {
                 topSongYear: songInfoToPush,
               });
@@ -329,8 +332,6 @@ app.get("/callback", function (req, res) {
                 })
               );
 
-              console.log("songInfoToPush", songInfoToPush);
-
               updateDoc(doc(db, "users", userToUpdate), {
                 topSongHalfYear: songInfoToPush,
               });
@@ -366,13 +367,12 @@ app.get("/callback", function (req, res) {
               allTopSongsInfo.map((song) =>
                 songInfoToPush.push({
                   albumimage: song.album.images[0].url,
+                  albumname: song.album.name,
                   songname: song.name,
                   artistname: song.artists,
                   songid: song.id,
                 })
               );
-
-              console.log("songInfoToPush", songInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
                 topSongMonth: songInfoToPush,
@@ -382,8 +382,6 @@ app.get("/callback", function (req, res) {
             console.error("Error getting top song of the month: ", e);
           }
         });
-
-
 
         // Fetch followed artist
         var followedArtists = {
@@ -400,13 +398,14 @@ app.get("/callback", function (req, res) {
 
           const usersRef = collection(db, "users");
           const q = query(usersRef, where("userid", "==", user_id));
+          console.log("followed artist body", body);
 
           try {
             const querySnapshot = await getDocs(q);
             if (!querySnapshot.empty) {
               const userToUpdate = querySnapshot.docs[0].id;
 
-              var allFollowedArtists = body.items;
+              var allFollowedArtists = body.artists.items;
               var artistInfoToPush = [];
               allFollowedArtists.map((artist) =>
                 artistInfoToPush.push({
@@ -416,20 +415,20 @@ app.get("/callback", function (req, res) {
                 })
               );
 
-              console.log("songInfoToPush", songInfoToPush);
+              console.log("followed artist", artistInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
-                followedArtistsCount: body.total,
+                followedArtistsCount: body.artists.total,
                 allFollowedArtists: artistInfoToPush,
               });
             }
           } catch (e) {
-            console.error("Error getting top song of 6 months: ", e);
+            console.error("Error getting followed artists: ", e);
           }
         });
 
-         // Fetch saved albums
-         var allAlbums = {
+        // Fetch saved albums
+        var allAlbums = {
           url: "https://api.spotify.com/v1/me/albums?limit=25&offset=0",
           headers: { Authorization: "Bearer " + access_token },
           json: true,
@@ -449,31 +448,74 @@ app.get("/callback", function (req, res) {
             if (!querySnapshot.empty) {
               const userToUpdate = querySnapshot.docs[0].id;
 
-              var allAl = body.items;
-              var artistInfoToPush = [];
-              allFollowedArtists.map((artist) =>
-                artistInfoToPush.push({
-                  artistimage: artist.images[0].url,
-                  artistname: artist.name,
-                  artistid: artist.id,
+              console.log("all albums body", body);
+
+              var allAlbums = body.items;
+              var albumInfoToPush = [];
+              allAlbums.map((album) =>
+                albumInfoToPush.push({
+                  albumname: album.album.name,
+                  artistname: album.album.artists,
+                  albumid: album.album.id,
                 })
               );
 
-              console.log("songInfoToPush", songInfoToPush);
+              console.log("saved album info to push", albumInfoToPush);
 
               updateDoc(doc(db, "users", userToUpdate), {
-                followedArtistsCount: body.total,
-                allFollowedArtists: artistInfoToPush,
+                savedalbums: albumInfoToPush,
               });
             }
           } catch (e) {
-            console.error("Error getting top song of 6 months: ", e);
+            console.error("Error getting saved albums: ", e);
           }
         });
 
+        // Fetch saved songs
+        var allSongs = {
+          url: "https://api.spotify.com/v1/me/tracks?limit=30",
+          headers: { Authorization: "Bearer " + access_token },
+          json: true,
+        };
 
+        request.get(allSongs, async function (error, response, body) {
+          if (error) {
+            console.error("Error for all songs:", error);
+            return;
+          }
 
+          const usersRef = collection(db, "users");
+          const q = query(usersRef, where("userid", "==", user_id));
 
+          try {
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+              const userToUpdate = querySnapshot.docs[0].id;
+
+              console.log("all songs body", body);
+
+              var allSongsInfo = body.items;
+              var allSongsInfoToPush = [];
+              allSongsInfo.map((song) =>
+                allSongsInfoToPush.push({
+                  albumimage: song.track.album.images[0].url,
+                  albumname: song.track.album.name,
+                  artistname: song.track.artists,
+                  songname: song.track.name,
+                  songid: song.track.id,
+                })
+              );
+
+              console.log("all songs info to push", allSongsInfoToPush);
+
+              updateDoc(doc(db, "users", userToUpdate), {
+                allsongs: allSongsInfoToPush,
+              });
+            }
+          } catch (e) {
+            console.error("Error getting all songs info: ", e);
+          }
+        });
       } else {
         res.redirect(
           "http://localhost:5173/#" +
