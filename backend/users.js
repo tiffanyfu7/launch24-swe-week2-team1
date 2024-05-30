@@ -1,4 +1,4 @@
-var request = require('request');
+var request = require("request");
 const express = require("express");
 const db = require("./firebase");
 const {
@@ -15,44 +15,23 @@ const {
 const router = express.Router();
 
 
-// router.post("/", async (req, res) => {
-//   try {
-//     let profileInfo = null;
-//     getToken().then(response => {
-//       getTrackInfo(response.access_token).then(profile => {
-//               profileInfo = profile
-//             })
-//           });
-
-//         const docRef = await addDoc(collection(db, "users"), {
-//             username: "name",
-//         });
-//         // console.log(docRef.data());
-
-//         res.status(200).json({message: "profileInfo"})
-        
-//     } catch (e) {
-//         res.status(400).json({error: `Error setting user data ${e}`})
-//     }
-// })
-
 router.get("/", async (req, res) => {
   try {
-        let ret = [];
-        const docRef = await getDocs(collection(db, "users"));
+    let ret = [];
+    const docRef = await getDocs(collection(db, "users"));
 
-        docRef.forEach((doc) => {
-            ret.push({
-                id: doc.id,
-                ...doc.data()
-            })
-        }) 
+    docRef.forEach((doc) => {
+      ret.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
 
-        res.status(200).json(ret)
-  } catch(e) {
-    res.status(400).json({error: `Error fetching user data ${e}`})
+    res.status(200).json(ret);
+  } catch (e) {
+    res.status(400).json({ error: `Error fetching user data ${e}` });
   }
-})
+});
 
 router.get("/:id", async (req, res) => {
   try {
@@ -64,7 +43,7 @@ router.get("/:id", async (req, res) => {
       console.log("Document does not exist");
     }
   } catch (e) {
-    res.status(400).json({error: `Error fetching user data ${e}`})
+    res.status(400).json({ error: `Error fetching user data ${e}` });
   }
 })
 
