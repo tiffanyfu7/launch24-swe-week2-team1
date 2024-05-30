@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ReplyBox = ({setClickedReply}) => {
+const ReplyBox = ({setClickReply}) => {
     return (
         <>
-            <button>x</button>
+            <button onClick={() => setClickReply(false)}>x</button>
             <input placeholder="Type a Reply...."></input>
             <button>Post</button>
         </>

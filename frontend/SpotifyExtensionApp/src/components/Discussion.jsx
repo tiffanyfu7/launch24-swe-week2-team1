@@ -56,7 +56,7 @@ const Discussion = ({ forumId }) => {
             }
 
             {clickReply &&
-                <ReplyBox set/>
+                <ReplyBox setClickReply={setClickReply}/>
             }
             
             {forumData && 
