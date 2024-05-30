@@ -34,6 +34,7 @@ const Inbox = () => {
 
   const fetchAllChats = async () => {
     const response = await axios.get("http://localhost:8000/chat");
+    console.log("all chats", response.data)
     setChatData(response.data);
   };
 
