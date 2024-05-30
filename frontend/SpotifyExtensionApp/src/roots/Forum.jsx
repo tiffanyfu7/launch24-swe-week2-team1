@@ -22,7 +22,7 @@ const Forum = () => {
 
   useEffect(() => {
     fetchForums();
-  }, []);
+  }, [ individualForumId ]);
 
   const handleForumCardClick = (forumId) => {
     // Set the individual forum id

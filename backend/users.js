@@ -1,28 +1,40 @@
 var request = require('request');
 const express = require("express");
+const db = require("./firebase");
+const {
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  addDoc,
+  deleteDoc,
+  getDoc,
+  query,
+  where,
+} = require("firebase/firestore");
 const router = express.Router();
 
 
-router.post("/", async (req, res) => {
-  try {
-    let profileInfo = null;
-    getToken().then(response => {
-      getTrackInfo(response.access_token).then(profile => {
-              profileInfo = profile
-            })
-          });
+// router.post("/", async (req, res) => {
+//   try {
+//     let profileInfo = null;
+//     getToken().then(response => {
+//       getTrackInfo(response.access_token).then(profile => {
+//               profileInfo = profile
+//             })
+//           });
 
-        const docRef = await addDoc(collection(db, "users"), {
-            username: "name",
-        });
-        // console.log(docRef.data());
+//         const docRef = await addDoc(collection(db, "users"), {
+//             username: "name",
+//         });
+//         // console.log(docRef.data());
 
-        res.status(200).json({message: "profileInfo"})
+//         res.status(200).json({message: "profileInfo"})
         
-    } catch (e) {
-        res.status(400).json({error: `Error setting user data ${e}`})
-    }
-})
+//     } catch (e) {
+//         res.status(400).json({error: `Error setting user data ${e}`})
+//     }
+// })
 
 router.get("/", async (req, res) => {
   try {
