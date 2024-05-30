@@ -45,15 +45,12 @@ const Discover = () => {
             <h1>Find Your Band</h1>
             <SearchBar placeholder="Search Spotify Users..." />
           </div>
-          <div className="userProfile"> 
-            <div className="userProfilePic"></div>
-            <div className="userText"> 
-                <a href="/UserProfile"> 
-                    <h2> {userName} </h2>
-                    <h4>View Your Profile</h4>
-                </a>
+          <a href="/UserProfile"> 
+            <div className="userProfile"> 
+                <div className="userProfilePic"></div>
+                <h4> {userName} </h4>
             </div>
-          </div>
+          </a>
         </div>
         <div>
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>

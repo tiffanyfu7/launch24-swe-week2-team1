@@ -10,7 +10,7 @@
     
   }
   
-  button {
+  .login-button {
     padding: 10px 20px;
     margin-top: 20px;
     font-size: 20px;
@@ -24,15 +24,14 @@
     filter: drop-shadow(2px 2px 4px #000000);
   }
 
-  /* avoid using header and button tags in page css*/
-  h1 {
+  .landing-header {
     font-weight: bold;
     font-size: 4em;
     margin: 0; /* Removes default margin */
     margin-bottom: 5px; 
   }
 
-  h3 {
+  .landing-sub {
     color: white;
     font-size: 1.7em;
   }

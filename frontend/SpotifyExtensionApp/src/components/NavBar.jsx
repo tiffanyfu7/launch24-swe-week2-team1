@@ -19,7 +19,6 @@ const LinkItems = [
   { name: 'Forum', icon: LuMessagesSquare },
   { name: 'Inbox', icon: IoIosPaperPlane },
   { name: 'Library', icon: FaRegHeart },
-   { name: 'Landing'}
 ];
 
 
@@ -84,6 +83,7 @@ const SideBarContent = ({ handleLogout }) => (
     <Box marginBottom={20} >
       <button className="logout-button" onClick={handleLogout}>Log out</button>
     </Box>
+    <img className="logo" src="/spotifylogosmaller.png" alt="spotify logo"></img>
   </Box>
 );
 
@@ -146,6 +146,7 @@ const BottomBarContent = () => (
       }}>
         Log out
       </button>
+      <img src="/spotifylogosmaller.png" alt="spotify logo"></img>
     </Box>
   );
   

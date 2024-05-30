@@ -11,19 +11,32 @@ const UserProfile = ({ userId }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+  
+  
   return (
     <>
-      <div className="profileContainer"> 
-        <div className="profilePic"></div>
-        <div className="profileBio"> 
-          <h3>{userName}</h3>
-          <h6>Cool One Line Status</h6>
-          <h6>5 Followers * 30 Following</h6>
-          <button onClick={toggleModal}>Edit Profile</button>
-          <button>Inbox</button>
+      <a href="/Discover"> 
+        <button className="profile-button" style={{width:"60px", height:"30px"}}> 
+          <img src="/backarrow.png" alt="Back"></img>
+        </button> 
+      </a>
+      <div className="main-container"> 
+        <div className="profileContainer"> 
+              <div className="profilePic"></div>
+              <div className="profileBio"> 
+                <h3> {userName} </h3>
+                <h6> 5 Followers * 30 Following</h6>
+                <div className="button-container"> 
+                  <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
+                  <button className="profile-button"> Inbox </button>
+                </div>
+              </div>
         </div>
-      </div>  
-      {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+        {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+        <h4 className="song-header"> Top Songs </h4> 
+
+      </div>
+      
     </>
   )
 }

@@ -23,12 +23,12 @@ const Landing = () => {
   };
 
   return (
-    <div  className="landingpage-container">
+    <div className="landingpage-container">
       <img src="/spotifylogo.png" alt="Spotify Logo"></img>
-      <h1> Welcome Back </h1>
-      <h3> Find your Groove </h3>
+      <h1 className="landing-header"> Welcome Back </h1>
+      <h3 className="landing-sub"> Find your Groove </h3>
       {!accessToken && (
-        <button onClick={handleLogin}>Log in with Spotify</button>
+        <button className="login-button" onClick={handleLogin}>Log in with Spotify</button>
       )} 
     </div>
   );
