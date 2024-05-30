@@ -32,14 +32,18 @@ const Discover = () => {
             <h1>Find Your Band</h1>
             <SearchBar placeholder="Search Spotify Users..." />
           </div>
-          <div>
-            <a href="/UserProfile">View Your Profile {userName}</a>
+          <div className="userProfile"> 
+            <div className="userProfilePic"></div>
+            <div className="userText"> 
+                <a href="/UserProfile"> 
+                    <h2> {userName} </h2>
+                    <h4>View Your Profile</h4>
+                </a>
+            </div>
           </div>
         </div>
         <div>
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
-          <h3> {userID} </h3>
-          <h3> {userName} </h3>
           <div className="user-cards-container">
             {userData && userData.map((user, index) =>
               ((user.id !== userID && user.public) ?
