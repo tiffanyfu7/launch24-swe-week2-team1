@@ -1,6 +1,6 @@
 # Spotify Extension Harmony 🎵
 Description: A Spotify extension that allows users to message each other and post to forums. <br>
-Authors: Tiffany Fu, Pine, Abhinav, Anna, Anh
+Authors: Tiffany Fu, Pine Netcharussaeng, Abhinav Attaluri, Anna Batman , Anh Nguyen
 
 ## Table of Contents
 1. Installation
