@@ -1,4 +1,5 @@
-.header-filter:hover {
+.header-filter:hover,
+.header-filter.active {
     text-decoration: underline #f9bc60;
 }
 
@@ -8,7 +9,9 @@
     width: 400px;
     height: 60px;
     padding: 10px;
-    display: "flex";
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .artist-container {
@@ -17,7 +20,9 @@
     width: 400px;
     height: 60px;
     padding: 10px;
-    display: "flex";
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .album-container {
@@ -26,5 +31,56 @@
     width: 400px;
     height: 60px;
     padding: 10px;
-    display: "flex";
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
+
+h4 {
+    color: #ffffff;
+    align-self: flex-start;
+    margin: 0;
+    padding-left: 10px;
+}
+
+p {
+    color: #ffffff;
+    align-self: flex-start;
+    margin: 0;
+    padding-left: 10px;
+}
+
+h3 {
+    color: #ffffff;
+    align-self: center;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.text h4 {
+    margin-bottom: 5px; /* Add space below the h4 tag */
+}
+
+img {
+    border-radius: 5px;
+}
+
+.select::-ms-expand {
+    display: none;
+}
+
+.select {
+    border-radius: 10px;
+    width: 125px;
+    height: 25px;
+    padding-right: 20px;
+    margin-top: 40px;
+}
+
+
