@@ -17,6 +17,19 @@ const Discover = () => {
     setUserData(response.data);
   };
 
+  // const fetchMessages = async () => {
+  //   const response = await axios.get("http://localhost:8000/chatmessages");
+  //   console.log("all messages",response.data);
+  //   setAllMessages(response.data);
+  // };
+
+  const postUser = async () => {
+    const response = await axios.post("http://localhost:8000/user");
+    console.log("forums", response.data);
+    // setForums(response.data);
+  };
+
+
   useEffect(() => {
     fetchUsers();
   }, []);
