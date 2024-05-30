@@ -32,11 +32,11 @@ const UserProfile = ({ userId }) => {
                 </div>
               </div>
         </div>
-        {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+        
         <h4 className="song-header"> Top Songs </h4> 
 
       </div>
-      
+      {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
     </>
   )
 }
