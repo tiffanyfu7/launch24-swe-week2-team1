@@ -12,7 +12,7 @@ const Discover = () => {
   const [userData, setUserData] = useState(null);
 
   const fetchUsers = async () => {
-    const response = await axios.get("http://localhost:8000/user");
+    const response = await axios.get("http://localhost:8000/users");
     console.log("users: ", response.data);
     setUserData(response.data);
   };
@@ -23,11 +23,11 @@ const Discover = () => {
   //   setAllMessages(response.data);
   // };
 
-  const postUser = async () => {
-    const response = await axios.post("http://localhost:8000/user");
-    console.log("forums", response.data);
-    // setForums(response.data);
-  };
+  // const postUser = async () => {
+  //   const response = await axios.post("http://localhost:8000/users");
+  //   console.log("forums", response.data);
+  //   // setForums(response.data);
+  // };
 
 
   useEffect(() => {

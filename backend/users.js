@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } = require("firebase/firestore");
+const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc, getDoc } = require("firebase/firestore");
 
 var client_id = process.env.CLIENT_ID; // your clientId
 var client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -93,7 +93,7 @@ getToken().then(response => {
 
 
 router.get("/", async (req, res) => {
-    try {
+  try {
         let ret = [];
         const docRef = await getDocs(collection(db, "users"));
         console.log("docRef in get", docRef);
@@ -106,10 +106,26 @@ router.get("/", async (req, res) => {
         }) 
 
         res.status(200).json(ret)
-    } catch(e) {
-        res.status(400).json({error: `Error fetching user data ${e}`})
-    }
+  } catch(e) {
+    res.status(400).json({error: `Error fetching user data ${e}`})
+  }
 })
 
+router.get("/:id", async (req, res) => {
+  try {
+    console.log("TRYNAA GET USERRR");
+    const docRef = doc(db, "users", req.params.id);
+    console.log("docref")
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("exits");
+      res.status(200).json(docSnap.data());
+    } else {
+      console.log("Document does not exist");
+    }
+  } catch (e) {
+    res.status(400).json({error: `Error fetching user data ${e}`})
+  }
+})
 
 module.exports = router;

@@ -5,11 +5,11 @@ import { FaArrowRight } from "react-icons/fa";
 const ChatCard = ({ chat, setSelectedChatId }) => {
 
     return (
-        <button onClick={ ()=> setSelectedChatId(chat.id) } className="chat-card-container">
-            {chat.recievers.map((u, index) => 
+        <button onClick={() => setSelectedChatId(chat.id)} className="chat-card-container">
+            {chat.receivers.map((u, index) => 
                 <div key={index} className="receiver-info">
                     <img src={u.profilepic} width="50px" className="chat-profile-pic"/>
-                    <p> {u.username} </p>
+                    <p id="username"> {u.username} </p>
                 </div>
             )}
             <h4 className="recent-message"> {chat.recentmessage} </h4>

@@ -25,13 +25,9 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        //const docRef = db.collection('chat').doc(req.params.id);
-        
         const docRef = doc(db, "chat", req.params.id);
-        console.log(docRef);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            // Document data
             res.status(200).json(docSnap.data());
         } else {
             console.log("Document does not exist");
