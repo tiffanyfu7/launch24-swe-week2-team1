@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("./firebase");
-const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc, getDoc } = require("firebase/firestore");
+const { collection, getDocs, updateDoc, doc, addDoc, deleteDoc, getDoc, setDoc } = require("firebase/firestore");
 
 router.get("/", async (req, res) => {
     try {
@@ -49,6 +49,48 @@ router.put("/:id", async (req, res) => {
             likes: currentLikes + 1,
         });
         res.status(200).json({ message: "success" });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+});
+
+router.post("/replies/:id", async (req, res) => {
+    try {
+        const id = req.body.id;
+        const timestamp = req.body.createdAt;
+        const message = req.body.message;
+        const userId = req.body.userId;
+
+        const discussionRef = doc(db, "forum", id);
+        const discussionDoc = await getDoc(discussionRef);
+
+        if (!discussionDoc.exists()) {
+            res.status(404).send('Discussion not found.');
+            return;
+        }
+
+        const discussionData = discussionDoc.data();
+        const updatedReplies = [...discussionData.replies, {
+            createdAt: timestamp,
+            message: message,
+            userId: userId,
+        }];
+
+        await updateDoc(discussionRef, {
+            replies: updatedReplies,
+        });
+
+        res.status(200).send('Reply added successfully.');
+
+
+        // const docRef = await getDocs(collection(db, "forum", id, "replies"));
+        // await addDoc(collection(db, "forum", id, "replies"), {
+        //     createdAt: timestamp,
+        //     message: message,
+        //     userId: userId,
+        // });
+        // const docRef = await addDoc(collection(db, "forum", id), );
+        // res.status(200).json({message: `Successfully added reply with id ${docRef.id}`})
     } catch (e) {
         res.status(400).json({ error: e.message });
     }

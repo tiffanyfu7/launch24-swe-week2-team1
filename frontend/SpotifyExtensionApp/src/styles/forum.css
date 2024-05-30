@@ -52,24 +52,26 @@
 .discussion-title-card {
     display: inline-flex;
     background-color: #3A6160;
-    border-radius: 30px;
+    border-radius: 50px;
     border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
-    min-height: 200px;
+    min-height: 180px;
     width: 90%;
+    max-width: 1250px;
     color: white;
     margin: 10px;
+    padding: 20px;
 }
 
 .artist-message {
-    line-height: 0.8;
+    line-height: 2;
 }
 
 .discussion-album-cover {
     width: 150px;
     height: 150px;
     border-radius: 5px;
-    margin: 25px 25px 0px 25px;
+    margin: 15px 25px 0px 25px;
 }
 
 .like-and-reply {
@@ -115,6 +117,7 @@
     width: 50%;
     color: white;
     margin: 10px;
+    line-height: 2;
 }
 
 .reply-pp {
@@ -126,22 +129,52 @@
 
 .reply-box-container {
     width: 100%;
-    max-width: 1200px;
-    margin-left: 100px;
-    margin-right: auto;
+    max-width: 1100px;
+    min-height: 80px;
+    margin: 20px auto 0px 100px;
     background-color: #3A6160;
     border-radius: 30px;
     border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
+    padding: 20px;
 }
 
 .reply-input {
-    background: transparent;
+    margin-left: 10%;
+    background: rgb(86, 105, 91);
+    width: 70%;
+    border-radius: 20px;
+    padding: 20px;
     border: none;
-    font-size: 22px;
+    font-size: 20px;
     color: white;
 }
 
 .reply-input:focus {
     outline: none
+}
+
+.cancel-button {
+    border: none;
+    background-color: #F9BC60;
+    border-radius: 20px;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
+    padding: 8px;
+    font-size: 20px;
+    color: white;
+}
+
+.post-button {
+    border: none;
+    background-color: #F9BC60;
+    border-radius: 20px;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
+    padding: 8px;
+    font-size: 20px;
+    color: white;
+    margin-left: 5%;
 }
