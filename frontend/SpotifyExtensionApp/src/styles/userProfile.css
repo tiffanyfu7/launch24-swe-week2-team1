@@ -223,3 +223,10 @@ h6 {
     
 }
 
+.private-message {
+    font-size: 35px;
+    text-align:center;
+    color:azure;
+    font-weight:bold;
+}
+
