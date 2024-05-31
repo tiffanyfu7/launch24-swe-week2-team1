@@ -52,21 +52,24 @@ router.post("/:id", async (req, res) => {
         });
 
         // Retrieve the existing chat document
-        const chatDocRef = doc(db, "chat", );
+        const chatDocRef = doc(db, "chat", "hTec14wd5pSZxNQwanR7");
         const chatDocSnapshot = await getDoc(chatDocRef);
+        console.log("chat doc snapshot", chatDocSnapshot.data());
         
-        // if (!chatDocSnapshot.exists()) {
-        //     return res.status(404).json({ error: "Chat document not found" });
-        // }
+        if (!chatDocSnapshot.exists()) {
+            return res.status(404).json({ error: "Chat document not found" });
+        }
 
-        // // Get the current messages array
-        // const currentMessages = chatDocSnapshot.data().message || [];
+        // Get the current messages array
+        const currentMessages = chatDocSnapshot.data().messages || [];
 
-        // // Add the new message ID to the messages array
-        // const updatedMessages = arrayUnion(currentMessages, [newMessageId]);
+        console.log("current messages", currentMessages);
 
-        // await updateDoc(doc(db, "chat", docRef.id), {
-        //     messages: updatedMessages,
+        currentMessages.push(docRef.id);
+        console.log("new current messages", currentMessages);
+
+        // await updateDoc(chatDocRef, {
+        //     messages: currentMessages,
         // })
 
         res.status(200).json({message: `Successfully added message to firebase with id: ${docRef.id}`});
