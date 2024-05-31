@@ -11,6 +11,7 @@ const Discover = () => {
   //fetch all users from Firestore and set to userData
   const [userData, setUserData] = useState(null);
 
+  
   const fetchUsers = async () => {
     const response = await axios.get("http://localhost:8000/users");
     console.log("users: ", response.data);
@@ -23,18 +24,18 @@ const Discover = () => {
   //   setAllMessages(response.data);
   // };
 
-  const postUser = async () => {
-    const response = await axios.post("http://localhost:8000/user");
-    console.log("forums", response.data);
-    // setForums(response.data);
-  };
+  // const postUser = async () => {
+  //   const response = await axios.post("http://localhost:8000/user");
+  //   console.log("forums", response.data);
+  //   // setForums(response.data);
+  // };
 
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const { userID, userName } = useContext(AuthContext);
+  const { userID, userName, docID } = useContext(AuthContext);
 
   // will display default orange background if profilepic is null for user
   let isProfilePic = false;
