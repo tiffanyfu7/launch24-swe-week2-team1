@@ -85,4 +85,9 @@
 
 .message {
     font-size: 20px;
+    color: black;
+}
+
+.timestamp{
+    color: black;
 }

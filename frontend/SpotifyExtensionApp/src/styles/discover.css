@@ -14,6 +14,10 @@
     padding: 20px
 }
 
+.profile-card-container:hover {
+    background-color: #F9BC60;
+}
+
 .empty-profile-pic {
     width:150px;
     height:150px;
@@ -77,6 +81,10 @@ a {
     top:0;
     right:0;
     margin:30px; 
+}
+
+.userProfile:hover {
+    background-color: #F9BC60;
 }
 
 

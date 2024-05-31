@@ -13,7 +13,7 @@ const Inbox = () => {
   // For John Johnson
   // const userID = "heSbXlYFOjsIL9XYO6ty";
   // For Jane Doe
-  const userID = "McXs6673kv4Udhw7OenL";
+  const userID = "tgbhyx06nvXxk1UtPmHx";
 
   const [selectedChatId, setSelectedChatId] = useState("");
   const [chatData, setChatData] = useState(null);
@@ -29,6 +29,7 @@ const Inbox = () => {
   };
 
   const fetchUserId = async (userId) => {
+    console.log("fetchUserId userId", userId);
     return await axios.get(`http://localhost:8000/users/${userId}`);
   };
 

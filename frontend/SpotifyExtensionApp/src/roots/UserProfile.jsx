@@ -142,11 +142,11 @@ const UserProfile = ({ userId }) => {
                         isPrivate={isPrivate}
                         displayTopSongs={displayTopSongs}
                         displayTopArtists={displayTopArtists}
-                        // displaySavedAlbums={displaySavedAlbums}
+                        displaySavedAlbums={displaySavedAlbums}
                         setIsPrivate={setIsPrivate}
                         setDisplayTopSongs={setDisplayTopSongs}
                         setDisplayTopArtists={setDisplayTopArtists}
-                        // setDisplaySavedAlbums={setDisplaySavedAlbums} 
+                        setDisplaySavedAlbums={setDisplaySavedAlbums} 
                       />}
     </>
           
