@@ -12,13 +12,13 @@ const UserProfile = ({ userId }) => {
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
   const [topArtistsYear, setTopArtistsYear] = useState(null);
-  // const [albums, setAlbums] = useState(null);
+  const [albums, setAlbums] = useState(null);
 
   // State for display preferences
   const [isPrivate, setIsPrivate] = useState(false);
   const [displayTopArtists, setDisplayTopArtists] = useState(true);
   const [displayTopSongs, setDisplayTopSongs] = useState(true);
-  // const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
+  const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -34,7 +34,7 @@ const UserProfile = ({ userId }) => {
       setUserData(response.data);
       setAllTimeSongs(response.data.allsongs);
       setTopArtistsYear(response.data.topArtistYear);
-      // setAlbums(response.data.savedalbums);
+      setAlbums(response.data.savedalbums);
 
     }
   }
@@ -45,12 +45,12 @@ const UserProfile = ({ userId }) => {
 
   const topSongs = [];
   const topArtists = [];
-  // const savedAlbums = []
+  const savedAlbums = []
   if (userData) {
     for (let i = 0; i < 4; i++) {
       topSongs.push(allTimeSongs[i]);
       topArtists.push(topArtistsYear[i]);
-      // savedAlbums.push(albums[i]);
+      savedAlbums.push(albums[i]);
     }
   }
 
@@ -63,7 +63,13 @@ const UserProfile = ({ userId }) => {
       </a>
       <div className="main-container"> 
         <div className="profileContainer"> 
-              <div className="profilePic"></div>
+                {userData && userData.profilepic ? (
+                  <div>
+                    <img className="profilePic" src={userData.profilepic} alt="Profile Pic"></img>
+                  </div>
+                ) : (
+                  <div className="profilePic"></div>
+                )}
               <div className="profileBio"> 
                 <h3> {userName} </h3>
                 <h6> {userData && userData.followercount} Followers * {userData && userData.followedArtistsCount} Artists Following </h6>
@@ -111,7 +117,7 @@ const UserProfile = ({ userId }) => {
             </div>
           </>
         )}
-        {/* {displaySavedAlbums && (
+        {displaySavedAlbums && (
           <> 
             <h4 className="content-header"> Saved Albums </h4>
             <div className="content-container"> 
@@ -128,7 +134,7 @@ const UserProfile = ({ userId }) => {
             ))}
             </div>
           </>
-        )} */}
+        )}
       </div>
 
       {isModalOpen && <EditProfileModal 

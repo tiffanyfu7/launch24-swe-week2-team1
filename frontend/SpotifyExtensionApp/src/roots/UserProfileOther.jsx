@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 const UserProfileOther = ({ userId }) => {
   
   const { otherUserId } = useParams(); // getting other userId from URL
+  const [otherDocID, setOtherDocID] = useState(null);
 
   const { userID, userName, docID } = useContext(AuthContext);
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,14 +40,16 @@ const UserProfileOther = ({ userId }) => {
         setTopArtistsYear(user.topArtistYear);
         setAlbums(user.savedalbums);
         setIsPrivate(!user.public);
+        setOtherDocID(user.id);
     }
   }
 
-  const handleToggle = async (currentFollowers) => {
-    // add field to put URL
-    const response = await axios.put(`http://localhost:8000/users`, {
-        followercount: currentFollowers + 1
+  const handleFollow = async (currentFollowers) => {
+    const response = await axios.put(`http://localhost:8000/users/follower/${otherDocID}`, {
+        userId: otherDocID,
+        followers: currentFollowers,
     });
+    fetchUserData();
   }
   
 
