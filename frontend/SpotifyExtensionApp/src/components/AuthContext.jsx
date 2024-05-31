@@ -62,7 +62,7 @@ const AuthProvider = ({ children, location, navigate }) => {
 				userId: userID
 			}).then((t) => {
 				setDocID(t.data);
-			})
+			});
 		}
 	}
 	
@@ -70,6 +70,8 @@ const AuthProvider = ({ children, location, navigate }) => {
 		getDocId();
 	}, [userID]);
 
+	  // userID represents spotify username, not doc ID from database
+	  // docID represents database doc id
 	  return (
 		<AuthContext.Provider value={{ accessToken, refreshToken, userID, userName, handleLogout, docID }}> 
 			{children}

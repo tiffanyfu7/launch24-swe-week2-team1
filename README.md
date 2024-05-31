@@ -1,6 +1,6 @@
 # Spotify Extension Harmony 🎵
 Description: A Spotify extension that allows users to message each other and post to forums. <br>
-Authors: Tiffany Fu, Pine, Abhinav, Anna, Anh
+Authors: Tiffany Fu, Pine Netcharussaeng, Abhinav Attaluri, Anna Batman , Anh Nguyen
 
 ## Table of Contents
 1. Installation
@@ -10,17 +10,23 @@ Authors: Tiffany Fu, Pine, Abhinav, Anna, Anh
 ### Installation
 To run our app follow these steps
 
-1. Clone the repo<br></br>
-<code>git clone {repo url}</code><br></br>
-2. Run the frontend code<br></br>
-<code>cd frontend/SpotifyExtensionApp</code><br></br>
-<code>npm install</code><br></br>
-<code>npm run dev</code>
-2. Run the backend code <br></br>
-<code>cd backend</code><br></br>
-<code>npm install</code><br></br>
-<code>npm install dotenv cors express cookie-parser request firebase</code><br></br>
-<code>npm start</code>
+1. Clone the repo
+```bash
+git clone {repo url}
+```
+2. Run the frontend code
+```bash
+cd frontend/SpotifyExtensionApp
+npm install
+npm run dev
+```
+2. Run the backend code
+```bash
+cd backend
+npm install
+npm install dotenv cors express cookie-parser request firebase
+npm start
+```
 
 In the backend folder add these files
 #### .env
@@ -29,9 +35,10 @@ Retrieve Client Secret and Client ID by registering an app with
 <a href="https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app">
 Spotify for Developers </a>
 
-<code>CLIENT_ID = {Client ID}
+```js
+CLIENT_ID = {Client ID}
 CLIENT_SECRET = {Client Secret}
-</code>
+```
 
 #### permissions.json
 Set up a project with Firebase to setup permissions.json file
@@ -40,7 +47,8 @@ Set up a project with Firebase to setup permissions.json file
 3. Create a Firestore Database
 4. Add Web App to Firebase Project
 5. Go to Project Settings and Generate New Private Key
-<code>{
+```js
+{
     "type": {type},
     "projectId": {project ID},
     "private_key_id": {private Key ID},
@@ -52,7 +60,8 @@ Set up a project with Firebase to setup permissions.json file
     "auth_provider_x509_cert_url": {auth provider},
     "client_x509_cert_url": {cert URL},
     "universe_domain": "googleapis.com"
-}</code>
+}
+```
 
 ### Features
 1. Sign In to Spotify on Landing Page (WIP)

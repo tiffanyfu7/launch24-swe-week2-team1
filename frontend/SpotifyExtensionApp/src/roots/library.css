@@ -6,7 +6,7 @@
 .song-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 400px;
+    width: 900px;
     height: 60px;
     padding: 10px;
     display: flex;
@@ -17,7 +17,7 @@
 .artist-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 400px;
+    width: 900px;
     height: 60px;
     padding: 10px;
     display: flex;
@@ -28,7 +28,7 @@
 .album-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 400px;
+    width: 900px;
     height: 60px;
     padding: 10px;
     display: flex;
@@ -47,7 +47,7 @@ p {
     color: #ffffff;
     align-self: flex-start;
     margin: 0;
-    padding-left: 18px;
+    padding-left: 17px;
 }
 
 h4 {
@@ -77,10 +77,11 @@ img {
 
 .select {
     border-radius: 10px;
-    width: 125px;
+    width: 150px;
     height: 25px;
     padding-right: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
+    font-size: 15px;
 }
 
 

@@ -36,18 +36,30 @@ const Discover = () => {
 
   const { userID, userName } = useContext(AuthContext);
 
+  // will display default orange background if profilepic is null for user
+  let isProfilePic = false;
+  if (userData && userData.profilepic) {
+    isProfilePic = true;
+  }
+
   return (
     <>
       <NavBar />
       <div className="page-container">
-        <div>
+        <div className="top-discover-page">
           <div>
             <h1>Find Your Band</h1>
             <SearchBar placeholder="Search Spotify Users..." />
           </div>
           <a href="/UserProfile"> 
             <div className="userProfile"> 
-                <div className="userProfilePic"></div>
+                {isProfilePic ? (
+                  <div>
+                    <img className="userProfilePic" src={userData.profilepic} alt="Profile Pic"></img>
+                  </div>
+                ) : (
+                  <div className="userProfilePic"></div>
+                )}
                 <h4> {userName} </h4>
             </div>
           </a>
