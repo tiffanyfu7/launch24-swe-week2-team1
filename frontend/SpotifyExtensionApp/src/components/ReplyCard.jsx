@@ -19,7 +19,7 @@ const Reply = ({ reply }) => {
             {user &&
                 <div className="reply-container">
                     <img className="reply-pp" src={user.profilepic} />
-                    <div style={{lineHeight: "0.1", marginTop:"8px"}}>
+                    <div style={{lineHeight: "1.5", marginTop:"10px"}}>
                         <p style={{fontWeight: "bold"}}>{user.username}: </p>
                         <p style={{ fontSize: "20px" }}>{reply.message}</p>
                     </div>

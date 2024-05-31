@@ -40,9 +40,9 @@
     background-color: #d6a153;
   }
 
-  html, body {
+  /* html, body {
     overflow: hidden;
-  }
+  } */
   
   @media (max-width: 600px) {
     .landingpage-container {
