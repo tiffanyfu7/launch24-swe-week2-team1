@@ -37,9 +37,11 @@ const Library = () => {
     const [songsFilterAppliedMonth, setSongsFilterAppliedMonth] =
         useState(false);
   
+    const [input, setInput] = React.useState("");
+    const [searching, setSearching] =
+        useState(false);
 
     const docID = localStorage.getItem("docID");
-    console.log(docID);
 
     const fetchUser = async () => {
         const response = await axios.get(
@@ -62,7 +64,6 @@ const Library = () => {
     function search(category, input) {
         if (category == "songs") {
             const results = [];
-            savedSongs.forEach();
             results.push(
                 savedSongs.artistname.filter((str) => str.includes(input))
             );
@@ -156,10 +157,16 @@ const Library = () => {
             <div className="page-container">
                 <h1>Your library</h1>
                 <div>
-                    <SearchBar
-                        placeholder={"Search your " + activeTab + "..."}
-                        //onSubmit={search(activeTab,input)}
-                    />
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <SearchBar
+                            placeholder={"Search your " + activeTab + "..."}
+                            input={input}
+                            setInput={setInput}
+                        />
+                        <button onClick={search(activeTab,input)} style={{ marginLeft: "10px" }}>
+                            Search
+                        </button>
+                    </div>
 
                     {(activeTab === "songs" || activeTab === "artists") && (
                         <Select
@@ -275,7 +282,6 @@ const Library = () => {
                                           <h3>{item.songname}</h3>
                                           <p>{item.artistname[0].name}</p>
                                       </div>
-                                      
                                   </div>
                               ))
                             : savedSongs.map((item, index) => (
