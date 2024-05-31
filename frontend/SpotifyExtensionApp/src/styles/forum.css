@@ -5,7 +5,7 @@
     border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
     height: 125px;
-    width: 90%;
+    width: 85vw;
     color: white;
     margin: 10px;
 }
@@ -19,14 +19,14 @@
 
 .post-info {
     margin-left: 2%;
-    line-height: 0.6;
-    margin-top: 15px;
+    margin-top: 26px;
     text-align: left;
 }
 
 .quick-info {
     text-align: center;
-    line-height: 0.05;
+    line-height: 1px;
+    margin-top: 10px;
     font-size: 25px;
 }
 
@@ -36,7 +36,7 @@
     margin: 0px 40px 0px auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .right-side {
         display: none;
     }
