@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     try {
         let ret = [];
         const docRef = await getDocs(collection(db, "messages"));
-        console.log("docRef from messages in backend", docRef);
+        
 
         docRef.forEach((doc) => {
             ret.push({
@@ -54,7 +54,7 @@ router.post("/:id", async (req, res) => {
         // Retrieve the existing chat document
         const chatDocRef = doc(db, "chat", "hTec14wd5pSZxNQwanR7");
         const chatDocSnapshot = await getDoc(chatDocRef);
-        console.log("chat doc snapshot", chatDocSnapshot.data());
+        
         
         if (!chatDocSnapshot.exists()) {
             return res.status(404).json({ error: "Chat document not found" });
@@ -63,10 +63,10 @@ router.post("/:id", async (req, res) => {
         // Get the current messages array
         const currentMessages = chatDocSnapshot.data().messages || [];
 
-        console.log("current messages", currentMessages);
+        
 
         currentMessages.push(docRef.id);
-        console.log("new current messages", currentMessages);
+        
         try{
             await updateDoc(chatDocRef, {
                 messages: currentMessages,

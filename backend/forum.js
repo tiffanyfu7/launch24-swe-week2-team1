@@ -42,9 +42,7 @@ router.put("/:id", async (req, res) => {
     try {
         const forumId = req.params.id;
         const currentLikes = req.body.currentLikes;
-        console.log(req)
-        console.log(forumId)
-        console.log(currentLikes);
+        
         await updateDoc(doc(db, "forum", forumId), {
             likes: currentLikes + 1,
         });
@@ -79,18 +77,7 @@ router.post("/replies/:id", async (req, res) => {
         await updateDoc(discussionRef, {
             replies: updatedReplies,
         });
-
         res.status(200).send('Reply added successfully.');
-
-
-        // const docRef = await getDocs(collection(db, "forum", id, "replies"));
-        // await addDoc(collection(db, "forum", id, "replies"), {
-        //     createdAt: timestamp,
-        //     message: message,
-        //     userId: userId,
-        // });
-        // const docRef = await addDoc(collection(db, "forum", id), );
-        // res.status(200).json({message: `Successfully added reply with id ${docRef.id}`})
     } catch (e) {
         res.status(400).json({ error: e.message });
     }

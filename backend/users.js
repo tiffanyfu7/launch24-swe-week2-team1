@@ -38,10 +38,9 @@ router.get("/:id", async (req, res) => {
 
     const docRef = doc(db, "users", req.params.id);
     const docSnap = await getDoc(docRef);
-    // console.log(docSnap.data());
-    console.log('user docID value: ', req.params.id);
+   
+    
     if (docSnap.exists()) {
-      console.log("user doc id exists!!")
       res.status(200).json(docSnap.data());
     } else {
       console.log("Document from user does not exist");
@@ -62,7 +61,7 @@ router.put("/query/:query", async (req, res) => {
     if (querySnapshot) {
       res.status(200).json(querySnapshot.docs[0].id);
     } else {
-      console.log("Document does not exist 111111111");
+      console.log("Document does not exist");
     }
   } catch (e) {
     res.status(400).json({error: `Error fetching user data ${e}`})
@@ -74,8 +73,6 @@ router.put("/public/:id", async (req, res) => {
   try {
       const isPublic = req.body.public;
       const userId = req.body.userId;
-      console.log("user ID:", userId);
-      console.log("new privacy setting:", isPublic);
 
       await updateDoc(doc(db, "users", userId), {
           public: isPublic,
@@ -91,7 +88,7 @@ router.put("/follower/:id", async (req, res) => {
   try {
       const followers = req.body.followers;
       const userDocId = req.body.userId;
-      console.log("user Doc ID:", userDocId);
+      
       await updateDoc(doc(db, "users", userDocId), {
           followercount: followers + 1,
       });

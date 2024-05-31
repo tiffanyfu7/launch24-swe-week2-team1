@@ -3,8 +3,6 @@ import { AuthContext } from '../components/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Landing.css';
 
-// import NavBar from '../components/NavBar.jsx';
-
 const Landing = () => {
   
   const { accessToken } = useContext(AuthContext);

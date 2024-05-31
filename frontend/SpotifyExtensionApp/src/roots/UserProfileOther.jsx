@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
-// import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -9,9 +8,6 @@ import { useParams } from 'react-router-dom';
 const UserProfileOther = () => {
   
   const { otherDocID } = useParams(); // getting other userId from URL
-  // const [otherDocID, setOtherDocID] = useState(null);
-
-  // const { userID, userName, docID } = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
@@ -22,13 +18,8 @@ const UserProfileOther = () => {
   const [isPrivate, setIsPrivate] = useState(false);
 
   const fetchUserData = async () => {
-    // console.log('oioioiooii');
     const response = await axios.get(`http://localhost:8000/users/${otherDocID}`);
     console.log(response.data);
-    // const allUsers = response.data;
-    // // this line should filter the data to only have the correct user's document
-    // const user = allUsers.find(user => user.userid === otherUserId);
-    // console.log(user);
     if (otherDocID) {
         setUserData(response.data);
         setAllTimeSongs(response.data.allsongs);

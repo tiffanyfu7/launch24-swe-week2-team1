@@ -27,10 +27,7 @@ const UserProfile = ({ userId }) => {
   const fetchUserData = async () => {
     console.log(docID);
     if (docID) {
-      console.log('oioioiooii');
       const response = await axios.get(`http://localhost:8000/users/${docID}`);
-      console.log(response.data);
-      console.log(response.data.followercount);
       setUserData(response.data);
       setAllTimeSongs(response.data.allsongs);
       setTopArtistsYear(response.data.topArtistYear);

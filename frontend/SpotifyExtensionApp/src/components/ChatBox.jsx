@@ -5,7 +5,6 @@ import { AuthContext } from "./AuthContext";
 import '../styles/inbox.css';
 
 const ChatBox = ({ chatId }) => {
-  // const { docID } = useContext(AuthContext)
   //get chat given chatId
   const [chatData, setChatData] = useState(null);
   const [message, setMessage] = useState(null);
@@ -21,7 +20,6 @@ const ChatBox = ({ chatId }) => {
     );
 
     const chatResponseData = chatResponse.data;
-    console.log(chatResponseData);
 
     for (var messageId of chatResponseData.messages) {
       var message = "",
@@ -63,7 +61,7 @@ const ChatBox = ({ chatId }) => {
 
       messages.push(messageToPush);
     }
-    console.log("messages array out of for loop", messages);
+    
 
     setChatData(messages);
   };
@@ -101,9 +99,6 @@ const ChatBox = ({ chatId }) => {
 const updateCurrentTime = () => {
     setTime(new Date().toLocaleString());
 };
-
-  //   loop thorugh messages field in chat
-  //   push to an array all the message
 
   return (
     <>

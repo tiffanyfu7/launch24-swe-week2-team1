@@ -5,9 +5,9 @@ import { AuthContext } from './AuthContext'
 const Message = ({ message }) => {
     // add right and left variant
     const { userName } = useContext(AuthContext);
-    console.log(message.username);
+    
     const senderBool = userName == message.username;
-    console.log(senderBool);
+    
     return (
         <>
             <div style={{ marginLeft: senderBool ? "650px": "0px"}}>
