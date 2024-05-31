@@ -72,7 +72,7 @@ const UserProfile = ({ userId }) => {
                 )}
               <div className="profileBio"> 
                 <h3> {userName} </h3>
-                <h6> {userData && userData.followercount} Followers * {userData && userData.followedArtistsCount} Artists Following </h6>
+                <h6> {userData && userData.followercount} Followers | {userData && userData.followedArtistsCount} Artists Following </h6>
                 {isPrivate ? ( <h6> Private </h6>) : ( <h6> Public </h6>)}
                 <div className="button-container"> 
                   <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
