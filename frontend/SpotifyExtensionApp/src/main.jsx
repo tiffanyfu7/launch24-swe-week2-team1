@@ -11,6 +11,7 @@ import Forum from "./roots/Forum.jsx";
 import Library from "./roots/Library.jsx";
 import Landing from "./roots/Landing.jsx";
 import UserProfile from "./roots/UserProfile.jsx";
+import UserProfileOther from './roots/UserProfileOther.jsx';
 
 import { AuthProvider } from "./components/AuthContext.jsx";
 
@@ -27,6 +28,7 @@ const RootApp = () => {
 				<Route path="/Forum" element={<Forum />} />
 				<Route path="/Library" element={<Library />} />
 				<Route path="/UserProfile" element={<UserProfile />} />
+				<Route path="/user/:otherUserId" element={<UserProfileOther />} />
 			</Routes>
 		</AuthProvider>
 	);

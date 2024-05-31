@@ -1,57 +1,65 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
-import EditProfileModal from '../components/EditProfileModal';
+// import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
-const UserProfile = ({ userId }) => {
+const UserProfileOther = ({ userId }) => {
+  
+  const { otherUserId } = useParams(); // getting other userId from URL
+
   const { userID, userName, docID } = useContext(AuthContext);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
   const [topArtistsYear, setTopArtistsYear] = useState(null);
-  // const [albums, setAlbums] = useState(null);
+  const [albums, setAlbums] = useState(null);
 
   // State for display preferences
   const [isPrivate, setIsPrivate] = useState(false);
-  const [displayTopArtists, setDisplayTopArtists] = useState(true);
-  const [displayTopSongs, setDisplayTopSongs] = useState(true);
-  // const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+//   const toggleModal = () => {
+//     setIsModalOpen(!isModalOpen);
+//   };
 
   const fetchUserData = async () => {
-    console.log(docID);
-    if (docID) {
-      console.log('oioioiooii');
-      const response = await axios.get(`http://localhost:8000/users/${docID}`);
-      console.log(response.data);
-      console.log(response.data.followercount);
-      setUserData(response.data);
-      setAllTimeSongs(response.data.allsongs);
-      setTopArtistsYear(response.data.topArtistYear);
-      // setAlbums(response.data.savedalbums);
-
+    // console.log('oioioiooii');
+    const response = await axios.get('http://localhost:8000/users');
+    console.log(response.data);
+    const allUsers = response.data;
+    // this line should filter the data to only have the correct user's document
+    const user = allUsers.find(user => user.userid === otherUserId);
+    console.log(user);
+    if (user) {
+        setUserData(user);
+        setAllTimeSongs(user.allsongs);
+        setTopArtistsYear(user.topArtistYear);
+        setAlbums(user.savedalbums);
+        setIsPrivate(!user.public);
     }
   }
+  
 
   useEffect(() => {
     fetchUserData();
-  }, [docID, userID])
+  }, [otherUserId])
 
   const topSongs = [];
   const topArtists = [];
-  // const savedAlbums = []
+  const savedAlbums = []
   if (userData) {
     for (let i = 0; i < 4; i++) {
       topSongs.push(allTimeSongs[i]);
       topArtists.push(topArtistsYear[i]);
-      // savedAlbums.push(albums[i]);
+      savedAlbums.push(albums[i]);
     }
+  }
+
+  if (userData) {
+    console.log(userData);
   }
 
   return (
@@ -63,25 +71,32 @@ const UserProfile = ({ userId }) => {
       </a>
       <div className="main-container"> 
         <div className="profileContainer"> 
-              <div className="profilePic"></div>
+                {userData && userData.profilepic ? (
+                  <div>
+                    <img className="profilePic" src={userData.profilepic} alt="Profile Pic"></img>
+                  </div>
+                ) : (
+                  <div className="profilePic"></div>
+                )}
               <div className="profileBio"> 
-                <h3> {userName} </h3>
+                <h3> {userData && userData.username} </h3>
                 <h6> {userData && userData.followercount} Followers * {userData && userData.followedArtistsCount} Artists Following </h6>
                 {isPrivate ? ( <h6> Private </h6>) : ( <h6> Public </h6>)}
                 <div className="button-container"> 
-                  <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
+                  <button className="profile-button"> Follow </button>
                   <a href="/Inbox" style={{textDecoration:"none"}}> 
-                    <button className="profile-button"> Inbox </button>
+                    <button className="profile-button"> Message </button>
                   </a>
                 </div>
               </div>
         </div>
-        {displayTopSongs && (
+    
+        {!isPrivate && (
           <>
             <h4 className="content-header"> Top Liked Songs </h4> 
             <div className="content-container"> 
               {topSongs && topSongs.map((song) => (
-                <div key = {song.songname} className="songs"> 
+                <div className="songs"> 
                   <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
                   <div className="song-text">
                     <div className="song-name"> 
@@ -94,14 +109,10 @@ const UserProfile = ({ userId }) => {
                 </div>
               ))}
             </div>
-          </>
-        )}
-        {displayTopArtists && (
-          <> 
             <h4 className="content-header"> Top Artists </h4>
             <div className="content-container"> 
             {topArtists && topArtists.map((artist) => (
-              <div key = {artist.artistname} className="artists"> 
+              <div className="artists"> 
                 <img className="artist-image" src={artist.artistimage}></img>
                 <div className="song-name"> 
                   {artist.artistname}
@@ -109,10 +120,6 @@ const UserProfile = ({ userId }) => {
               </div>
             ))}
             </div>
-          </>
-        )}
-        {/* {displaySavedAlbums && (
-          <> 
             <h4 className="content-header"> Saved Albums </h4>
             <div className="content-container"> 
             {savedAlbums && savedAlbums.map((album) => (
@@ -127,24 +134,12 @@ const UserProfile = ({ userId }) => {
             </div>
             ))}
             </div>
-          </>
-        )} */}
+        </>
+        )}
       </div>
-
-      {isModalOpen && <EditProfileModal 
-                        toggleModal={toggleModal}
-                        isPrivate={isPrivate}
-                        displayTopSongs={displayTopSongs}
-                        displayTopArtists={displayTopArtists}
-                        // displaySavedAlbums={displaySavedAlbums}
-                        setIsPrivate={setIsPrivate}
-                        setDisplayTopSongs={setDisplayTopSongs}
-                        setDisplayTopArtists={setDisplayTopArtists}
-                        // setDisplaySavedAlbums={setDisplaySavedAlbums} 
-                      />}
     </>
           
-  )
+  );
 }
 
-export default UserProfile;
+export default UserProfileOther;
