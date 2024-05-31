@@ -1,6 +1,7 @@
 .header-filter:hover,
 .header-filter.active {
     text-decoration: underline #f9bc60;
+    cursor:pointer;
 }
 
 .song-container {
@@ -91,7 +92,7 @@ img {
     border: none;
 }
 
-button {
+.librarybutton {
     border-radius: 10px;
     width: 60px;
     height: 30px;

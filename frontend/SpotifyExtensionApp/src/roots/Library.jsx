@@ -163,7 +163,7 @@ const Library = () => {
                             input={input}
                             setInput={setInput}
                         />
-                        <button onClick={search(activeTab,input)} style={{ marginLeft: "10px" }}>
+                        <button className="librarybutton" onClick={search(activeTab,input)} style={{ marginLeft: "10px" }}>
                             Search
                         </button>
                     </div>
