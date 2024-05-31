@@ -35,11 +35,11 @@ const RootApp = () => {
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  	<React.StrictMode>
+  	// <React.StrictMode>
       <BrowserRouter> 
         <RootApp />
       </BrowserRouter>
-  	</React.StrictMode>,
+  	// </React.StrictMode>,
 )
 
 

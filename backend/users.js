@@ -35,12 +35,16 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
+
     const docRef = doc(db, "users", req.params.id);
     const docSnap = await getDoc(docRef);
+    // console.log(docSnap.data());
+    console.log('user docID value: ', req.params.id);
     if (docSnap.exists()) {
+      console.log("user doc id exists!!")
       res.status(200).json(docSnap.data());
     } else {
-      console.log("Document does not exist");
+      console.log("Document from user does not exist");
     }
   } catch (e) {
     res.status(400).json({ error: `Error fetching user data ${e}` });
