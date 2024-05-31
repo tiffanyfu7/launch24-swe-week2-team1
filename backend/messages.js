@@ -67,10 +67,15 @@ router.post("/:id", async (req, res) => {
 
         currentMessages.push(docRef.id);
         console.log("new current messages", currentMessages);
-
-        // await updateDoc(chatDocRef, {
-        //     messages: currentMessages,
-        // })
+        try{
+            await updateDoc(chatDocRef, {
+                messages: currentMessages,
+            })
+    
+        } catch (e) {
+            `can't update doc ${e}`
+            console.log(e.message);
+        }
 
         res.status(200).json({message: `Successfully added message to firebase with id: ${docRef.id}`});
     } catch(e) {
