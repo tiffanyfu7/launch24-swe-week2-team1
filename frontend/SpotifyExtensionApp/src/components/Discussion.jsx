@@ -12,7 +12,6 @@ const Discussion = ({ forumId }) => {
 
     const fetchForum = async () => {
         const response = await axios.get(`http://localhost:8000/forum/${forumId}`);
-        console.log("forum: ", response.data);
         setForumData(response.data);
     };
 
@@ -66,7 +65,7 @@ const Discussion = ({ forumId }) => {
             
             {forumData && 
                 <div>
-                    <h1 style={{margin: "20px 0px 8px 10px"}}>Replies</h1>
+                    <h1 style={{ margin: "20px 0px 8px 10px" }}>Replies ({forumData.replies.length})</h1>
                     <div className="replies-container">
                         {forumData.replies.map((reply, index) => 
                             <ReplyCard key={index} reply={reply} />

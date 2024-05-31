@@ -51,17 +51,13 @@ router.get("/:id", async (req, res) => {
   }
 })
 
+//Get Doc ID
 router.put("/query/:query", async (req, res) => {
   try {
     const userId = req.body.userId;
     console.log(userId);
     const q = query(collection(db,"users"), where("userid", "==", userId));
     const querySnapshot = await getDocs(q);
-    // console.log(querySnapshot);
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id);
-    // })
-    
     console.log(querySnapshot.docs[0].id);
     if (querySnapshot) {
       res.status(200).json(querySnapshot.docs[0].id);
@@ -72,5 +68,22 @@ router.put("/query/:query", async (req, res) => {
     res.status(400).json({error: `Error fetching user data ${e}`})
   }
 })
+
+//update user privacy setting
+router.put("/public/:id", async (req, res) => {
+  try {
+      const isPublic = req.body.public;
+      const userId = req.body.userId;
+      console.log("user ID:", userId);
+      console.log("new privacy setting:", isPublic);
+
+      await updateDoc(doc(db, "users", userId), {
+          public: isPublic,
+      });
+      res.status(200).json({ message: "Profile privacy updated successfully" });
+  } catch (e) {
+      res.status(400).json({ error: e.message });
+  }
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/discover.css'
 import { IoIosPaperPlane } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const ProfileCard = ({ profileData, variant }) => {    
     
@@ -12,21 +13,23 @@ const ProfileCard = ({ profileData, variant }) => {
     
     return (
         <>
-            { variant == "user" &&
-                <div className="profile-card-container">
-                    {isProfilePic ? (
-                        <img src={profileData.profilepic} className="profile-pic"/>
-                    ) : (
-                        <div className="empty-profile-pic"></div>
-                    )}
-                    
-                    <h5 className="profile-card-username">{profileData.username}</h5>
-                    <div className="action-container">
-                        <IoIosPaperPlane color="white" />
-                        <a href="/Inbox">Message</a>
+            <Link to={`/user/${profileData.userid}`} style={{textDecoration: "none"}}> 
+                { variant == "user" &&
+                    <div className="profile-card-container">
+                        {isProfilePic ? (
+                            <img src={profileData.profilepic} className="profile-pic"/>
+                        ) : (
+                            <div className="empty-profile-pic"></div>
+                        )}
+                        
+                        <h5 className="profile-card-username">{profileData.username}</h5>
+                        <div className="action-container">
+                            <IoIosPaperPlane color="white" />
+                            <a href="/Inbox">Message</a>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </Link>
 
             {variant == "artist" &&
                 <div className="profile-card-container">

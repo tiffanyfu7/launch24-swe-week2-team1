@@ -1,8 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import '../styles/editprofilemodal.css';
 import Switch from 'react-switch';
 import { IoMdClose } from "react-icons/io";
+import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
 
 const EditProfileModal = ({ 
   toggleModal,
@@ -13,43 +15,32 @@ const EditProfileModal = ({
   setIsPrivate,
   setDisplayTopSongs,
   setDisplayTopArtists,
-  setDisplaySavedAlbums
+  setDisplaySavedAlbums,
 }) => {
-  
+
+
+    const { docID } = useContext(AuthContext);  
   // prevent scrolling in the background when modal is open
   document.body.classList.add('active-modal');
 
-  // const [isPrivate, setIsPrivate] = useState(false);
-  // const [displayTopArtists, setDisplayTopArtists] = useState(true);
-  // const [displayTopSongs, setDisplayTopSongs] = useState(true);
-  // const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
-
-
-  // const handleSaveChanges = (setting) => {
-  //   switch (setting) {
-  //     case 'privateAccount':
-  //       setIsPrivate(!isPrivate);
-  //       break;
-  //     case 'displayTopArtists':
-  //       setDisplayTopArtists(!displayTopArtists);
-  //       break;
-  //     case 'displayTopSongs':
-  //       setDisplayTopSongs(!displayTopSongs);
-  //       break;
-  //     case 'displaySavedAlbums':
-  //       setDisplaySavedAlbums(!displaySavedAlbums);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   // TODO: Save changes to the user's profile in firebase
-  //   //hide display for top artists or top songs
-  //   toggleModal();
-  // }
-
   const handleToggle = (setter, value) => {
     setter(!value);
-  }
+  };
+
+  const handlePrivacyToggle = async (value) => {
+    setIsPrivate(!value);
+    try {
+        if(docID){
+            await axios.put(`http://localhost:8000/users/public/${docID}`, {
+                userId : docID,
+                public: value
+            });
+            console.log('Profile privacy updated successfully YAY');
+        }
+    } catch (error) {
+      console.error('Error updating profile privacy:', error);
+    }
+  };
 
 
 return (
@@ -60,7 +51,7 @@ return (
         <div className="option">
           <p>Private account</p>
           <Switch
-            onChange={() => handleToggle(setIsPrivate, isPrivate)}
+            onChange={() => handlePrivacyToggle(isPrivate)}
             checked={isPrivate}
           />
         </div>
@@ -85,9 +76,9 @@ return (
             checked={displaySavedAlbums}
           />
         </div>
-        {/* <button className="close-modal" onClick={handleSaveChanges}>
+        <button className="close-modal" onClick={toggleModal}>
           Save Changes
-        </button> */}
+        </button>
         <button className="X-button" onClick = {toggleModal} >
             <IoMdClose />
             </button>

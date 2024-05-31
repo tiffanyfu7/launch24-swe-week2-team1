@@ -7,20 +7,8 @@ const ReplyBox = ({ setClickReply, forumId, setNewPost }) => {
     const [inputValue, setInputValue] = useState('');
     const { docID } = useContext(AuthContext);
     
-    //push to forum/replies
-    // replies = [{
-    //     forumId: ,
-    //     createdAt: ,
-    //     message: ,
-    //     userId:
-    // }]
-
-        //     const id = req.body.forumId;
-        // const timestamp = req.body.createdAt;
-        // const message = req.body.message;
-    // const userId = req.body.userId;
     const postReply = async () => {
-        const response = await axios.post(`http://localhost:8000/forum/replies/${forumId}`, {
+        await axios.post(`http://localhost:8000/forum/replies/${forumId}`, {
             id: forumId,
             createdAt: new Date().getTime(),
             message: inputValue,
