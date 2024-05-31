@@ -12,13 +12,13 @@ const UserProfile = ({ userId }) => {
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
   const [topArtistsYear, setTopArtistsYear] = useState(null);
-  const [albums, setAlbums] = useState(null);
+  // const [albums, setAlbums] = useState(null);
 
   // State for display preferences
   const [isPrivate, setIsPrivate] = useState(false);
   const [displayTopArtists, setDisplayTopArtists] = useState(true);
   const [displayTopSongs, setDisplayTopSongs] = useState(true);
-  const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
+  // const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -34,7 +34,7 @@ const UserProfile = ({ userId }) => {
       setUserData(response.data);
       setAllTimeSongs(response.data.allsongs);
       setTopArtistsYear(response.data.topArtistYear);
-      setAlbums(response.data.savedalbums);
+      // setAlbums(response.data.savedalbums);
 
     }
   }
@@ -45,12 +45,12 @@ const UserProfile = ({ userId }) => {
 
   const topSongs = [];
   const topArtists = [];
-  const savedAlbums = []
+  // const savedAlbums = []
   if (userData) {
     for (let i = 0; i < 4; i++) {
       topSongs.push(allTimeSongs[i]);
       topArtists.push(topArtistsYear[i]);
-      savedAlbums.push(albums[i]);
+      // savedAlbums.push(albums[i]);
     }
   }
 
@@ -81,7 +81,7 @@ const UserProfile = ({ userId }) => {
             <h4 className="content-header"> Top Liked Songs </h4> 
             <div className="content-container"> 
               {topSongs && topSongs.map((song) => (
-                <div className="songs"> 
+                <div key = {song.songname} className="songs"> 
                   <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
                   <div className="song-text">
                     <div className="song-name"> 
@@ -101,7 +101,7 @@ const UserProfile = ({ userId }) => {
             <h4 className="content-header"> Top Artists </h4>
             <div className="content-container"> 
             {topArtists && topArtists.map((artist) => (
-              <div className="artists"> 
+              <div key = {artist.artistname} className="artists"> 
                 <img className="artist-image" src={artist.artistimage}></img>
                 <div className="song-name"> 
                   {artist.artistname}
@@ -111,7 +111,7 @@ const UserProfile = ({ userId }) => {
             </div>
           </>
         )}
-        {displaySavedAlbums && (
+        {/* {displaySavedAlbums && (
           <> 
             <h4 className="content-header"> Saved Albums </h4>
             <div className="content-container"> 
@@ -128,7 +128,7 @@ const UserProfile = ({ userId }) => {
             ))}
             </div>
           </>
-        )}
+        )} */}
       </div>
 
       {isModalOpen && <EditProfileModal 
@@ -136,11 +136,11 @@ const UserProfile = ({ userId }) => {
                         isPrivate={isPrivate}
                         displayTopSongs={displayTopSongs}
                         displayTopArtists={displayTopArtists}
-                        displaySavedAlbums={displaySavedAlbums}
+                        // displaySavedAlbums={displaySavedAlbums}
                         setIsPrivate={setIsPrivate}
                         setDisplayTopSongs={setDisplayTopSongs}
                         setDisplayTopArtists={setDisplayTopArtists}
-                        setDisplaySavedAlbums={setDisplaySavedAlbums} 
+                        // setDisplaySavedAlbums={setDisplaySavedAlbums} 
                       />}
     </>
           
