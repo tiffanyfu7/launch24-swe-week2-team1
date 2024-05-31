@@ -36,14 +36,14 @@ const ChatBox = ({ chatId }) => {
 
       message = messageResponseData.message;
 
-      const rawDate = messageResponseData.date;
-      const milliseconds =
-        rawDate.nanoseconds / 1000000 + rawDate.seconds * 1000;
-      const date = new Date(milliseconds);
-      const formattedDate = date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
-      const formattedTime = date.toLocaleTimeString("en-GB"); // Format as HH:MM:SS
-      const newDate = formattedDate + " " + formattedTime;
-      timestamp = newDate;
+      // const rawDate = messageResponseData.date;
+      // const milliseconds =
+      //   rawDate.nanoseconds / 1000000 + rawDate.seconds * 1000;
+      // const date = new Date(milliseconds);
+      // const formattedDate = date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
+      // const formattedTime = date.toLocaleTimeString("en-GB"); // Format as HH:MM:SS
+      // const newDate = formattedDate + " " + formattedTime;
+      timestamp = messageResponseData.date;
 
       const userResponse = await axios.get(
         `http://localhost:8000/users/${messageResponseData.senderId}`

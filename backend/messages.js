@@ -67,6 +67,7 @@ router.post("/:id", async (req, res) => {
 
         currentMessages.push(docRef.id);
         console.log("new current messages", currentMessages);
+        
         try{
             await updateDoc(chatDocRef, {
                 messages: currentMessages,
