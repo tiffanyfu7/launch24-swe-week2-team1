@@ -59,7 +59,7 @@
 .messages-box {
     width:100%;
     max-width:1200px;
-    min-height: 520px;
+    min-height: 420px;
     border-radius: 50px;
     padding: 50px;
     overflow-y: hidden;
@@ -98,4 +98,43 @@
 
 .timestamp{
     color: black;
+}
+
+.input-message{
+    display: inline-flex;
+    max-width: 1250px;
+    min-height: 50px;
+    margin-top:20px;
+    margin-left: 20%;
+    border-radius: 50px;
+    padding: 20px;
+    overflow-y: hidden;
+    background-color: #3A6160;
+    border: 1px solid black;
+    filter: drop-shadow(2px 2px 4px #000000);
+}
+/* 
+.form-fieldinew {
+    width: 100%;
+} */
+
+.text-area{
+    font-size: 20px;
+    background-color: beige;
+    height: 50px;
+    width: 800px;
+    margin-left: 30px;
+    margin-right: 20px;
+    border-radius: 20px;
+}
+
+.send-button {
+    margin-top: 8px;
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-size: 20px;
 }

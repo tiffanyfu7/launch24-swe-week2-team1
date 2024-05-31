@@ -37,4 +37,50 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+router.post("/:id", async (req, res) => {
+    try {
+        const chatId = req.body.chatId;
+        const date = req.body.date;
+        const message = req.body.message;
+        const senderId = req.body.senderId;
+
+        const docRef = await addDoc(collection(db, "messages"), {
+            chatId: chatId,
+            date: date,
+            message: message,
+            senderId: senderId
+        });
+
+        // Retrieve the existing chat document
+        const chatDocRef = doc(db, "chat", "hTec14wd5pSZxNQwanR7");
+        const chatDocSnapshot = await getDoc(chatDocRef);
+        console.log("chat doc snapshot", chatDocSnapshot.data());
+        
+        if (!chatDocSnapshot.exists()) {
+            return res.status(404).json({ error: "Chat document not found" });
+        }
+
+        // Get the current messages array
+        const currentMessages = chatDocSnapshot.data().messages || [];
+
+        console.log("current messages", currentMessages);
+
+        currentMessages.push(docRef.id);
+        console.log("new current messages", currentMessages);
+        try{
+            await updateDoc(chatDocRef, {
+                messages: currentMessages,
+            })
+    
+        } catch (e) {
+            `can't update doc ${e}`
+            console.log(e.message);
+        }
+
+        res.status(200).json({message: `Successfully added message to firebase with id: ${docRef.id}`});
+    } catch(e) {
+        res.status(400).json({error: `Error adding message with ${e.message} error`})
+    }
+})
+
 module.exports = router;
