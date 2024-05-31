@@ -158,6 +158,7 @@ const Library = () => {
                                 search(activeTab, input);
                             }}
                             style={{ marginLeft: "10px" }}
+                            className="librarybutton "
                         >
                             Search
                         </button>
