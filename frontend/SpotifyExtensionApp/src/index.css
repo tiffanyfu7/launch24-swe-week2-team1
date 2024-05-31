@@ -18,7 +18,7 @@ h1 {
   width: 100%;
   margin-left: 120px;
   overflow-y: scroll;
-  height: 95vh;
+  height: 92vh;
 }
 
 @media (max-width: 600px) {
@@ -34,71 +34,42 @@ h1 {
 ::placeholder {
   color: white;
 }
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*Add Masked Overflow
+https://pqina.nl/blog/fade-out-overflow-using-css-mask-image */
+.page-container {
+  /* scroll bar width, for use in mask calculations */
+  --scrollbar-width: 5px;
+  /* mask fade distance, for use in mask calculations */
+  --mask-height: 10px;
+  /* If content exceeds height of container, overflow! */
+  overflow-y: auto;
+  /* Our height limit */
+  height: 92vh;
+  /* Need to make sure container has bottom space,
+  otherwise content at the bottom is always faded out */
+  padding-bottom: var(--mask-height);
+  /* The CSS mask */
+  /* The content mask is a linear gradient from top to bottom */
+  --mask-image-content: linear-gradient(to bottom,
+      transparent,
+      #126180 var(--mask-height),
+      #126180 calc(100% - var(--mask-height)),
+      transparent);
+  /* Here we scale the content gradient to the width of the container 
+  minus the scrollbar width. The height is the full container height */
+  --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+  /* The scrollbar mask is a blue pixel */
+  --mask-image-scrollbar: linear-gradient(#126180, #126180);
+  /* The width of our blue pixel is the width of the scrollbar.
+  The height is the full container height */
+  --mask-size-scrollbar: var(--scrollbar-width) 100%;
+  /* Apply the mask image and mask size variables */
+  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+  /* Position the content gradient in the top left, and the 
+  scroll gradient in the top right */
+  mask-position: 0 0, 100% 0;
+  /* We don't repeat our mask images */
+  mask-repeat: no-repeat, no-repeat;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
