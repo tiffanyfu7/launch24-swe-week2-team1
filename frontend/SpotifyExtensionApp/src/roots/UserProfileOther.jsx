@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
-// import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -9,9 +8,6 @@ import { useParams } from 'react-router-dom';
 const UserProfileOther = () => {
   
   const { otherDocID } = useParams(); // getting other userId from URL
-  // const [otherDocID, setOtherDocID] = useState(null);
-
-  // const { userID, userName, docID } = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
@@ -22,13 +18,8 @@ const UserProfileOther = () => {
   const [isPrivate, setIsPrivate] = useState(false);
 
   const fetchUserData = async () => {
-    // console.log('oioioiooii');
     const response = await axios.get(`http://localhost:8000/users/${otherDocID}`);
     console.log(response.data);
-    // const allUsers = response.data;
-    // // this line should filter the data to only have the correct user's document
-    // const user = allUsers.find(user => user.userid === otherUserId);
-    // console.log(user);
     if (otherDocID) {
         setUserData(response.data);
         setAllTimeSongs(response.data.allsongs);
@@ -69,6 +60,11 @@ const UserProfileOther = () => {
           <img src="/backarrow.png" alt="Back"></img>
         </button> 
       </a>
+      {isPrivate ? (
+        <div className="private-message"> 
+            <h2> User's Profile is Private </h2>
+        </div>
+      ) : (
       <div className="main-container"> 
         <div className="profileContainer"> 
                 {userData && userData.profilepic ? (
@@ -90,53 +86,49 @@ const UserProfileOther = () => {
                 </div>
               </div>
         </div>
-    
-        {!isPrivate && (
-          <>
-            <h4 className="content-header"> Top Liked Songs </h4> 
-            <div className="content-container"> 
-              {topSongs && topSongs.map((song) => (
-                <div className="songs"> 
-                  <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
-                  <div className="song-text">
-                    <div className="song-name"> 
-                      {song.songname}
-                    </div>
-                    <div className="artist-name">
-                      {song.artistname[0].name}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <h4 className="content-header"> Top Artists </h4>
-            <div className="content-container"> 
-            {topArtists && topArtists.map((artist) => (
-              <div className="artists"> 
-                <img className="artist-image" src={artist.artistimage}></img>
+        <h4 className="content-header"> Top Liked Songs </h4> 
+        <div className="content-container"> 
+            {topSongs && topSongs.map((song) => (
+            <div className="songs"> 
+                <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
+                <div className="song-text">
                 <div className="song-name"> 
-                  {artist.artistname}
+                    {song.songname}
                 </div>
-              </div>
-            ))}
-            </div>
-            <h4 className="content-header"> Saved Albums </h4>
-            <div className="content-container"> 
-            {savedAlbums && savedAlbums.map((album) => (
-            <div className="albums"> 
-              <img src={album.albumimage} alt="Album cover" className="artist-image"></img>
-              <div className="album-name"> 
-                {album.albumname}
-                <div className="artist-name" style={{fontWeight: "normal"}}> 
-                  {album.artistname[0].name}
+                <div className="artist-name">
+                    {song.artistname[0].name}
                 </div>
-              </div>
+                </div>
             </div>
             ))}
+        </div>
+        <h4 className="content-header"> Top Artists </h4>
+        <div className="content-container"> 
+        {topArtists && topArtists.map((artist) => (
+            <div className="artists"> 
+            <img className="artist-image" src={artist.artistimage}></img>
+            <div className="song-name"> 
+                {artist.artistname}
             </div>
-        </>
-        )}
+            </div>
+        ))}
+        </div>
+        <h4 className="content-header"> Saved Albums </h4>
+        <div className="content-container"> 
+        {savedAlbums && savedAlbums.map((album) => (
+        <div className="albums"> 
+            <img src={album.albumimage} alt="Album cover" className="artist-image"></img>
+            <div className="album-name"> 
+            {album.albumname}
+            <div className="artist-name" style={{fontWeight: "normal"}}> 
+                {album.artistname[0].name}
+            </div>
+            </div>
+        </div>
+        ))}
+        </div>
       </div>
+      )}
     </>
           
   );

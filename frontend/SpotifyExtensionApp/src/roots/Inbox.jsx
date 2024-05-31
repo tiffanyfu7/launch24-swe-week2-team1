@@ -9,10 +9,6 @@ import "../styles/inbox.css";
 import ChatBox from "../components/ChatBox.jsx";
 
 const Inbox = () => {
-  // const { userID } = useContext(AuthContext);
-  // For John Johnson
-  // const userID = "heSbXlYFOjsIL9XYO6ty";
-  // For Jane Doe
   const userID = "tgbhyx06nvXxk1UtPmHx";
 
   const [selectedChatId, setSelectedChatId] = useState("");
@@ -156,10 +152,3 @@ const Inbox = () => {
 };
 
 export default Inbox;
-
-{
-  /* <buttonstyle={{ marginLeft: '10px', padding: '12px', backgroundColor: '#F9BC60', color: 'black', border: 'none',
-borderRadius: '5px', fontSize: '20px', cursor: 'pointer', textAlign: 'center', marginBottom: '6px'}}
-className="filter-button"
-> Sort By </button> */
-}

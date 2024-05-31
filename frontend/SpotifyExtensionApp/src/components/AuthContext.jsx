@@ -62,7 +62,6 @@ const AuthProvider = ({ children, location, navigate }) => {
 				userId: userID
 			}).then((t) => {
 				setDocID(t.data);
-				console.log(t.data);
 				localStorage.setItem("docID",t.data);
 			})
 		}

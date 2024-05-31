@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 const Reply = ({ reply }) => {
     const [user, setUser] = useState(null);
 
-    console.log(reply);
+    
 
     const fetchUser = async () => {
         const response = await axios.get(`http://localhost:8000/users/${reply.userId}`);
-        console.log("user: ", response.data);
+        
         setUser(response.data);
     };
 
@@ -17,7 +17,6 @@ const Reply = ({ reply }) => {
         fetchUser();
     }, []);
 
-    const url = `/user/${reply.userId}`
 
     return (
         <>

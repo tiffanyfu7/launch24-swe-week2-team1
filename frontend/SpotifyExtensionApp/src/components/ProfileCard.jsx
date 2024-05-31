@@ -12,7 +12,6 @@ const ProfileCard = ({ profileData, variant }) => {
     }
 
     // profileData.id is the DOC id, so changing the userprofile URL to link to that
-    console.log(profileData.id);
     
     return (
         <>

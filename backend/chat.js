@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     try {
         let ret = [];
         const docRef = await getDocs(collection(db, "chat"));
-        // console.log("docRef from chat in backend", docRef);
+       
 
         docRef.forEach((doc) => {
             ret.push({
@@ -26,11 +26,11 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const docRef = doc(db, "chat", req.params.id);
-        console.log("get chat from chatid:", req.params.id);
+        
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             res.status(200).json(docSnap.data());
-            console.log("data from get chat from chatid:", docSnap.data());
+            
         } else {
             console.log("Document does not exist");
         }
