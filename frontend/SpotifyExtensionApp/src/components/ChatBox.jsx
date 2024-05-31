@@ -1,12 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Message from "./Message";
+import { AuthContext } from "./AuthContext";
 
 const ChatBox = ({ chatId }) => {
-  console.log("chatId", chatId);
+  // const { docID } = useContext(AuthContext)
   //get chat given chatId
   const [chatData, setChatData] = useState(null);
   const [message, setMessage] = useState(null);
+  const userID = "tgbhyx06nvXxk1UtPmHx";
+  const [time, setTime] = useState(null);
 
   let messages = [];
 
@@ -28,6 +31,7 @@ const ChatBox = ({ chatId }) => {
       const messageResponse = await axios.get(
         `http://localhost:8000/messages/${messageId}`
       );
+
       const messageResponseData = messageResponse.data;
 
       message = messageResponseData.message;
@@ -44,7 +48,7 @@ const ChatBox = ({ chatId }) => {
       const userResponse = await axios.get(
         `http://localhost:8000/users/${messageResponseData.senderId}`
       );
-      
+
       const userResponseData = userResponse.data;
       username = userResponseData.username;
       profilepic = userResponseData.profilepic;
@@ -67,23 +71,35 @@ const ChatBox = ({ chatId }) => {
     fetchChat();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    var curChatId = "chat/hTec14wd5pSZxNQwanR7"
+    const body = {
+      chatId: curChatId,
+      date: time,
+      message: message,
+      senderId: userID,
+    };
+
+    await axios.post(
+      "http://localhost:8000/messages/hTec14wd5pSZxNQwanR7",
+      body
+    );
+
+    fetchChat();
+
+    setMessage("");
+  };
+
   
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const body = {
-  //     username: username,
-  //     message: message,
-  //   };
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+    updateCurrentTime();
+};
 
-  //   const response = await axios.post(`http://localhost:5000/chat/${chatId}`, body);
-  //   console.log(response);
-
-  //   fetchChat();
-
-  //   setMessage("");
-  // };
-
-  
+const updateCurrentTime = () => {
+    setTime(new Date().toLocaleString());
+};
 
   //   loop thorugh messages field in chat
   //   push to an array all the message
@@ -97,21 +113,21 @@ const ChatBox = ({ chatId }) => {
             <Message key={index} message={chatMessage} />
           ))}
       </div>
-      {/* <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         
         <div className="formfield-new">
           <label id="form">Message: &nbsp;</label>
           <textarea
             type="text"
             defaultValue={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={handleChange}
             style={{ height: "100px" }}
           ></textarea>
         </div>
 
         <br></br>
         <button type="submit">Send</button>
-      </form> */}
+      </form>
     </>
   );
 };
