@@ -3,6 +3,10 @@
   background-color: #004643;
 }
 
+a, button, Link {
+  cursor:pointer;
+}
+
 body {
   padding: 20px;
 }

@@ -10,10 +10,13 @@ const ProfileCard = ({ profileData, variant }) => {
     if (profileData && profileData.profilepic) {
         isProfilePic = true;
     }
+
+    // profileData.id is the DOC id, so changing the userprofile URL to link to that
+    console.log(profileData.id);
     
     return (
         <>
-            <Link to={`/user/${profileData.userid}`} style={{textDecoration: "none"}}> 
+            <Link to={`/user/${profileData.id}`} style={{textDecoration: "none"}}> 
                 { variant == "user" &&
                     <div className="profile-card-container">
                         {isProfilePic ? (

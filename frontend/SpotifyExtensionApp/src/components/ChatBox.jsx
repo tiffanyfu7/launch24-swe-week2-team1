@@ -107,7 +107,7 @@ const updateCurrentTime = () => {
   return (
     <>
       {/* <h1>You have entered chat {chatId} </h1> */}
-      <div className="messages-container">
+      <div className="messages-box">
         {chatData &&
           chatData.map((chatMessage, index) => (
             <Message key={index} message={chatMessage} />

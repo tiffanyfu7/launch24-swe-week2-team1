@@ -28,7 +28,7 @@ const RootApp = () => {
 				<Route path="/Forum" element={<Forum />} />
 				<Route path="/Library" element={<Library />} />
 				<Route path="/UserProfile" element={<UserProfile />} />
-				<Route path="/user/:otherUserId" element={<UserProfileOther />} />
+				<Route path="/user/:otherDocID" element={<UserProfileOther />} />
 			</Routes>
 		</AuthProvider>
 	);

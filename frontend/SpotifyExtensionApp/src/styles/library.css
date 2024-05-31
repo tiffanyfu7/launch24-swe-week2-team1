@@ -1,39 +1,46 @@
 .header-filter:hover,
 .header-filter.active {
     text-decoration: underline #f9bc60;
+    cursor:pointer;
 }
 
 .song-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 900px;
+    width: 1000px;
     height: 60px;
     padding: 10px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    border: 1px solid black;
+    filter: drop-shadow(2px 2px 4px #000000);
 }
 
 .artist-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 900px;
+    width: 1000px;
     height: 60px;
     padding: 10px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    border: 1px solid black;
+    filter: drop-shadow(2px 2px 4px #000000);
 }
 
 .album-container {
     background-color: #3a6160;
     border-radius: 20px;
-    width: 900px;
+    width: 1000px;
     height: 60px;
     padding: 10px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    border: 1px solid black;
+    filter: drop-shadow(2px 2px 4px #000000);
 }
 
 h3 {
@@ -64,7 +71,7 @@ h4 {
 }
 
 .text h4 {
-    margin-bottom: 5px; /* Add space below the h4 tag */
+    margin-bottom: 5px;
 }
 
 img {
@@ -77,11 +84,19 @@ img {
 
 .select {
     border-radius: 10px;
-    width: 150px;
+    width: 215px;
     height: 25px;
     padding-right: 20px;
     margin-top: 20px;
     font-size: 15px;
+    border: none;
 }
 
-
+.librarybutton {
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+    background-color: #f9bc60;
+    border: none;
+    align-items: center;
+}

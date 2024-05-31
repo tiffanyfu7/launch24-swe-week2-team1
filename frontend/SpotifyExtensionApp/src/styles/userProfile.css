@@ -9,7 +9,7 @@
 .profileContainer {
     background-color: #3A6160;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
     width: 400px;
     /* height: 225px; */

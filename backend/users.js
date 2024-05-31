@@ -86,4 +86,20 @@ router.put("/public/:id", async (req, res) => {
   }
 });
 
+// update user follower count 
+router.put("/follower/:id", async (req, res) => {
+  try {
+      const followers = req.body.followers;
+      const userDocId = req.body.userId;
+      console.log("user Doc ID:", userDocId);
+      await updateDoc(doc(db, "users", userDocId), {
+          followercount: followers + 1,
+      });
+      res.status(200).json({ message: "Profile follower count updated successfully" });
+  } catch (e) {
+      res.status(400).json({ error: e.message });
+  }
+});
+
+
 module.exports = router;

@@ -7,7 +7,7 @@
 .profile-card-container {
     background-color: #3A6160;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
     width: 190px;
     height: 240px;
@@ -15,7 +15,7 @@
 }
 
 .profile-card-container:hover {
-    background-color: #F9BC60;
+    background-color: #d6a153;
 }
 
 .empty-profile-pic {
@@ -64,7 +64,7 @@ a {
 .userProfile {
     background-color: #3A6160;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid black;
     filter: drop-shadow(2px 2px 4px #000000);
     width: 300px;
     height: 150px;
@@ -84,7 +84,7 @@ a {
 }
 
 .userProfile:hover {
-    background-color: #F9BC60;
+    background-color: #d6a153;
 }
 
 
