@@ -41,6 +41,13 @@ const UserProfileOther = ({ userId }) => {
         setIsPrivate(!user.public);
     }
   }
+
+  const handleToggle = async (currentFollowers) => {
+    // add field to put URL
+    const response = await axios.put(`http://localhost:8000/users`, {
+        followercount: currentFollowers + 1
+    });
+  }
   
 
   useEffect(() => {
@@ -56,10 +63,6 @@ const UserProfileOther = ({ userId }) => {
       topArtists.push(topArtistsYear[i]);
       savedAlbums.push(albums[i]);
     }
-  }
-
-  if (userData) {
-    console.log(userData);
   }
 
   return (
@@ -83,7 +86,7 @@ const UserProfileOther = ({ userId }) => {
                 <h6> {userData && userData.followercount} Followers * {userData && userData.followedArtistsCount} Artists Following </h6>
                 {isPrivate ? ( <h6> Private </h6>) : ( <h6> Public </h6>)}
                 <div className="button-container"> 
-                  <button className="profile-button"> Follow </button>
+                  <button onClick={() => handleFollow(userData.followercount)} className="profile-button"> Follow </button>
                   <a href="/Inbox" style={{textDecoration:"none"}}> 
                     <button className="profile-button"> Message </button>
                   </a>
