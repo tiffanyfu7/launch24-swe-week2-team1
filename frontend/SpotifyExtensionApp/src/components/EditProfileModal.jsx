@@ -62,7 +62,7 @@ return (
         <button className="close-modal" onClick={handleSaveChanges}>
           Save Changes
         </button>
-        <button class = "X-button" onClick = {toggleModal} >
+        <button className="X-button" onClick = {toggleModal} >
             <IoMdClose />
             </button>
       </div>

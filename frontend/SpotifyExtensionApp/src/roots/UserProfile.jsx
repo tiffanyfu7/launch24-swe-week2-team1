@@ -8,21 +8,44 @@ const UserProfile = ({ userId }) => {
   const { userID, userName, docID } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [allTimeSongs, setAllTimeSongs] = useState(null);
+  const [topArtistsYear, setTopArtistsYear] = useState(null);
+  const [albums, setAlbums] = useState(null);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   const fetchUserData = async () => {
-    const response = await axios.get()
+    console.log(docID);
+    if (docID) {
+      console.log('oioioiooii');
+      const response = await axios.get(`http://localhost:8000/users/${docID}`);
+      console.log(response.data);
+      console.log(response.data.followercount);
+      setUserData(response.data);
+      setAllTimeSongs(response.data.allsongs);
+      setTopArtistsYear(response.data.topArtistYear);
+      setAlbums(response.data.savedalbums);
+
+    }
   }
 
   useEffect(() => {
     fetchUserData();
-  }, [])
+  }, [docID, userID])
 
-  
-  
+  const topSongs = [];
+  const topArtists = [];
+  const savedAlbums = []
+  if (userData) {
+    for (let i = 0; i < 4; i++) {
+      topSongs.push(allTimeSongs[i]);
+      topArtists.push(topArtistsYear[i]);
+      savedAlbums.push(albums[i]);
+    }
+  }
+
   return (
     <>
       <a href="/Discover" className="back-button-link"> 
@@ -35,7 +58,7 @@ const UserProfile = ({ userId }) => {
               <div className="profilePic"></div>
               <div className="profileBio"> 
                 <h3> {userName} </h3>
-                <h6> 5 Followers * 30 Following</h6>
+                <h6> {userData && userData.followercount} Followers * 30 Following </h6>
                 <div className="button-container"> 
                   <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
                   <a href="/Inbox" style={{textDecoration:"none"}}> 
@@ -47,46 +70,51 @@ const UserProfile = ({ userId }) => {
         
         <h4 className="content-header"> Top Liked Songs </h4> 
         <div className="content-container"> 
-          {/* map songs and add div within map */}
-          <div className="songs"> 
-
-          </div>
-          <div className="songs"> 
-            
-          </div>
-          <div className="songs"> 
-            
-          </div>
-          <div className="songs"> 
-            
-          </div>
+          {topSongs && topSongs.map((song) => (
+            <div className="songs"> 
+              <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
+              <div className="song-text">
+                <div className="song-name"> 
+                  {song.songname}
+                </div>
+                <div className="artist-name">
+                  {song.artistname[0].name}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
         <h4 className="content-header"> Top Artists </h4>
         <div className="content-container"> 
-          {/* map artists and add div within map */}
-          <div className="artists"> 
-          
-          </div>
-          <div className="artists"> 
-          
-          </div>
-          <div className="artists"> 
-          
-          </div>
-          <div className="artists"> 
-          
-          </div>
+          {topArtists && topArtists.map((artist) => (
+            <div className="artists"> 
+              <img className="artist-image" src={artist.artistimage}></img>
+              <div className="song-name"> 
+                {artist.artistname}
+              </div>
+            </div>
+          ))}
         </div>
         <h4 className="content-header"> Saved Albums </h4>
         <div className="content-container"> 
-          {/* map albums and add div within map */}
-          <div className="albums"> 
+          {savedAlbums && savedAlbums.map((album) => (
+            <div className="albums"> 
+              <img src={album.image} alt="Album cover" className="artist-image"></img>
+              <div className="album-name"> 
+                {album.albumname}
+              </div>
+            </div>
+          ))}
+          {/* <div className="albums"> 
           
-          </div>
+          </div> */}
         </div>
       </div>
+
       {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
+    
     </>
+          
   )
 }
 
