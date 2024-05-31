@@ -8,7 +8,7 @@ const Message = ({ message }) => {
             <img src={message.profilepic} className="message-profile-pic"/>
             <h5>{message.username}</h5>
             <p className="message">{message.message}</p>
-            <p>{message.timestamp}</p>
+            <p className="timestamp">{message.timestamp}</p>
         </>
     )
 }
