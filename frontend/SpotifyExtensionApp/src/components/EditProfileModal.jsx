@@ -69,13 +69,13 @@ return (
             checked={displayTopSongs}
           />
         </div>
-        {/* <div className="option">
+        <div className="option">
           <p>Display Saved Albums</p>
           <Switch
             onChange={() => handleToggle(setDisplaySavedAlbums, displaySavedAlbums)}
             checked={displaySavedAlbums}
           />
-        </div> */}
+        </div>
         <button className="close-modal" onClick={toggleModal}>
           Save Changes
         </button>
