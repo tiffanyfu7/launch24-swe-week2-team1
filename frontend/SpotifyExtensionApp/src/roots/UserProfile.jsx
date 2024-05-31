@@ -3,14 +3,23 @@ import { AuthContext } from '../components/AuthContext';
 import '../styles/userProfile.css';
 import EditProfileModal from '../components/EditProfileModal';
 import axios from 'axios';
+import { Select } from '@chakra-ui/react';
+
 
 const UserProfile = ({ userId }) => {
   const { userID, userName, docID } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
   const [topArtistsYear, setTopArtistsYear] = useState(null);
   const [albums, setAlbums] = useState(null);
+
+  // State for display preferences
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [displayTopArtists, setDisplayTopArtists] = useState(true);
+  const [displayTopSongs, setDisplayTopSongs] = useState(true);
+  const [displaySavedAlbums, setDisplaySavedAlbums] = useState(true);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -58,8 +67,8 @@ const UserProfile = ({ userId }) => {
               <div className="profilePic"></div>
               <div className="profileBio"> 
                 <h3> {userName} </h3>
-                <h6> {userData && userData.followercount} Followers * {userData.followedArtistsCount} Artists Following </h6>
-                {userData.public ? ( <h6> Public </h6>) : ( <h6> Private </h6>)}
+                <h6> {userData && userData.followercount} Followers * {userData && userData.followedArtistsCount} Artists Following </h6>
+                {isPrivate ? ( <h6> Private </h6>) : ( <h6> Public </h6>)}
                 <div className="button-container"> 
                   <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
                   <a href="/Inbox" style={{textDecoration:"none"}}> 
@@ -68,37 +77,56 @@ const UserProfile = ({ userId }) => {
                 </div>
               </div>
         </div>
-        
-        <h4 className="content-header"> Top Liked Songs </h4> 
-        <div className="content-container"> 
-          {topSongs && topSongs.map((song) => (
-            <div className="songs"> 
-              <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
-              <div className="song-text">
+        {/* can decide to implement dropdown later
+        <Select
+          bg="#f9bc60"
+          placeholder="Sort By"
+          className="dropdown"
+          style={{ paddingInlineEnd: "0px" }}
+          icon=""
+        >
+          
+        </Select> */}
+        {displayTopSongs && (
+          <>
+            <h4 className="content-header"> Top Liked Songs </h4> 
+            <div className="content-container"> 
+              {topSongs && topSongs.map((song) => (
+                <div className="songs"> 
+                  <img className="song-album-cover" src={song.albumimage} alt="album cover"></img>
+                  <div className="song-text">
+                    <div className="song-name"> 
+                      {song.songname}
+                    </div>
+                    <div className="artist-name">
+                      {song.artistname[0].name}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        {displayTopArtists && (
+          <> 
+            <h4 className="content-header"> Top Artists </h4>
+            <div className="content-container"> 
+            {topArtists && topArtists.map((artist) => (
+              <div className="artists"> 
+                <img className="artist-image" src={artist.artistimage}></img>
                 <div className="song-name"> 
-                  {song.songname}
-                </div>
-                <div className="artist-name">
-                  {song.artistname[0].name}
+                  {artist.artistname}
                 </div>
               </div>
+            ))}
             </div>
-          ))}
-        </div>
-        <h4 className="content-header"> Top Artists </h4>
-        <div className="content-container"> 
-          {topArtists && topArtists.map((artist) => (
-            <div className="artists"> 
-              <img className="artist-image" src={artist.artistimage}></img>
-              <div className="song-name"> 
-                {artist.artistname}
-              </div>
-            </div>
-          ))}
-        </div>
-        <h4 className="content-header"> Saved Albums </h4>
-        <div className="content-container"> 
-          {savedAlbums && savedAlbums.map((album) => (
+          </>
+        )}
+        {displaySavedAlbums && (
+          <> 
+            <h4 className="content-header"> Saved Albums </h4>
+            <div className="content-container"> 
+            {savedAlbums && savedAlbums.map((album) => (
             <div className="albums"> 
               <img src={album.albumimage} alt="Album cover" className="artist-image"></img>
               <div className="album-name"> 
@@ -108,15 +136,23 @@ const UserProfile = ({ userId }) => {
                 </div>
               </div>
             </div>
-          ))}
-          {/* <div className="albums"> 
-          
-          </div> */}
-        </div>
+            ))}
+            </div>
+          </>
+        )}
       </div>
 
-      {isModalOpen && <EditProfileModal toggleModal={toggleModal} />}
-    
+      {isModalOpen && <EditProfileModal 
+                        toggleModal={toggleModal}
+                        isPrivate={isPrivate}
+                        displayTopSongs={displayTopSongs}
+                        displayTopArtists={displayTopArtists}
+                        displaySavedAlbums={displaySavedAlbums}
+                        setIsPrivate={setIsPrivate}
+                        setDisplayTopSongs={setDisplayTopSongs}
+                        setDisplayTopArtists={setDisplayTopArtists}
+                        setDisplaySavedAlbums={setDisplaySavedAlbums} 
+                      />}
     </>
           
   )
