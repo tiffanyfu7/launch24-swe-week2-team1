@@ -142,6 +142,7 @@ h6 {
 .artist-name {
     font-size:18px;
     margin:5px;
+    color:azure;
 }
 
 
@@ -195,14 +196,18 @@ h6 {
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    overflow:scroll;
+    height:40vh;
 }
 
 .album-name {
     font-weight:bold;
-    margin:5px;
+    margin:2px;
     width:auto;
     color:azure;
     font-size:18px;
-    overflow:hidden;
+    overflow:scroll;
+    height:10vh;
+    
 }
 

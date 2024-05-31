@@ -58,7 +58,7 @@ const UserProfile = ({ userId }) => {
               <div className="profilePic"></div>
               <div className="profileBio"> 
                 <h3> {userName} </h3>
-                <h6> {userData && userData.followercount} Followers * 30 Following </h6>
+                <h6> {userData && userData.followercount} Followers * {userData.followedArtistsCount} Artists Following </h6>
                 <div className="button-container"> 
                   <button onClick={toggleModal} className="profile-button"> Edit Profile </button>
                   <a href="/Inbox" style={{textDecoration:"none"}}> 
@@ -99,9 +99,12 @@ const UserProfile = ({ userId }) => {
         <div className="content-container"> 
           {savedAlbums && savedAlbums.map((album) => (
             <div className="albums"> 
-              <img src={album.image} alt="Album cover" className="artist-image"></img>
+              <img src={album.albumimage} alt="Album cover" className="artist-image"></img>
               <div className="album-name"> 
                 {album.albumname}
+                <div className="artist-name" style={{fontWeight: "normal"}}> 
+                  {album.artistname[0].name}
+                </div>
               </div>
             </div>
           ))}
