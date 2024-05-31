@@ -6,13 +6,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 
-const UserProfileOther = ({ userId }) => {
+const UserProfileOther = () => {
   
-  const { otherUserId } = useParams(); // getting other userId from URL
-  const [otherDocID, setOtherDocID] = useState(null);
+  const { otherDocID } = useParams(); // getting other userId from URL
+  // const [otherDocID, setOtherDocID] = useState(null);
 
-  const { userID, userName, docID } = useContext(AuthContext);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const { userID, userName, docID } = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
   const [allTimeSongs, setAllTimeSongs] = useState(null);
@@ -22,25 +21,20 @@ const UserProfileOther = ({ userId }) => {
   // State for display preferences
   const [isPrivate, setIsPrivate] = useState(false);
 
-//   const toggleModal = () => {
-//     setIsModalOpen(!isModalOpen);
-//   };
-
   const fetchUserData = async () => {
     // console.log('oioioiooii');
-    const response = await axios.get('http://localhost:8000/users');
+    const response = await axios.get(`http://localhost:8000/users/${otherDocID}`);
     console.log(response.data);
-    const allUsers = response.data;
-    // this line should filter the data to only have the correct user's document
-    const user = allUsers.find(user => user.userid === otherUserId);
-    console.log(user);
-    if (user) {
-        setUserData(user);
-        setAllTimeSongs(user.allsongs);
-        setTopArtistsYear(user.topArtistYear);
-        setAlbums(user.savedalbums);
-        setIsPrivate(!user.public);
-        setOtherDocID(user.id);
+    // const allUsers = response.data;
+    // // this line should filter the data to only have the correct user's document
+    // const user = allUsers.find(user => user.userid === otherUserId);
+    // console.log(user);
+    if (otherDocID) {
+        setUserData(response.data);
+        setAllTimeSongs(response.data.allsongs);
+        setTopArtistsYear(response.data.topArtistYear);
+        setAlbums(response.data.savedalbums);
+        setIsPrivate(!response.data.public);
     }
   }
 
@@ -55,7 +49,7 @@ const UserProfileOther = ({ userId }) => {
 
   useEffect(() => {
     fetchUserData();
-  }, [otherUserId])
+  }, [otherDocID])
 
   const topSongs = [];
   const topArtists = [];

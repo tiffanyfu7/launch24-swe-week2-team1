@@ -3,7 +3,7 @@
   background-color: #004643;
 }
 
-a, button {
+a, button, Link {
   cursor:pointer;
 }
 
