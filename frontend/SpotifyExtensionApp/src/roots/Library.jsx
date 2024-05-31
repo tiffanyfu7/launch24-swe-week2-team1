@@ -32,14 +32,14 @@ const Library = () => {
         useState(false);
 
     const [songsFilterAppliedYear, setSongsFilterAppliedYear] = useState(false);
-      const [songsFilterAppliedSixMonth, setSongsFilterAppliedSixMonth] =
-          useState(false);
+    const [songsFilterAppliedSixMonth, setSongsFilterAppliedSixMonth] =
+        useState(false);
     const [songsFilterAppliedMonth, setSongsFilterAppliedMonth] =
         useState(false);
-  
+
     const [input, setInput] = React.useState("");
-    const [searching, setSearching] =
-        useState(false);
+    const [searching, setSearching] = useState(false);
+    const [placeholder, setPlaceholder] = React.useState("");
 
     const docID = localStorage.getItem("docID");
 
@@ -62,39 +62,34 @@ const Library = () => {
     };
 
     function search(category, input) {
+        setSearching(true);
         if (category == "songs") {
-            const results = [];
-            results.push(
-                savedSongs.artistname.filter((str) => str.includes(input))
+            const results = savedSongs.filter((item) =>
+                [item.artistname, item.songname, item.albumname].some((attr) =>
+                    attr.toLowerCase().includes(input.toLowerCase())
+                )
             );
-            results.push(
-                savedSongs.songname.filter((str) => str.includes(input))
-            );
-            results.push(
-                savedSongs.albumname.filter((str) => str.includes(input))
-            );
-            setSearchResults(results);
         }
 
-        if (category == "artist") {
-            const results = [];
-            results.push(
-                savedSongs.artistname.filter((str) => str.includes(input))
-            );
-            setSearchResults(results);
+        if (category == "artists") {
+            console.log(artists);
+            let temp = [];
+            artists.forEach((item) => {if (item.artistname.toLowerCase().includes(input.toLowerCase())) {temp.push(item)}})
+            setSearchResults(temp);
         }
 
         if (category == "albums") {
-            const results = [];
-            results.push(albums.albumname.filter((str) => str.includes(input)));
-            results.push(
-                albums.artistname.filter((str) => str.includes(input))
+            const results = albums.filter((item) =>
+                [item.artistname, item.albumname].some((attr) =>
+                    attr.toLowerCase().includes(input.toLowerCase())
+                )
             );
             setSearchResults(results);
         }
     }
 
     useEffect(() => {
+        setPlaceholder("Search your " + activeTab + "...");
         fetchUser();
     }, []);
 
@@ -108,49 +103,44 @@ const Library = () => {
             setArtistFilterAppliedMonth(false);
             setArtistFilterAppliedSixMonth(false);
             setArtistFilterAppliedYear(false);
-        } 
-        else if (value === "songsBySixMonth") {
+        } else if (value === "songsBySixMonth") {
             setSongsFilterAppliedYear(false);
             setSongsFilterAppliedSixMonth(true);
             setSongsFilterAppliedMonth(false);
             setArtistFilterAppliedMonth(false);
             setArtistFilterAppliedSixMonth(false);
             setArtistFilterAppliedYear(false);
-        } 
-        else if (value === "songsByMonth") {
+        } else if (value === "songsByMonth") {
             setSongsFilterAppliedYear(false);
             setSongsFilterAppliedSixMonth(false);
             setSongsFilterAppliedMonth(true);
             setArtistFilterAppliedMonth(false);
             setArtistFilterAppliedSixMonth(false);
             setArtistFilterAppliedYear(false);
-        } 
-        else if (value === "artistsByMonth") {
-           setSongsFilterAppliedYear(false);
-           setSongsFilterAppliedSixMonth(false);
-           setSongsFilterAppliedMonth(false);
-           setArtistFilterAppliedMonth(true);
-           setArtistFilterAppliedSixMonth(false);
-           setArtistFilterAppliedYear(false);
-        } 
-        else if (value === "artistsBySixMonth") {
+        } else if (value === "artistsByMonth") {
+            setSongsFilterAppliedYear(false);
+            setSongsFilterAppliedSixMonth(false);
+            setSongsFilterAppliedMonth(false);
+            setArtistFilterAppliedMonth(true);
+            setArtistFilterAppliedSixMonth(false);
+            setArtistFilterAppliedYear(false);
+        } else if (value === "artistsBySixMonth") {
             setSongsFilterAppliedYear(false);
             setSongsFilterAppliedSixMonth(false);
             setSongsFilterAppliedMonth(false);
             setArtistFilterAppliedMonth(false);
             setArtistFilterAppliedSixMonth(true);
             setArtistFilterAppliedYear(false);
-        } 
-        else if (value === "artistsByYear") {
+        } else if (value === "artistsByYear") {
             setSongsFilterAppliedYear(false);
             setSongsFilterAppliedSixMonth(false);
             setSongsFilterAppliedMonth(false);
             setArtistFilterAppliedMonth(false);
             setArtistFilterAppliedSixMonth(false);
             setArtistFilterAppliedYear(true);
-        } 
+        }
     };
-   
+
     return (
         <>
             <NavBar />
@@ -159,11 +149,16 @@ const Library = () => {
                 <div>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <SearchBar
-                            placeholder={"Search your " + activeTab + "..."}
+                            placeholder={placeholder} //{"Search your " + activeTab + "..."}
                             input={input}
                             setInput={setInput}
                         />
-                        <button className="librarybutton" onClick={search(activeTab,input)} style={{ marginLeft: "10px" }}>
+                        <button
+                            onClick={() => {
+                                search(activeTab, input);
+                            }}
+                            style={{ marginLeft: "10px" }}
+                        >
                             Search
                         </button>
                     </div>
@@ -212,13 +207,25 @@ const Library = () => {
                             className={`header-filter ${
                                 activeTab === "artists" ? "active" : ""
                             }`}
-                            onClick={() => setActiveTab("artists")}
+                            onClick={() => {
+                                setActiveTab("artists");
+                                setSearching(false);
+                                setPlaceholder(
+                                    "Search your " + activeTab + "..."
+                                );
+                            }}
                             style={headerStyle}
                         >
                             Artists
                         </h2>
                         <h2
-                            onClick={() => setActiveTab("albums")}
+                            onClick={() => {
+                                setActiveTab("albums");
+                                setSearching(false);
+                                setPlaceholder(
+                                    "Search your " + activeTab + "..."
+                                );
+                            }}
                             className={`header-filter ${
                                 activeTab === "albums" ? "active" : ""
                             }`}
@@ -227,7 +234,13 @@ const Library = () => {
                             Albums
                         </h2>
                         <h2
-                            onClick={() => setActiveTab("songs")}
+                            onClick={() => {
+                                setActiveTab("songs");
+                                setSearching(false);
+                                setPlaceholder(
+                                    "Search your " + activeTab + "..."
+                                );
+                            }}
                             className={`header-filter ${
                                 activeTab === "songs" ? "active" : ""
                             }`}
@@ -237,7 +250,7 @@ const Library = () => {
                         </h2>
                     </div>
                 </div>
-                {activeTab === "songs" && (
+                {activeTab === "songs" && !searching && (
                     <>
                         {!songsFilterAppliedSixMonth
                             ? topSongsSixMonth.map((item, index) => (
@@ -302,6 +315,7 @@ const Library = () => {
                 )}
 
                 {activeTab === "albums" &&
+                    !searching &&
                     albums.map((item, index) => (
                         <div className="album-container" key={index}>
                             <img
@@ -316,7 +330,7 @@ const Library = () => {
                             </div>
                         </div>
                     ))}
-                {activeTab === "artists" && (
+                {activeTab === "artists" && !searching && (
                     <>
                         {!artistFilterAppliedYear
                             ? topArtistsYear.map((item, index) => (
@@ -365,6 +379,56 @@ const Library = () => {
                                       <h3>{item.artistname}</h3>
                                   </div>
                               ))}
+                    </>
+                )}
+
+                {activeTab === "albums" &&
+                    searching &&
+                    searchResults.map((item, index) => (
+                        <div className="album-container" key={index}>
+                            <img
+                                width="55"
+                                height="55"
+                                src={item.albumimage}
+                                alt="Album cover"
+                            />
+                            <div className="text">
+                                <h3>{item.albumname}</h3>
+                                <p>{item.artistname[0].name}</p>
+                            </div>
+                        </div>
+                    ))}
+                {activeTab === "songs" && searching && (
+                    <>
+                        {searchResults.map((item, index) => (
+                            <div className="artist-container" key={index}>
+                                <img
+                                    width="55"
+                                    height="55"
+                                    src={item.albumimage}
+                                    alt="Artist photo"
+                                />
+                                <div className="text">
+                                    <h3>{item.songname}</h3>
+                                    <p>{item.artistname[0].name}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
+                {activeTab === "artists" && searching && (
+                    <>
+                        {searchResults.map((item, index) => (
+                            <div className="artist-container" key={index}>
+                                <img
+                                    width="55"
+                                    height="55"
+                                    src={item.artistimage}
+                                    alt="Artist photo"
+                                />
+                                <h3>{item.artistname}</h3>
+                            </div>
+                        ))}
                     </>
                 )}
             </div>
