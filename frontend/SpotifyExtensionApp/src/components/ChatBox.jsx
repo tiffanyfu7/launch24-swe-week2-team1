@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import Message from "./Message";
 import { AuthContext } from "./AuthContext";
+import '../styles/inbox.css';
 
 const ChatBox = ({ chatId }) => {
   // const { docID } = useContext(AuthContext)
@@ -113,20 +114,20 @@ const updateCurrentTime = () => {
             <Message key={index} message={chatMessage} />
           ))}
       </div>
-      <form onSubmit={handleSubmit}>
-        
+
+      <form className="input-message" onSubmit={handleSubmit}>
         <div className="formfield-new">
-          <label id="form">Message: &nbsp;</label>
+          <label id="form"></label>
+          {/* <label id="form">Message: &nbsp;</label> */}
           <textarea
             type="text"
             defaultValue={message}
             onChange={handleChange}
-            style={{ height: "100px" }}
+            className="text-area"
           ></textarea>
         </div>
-
         <br></br>
-        <button type="submit">Send</button>
+        <button className="send-button" type="submit">Send</button>
       </form>
     </>
   );
