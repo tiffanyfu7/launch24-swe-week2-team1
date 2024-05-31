@@ -14,13 +14,11 @@ const ChatBox = ({ chatId }) => {
   let messages = [];
 
   const fetchChat = async () => {
-    console.log("entering fetchChat2");
     const chatResponse = await axios.get(
       `http://localhost:8000/chat/${chatId}`
     );
 
     const chatResponseData = chatResponse.data;
-    console.log(chatResponseData);
 
     for (var messageId of chatResponseData.messages) {
       var message = "",
@@ -36,13 +34,6 @@ const ChatBox = ({ chatId }) => {
 
       message = messageResponseData.message;
 
-      // const rawDate = messageResponseData.date;
-      // const milliseconds =
-      //   rawDate.nanoseconds / 1000000 + rawDate.seconds * 1000;
-      // const date = new Date(milliseconds);
-      // const formattedDate = date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
-      // const formattedTime = date.toLocaleTimeString("en-GB"); // Format as HH:MM:SS
-      // const newDate = formattedDate + " " + formattedTime;
       timestamp = messageResponseData.date;
 
       const userResponse = await axios.get(
@@ -62,7 +53,6 @@ const ChatBox = ({ chatId }) => {
 
       messages.push(messageToPush);
     }
-    console.log("messages array out of for loop", messages);
 
     setChatData(messages);
   };
