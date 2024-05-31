@@ -9,37 +9,32 @@ import '../styles/discover.css'
   
 const Discover = () => {
   //fetch all users from Firestore and set to userData
+  const { userID, userName, docID } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   
   const fetchUsers = async () => {
     const response = await axios.get("http://localhost:8000/users");
-    console.log("users: ", response.data);
     setUserData(response.data);
   };
 
-  // const fetchMessages = async () => {
-  //   const response = await axios.get("http://localhost:8000/chatmessages");
-  //   console.log("all messages",response.data);
-  //   setAllMessages(response.data);
-  // };
-
-  // const postUser = async () => {
-  //   const response = await axios.post("http://localhost:8000/user");
-  //   console.log("forums", response.data);
-  //   // setForums(response.data);
-  // };
-
+  const fetchCurrentUser = async () => {
+    const responseUser = await axios.get(`http://localhost:8000/users/${docID}`);
+    setCurrentUser(responseUser.data);
+  }
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const { userID, userName, docID } = useContext(AuthContext);
+  useEffect(() => {
+    fetchCurrentUser();
+  }, [userData]);
 
   // will display default orange background if profilepic is null for user
   let isProfilePic = false;
-  if (userData && userData.profilepic) {
+  if (currentUser && currentUser.profilepic) {
     isProfilePic = true;
   }
 
@@ -54,25 +49,24 @@ const Discover = () => {
           </div>
           <a href="/UserProfile"> 
             <div className="userProfile"> 
-                {isProfilePic ? (
-                  <div>
-                    <img className="userProfilePic" src={userData.profilepic} alt="Profile Pic"></img>
-                  </div>
-                ) : (
-                  <div className="userProfilePic"></div>
-                )}
-                <h4> {userName} </h4>
+              {isProfilePic ? (
+                <div>
+                  <img className="userProfilePic" src={currentUser.profilepic} alt="Profile Pic"></img>
+                </div>
+              ) : (
+                <div className="userProfilePic"></div>
+              )}
+              <h4>{userName}</h4>
             </div>
           </a>
         </div>
         <div>
           <h1 style={{marginTop: "100px"}}>Based On Your Groove</h1>
           <div className="user-cards-container">
-            {userData && userData.map((user, index) =>
-              ((user.id !== userID && user.public) ?
-                <ProfileCard key={index} profileData={user} variant="user" />
-                : null
-            ))}
+            {userData && userData.map((user, index) => {
+              if (user.userid !== userID && user.public)
+                return <ProfileCard key={index} profileData={user} variant="user" />
+            })}
           </div>
         </div>
       </div>

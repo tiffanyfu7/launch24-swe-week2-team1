@@ -12,7 +12,6 @@ const Discussion = ({ forumId }) => {
 
     const fetchForum = async () => {
         const response = await axios.get(`http://localhost:8000/forum/${forumId}`);
-        console.log("forum: ", response.data);
         setForumData(response.data);
     };
 
