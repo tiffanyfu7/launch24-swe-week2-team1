@@ -73,4 +73,21 @@ router.put("/query/:query", async (req, res) => {
   }
 })
 
+//update user privacy setting
+router.put("/public/:id", async (req, res) => {
+  try {
+      const isPublic = req.body.public;
+      const userId = req.body.userId;
+      console.log("user ID:", userId);
+      console.log("new privacy setting:", isPublic);
+
+      await updateDoc(doc(db, "users", userId), {
+          public: isPublic,
+      });
+      res.status(200).json({ message: "Profile privacy updated successfully" });
+  } catch (e) {
+      res.status(400).json({ error: e.message });
+  }
+});
+
 module.exports = router;
