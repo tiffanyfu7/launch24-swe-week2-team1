@@ -76,14 +76,14 @@ Set up a project with Firebase to setup permissions.json file
 - See your Tops Songs over Different Periods of Time
 
 ### Tutorial
-Log In with Your Spotify Account Information
-Use the Navigation Bar to View Different Pages
-View Your Profile by clicking on the Top Rightside Icon on Discover Page
-View Other Users Profiles and Message them by clicking on the Message button
-See All Conversations and Chat with Specific Users by clicking on a card in Inbox
-View Discussion Forums surrounding popular Albums on Spotify
-See Artist Message and Like or Reply to a Specific Discussion
-Toggle Between Your Saved Songs, Artists, and Albums and Sort by Top Listens in The Library
+1. Log In with Your Spotify Account Information
+2. Use the Navigation Bar to View Different Pages
+3. View Your Profile by clicking on the Top Rightside Icon on Discover Page
+4. View Other Users Profiles and Message them by clicking on the Message button
+5. See All Conversations and Chat with Specific Users by clicking on a card in Inbox
+6. View Discussion Forums surrounding popular Albums on Spotify
+7. See Artist Message and Like or Reply to a Specific Discussion
+8. Toggle Between Your Saved Songs, Artists, and Albums and Sort by Top Listens in The Library
 
 ### Credits
 Authors: Tiffany Fu, Pine, Abhinav, Anna, Anh
