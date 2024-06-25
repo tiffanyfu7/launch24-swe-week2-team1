@@ -6,6 +6,8 @@ Authors: Tiffany Fu, Pine Netcharussaeng, Abhinav Attaluri, Anna Batman , Anh Ng
 1. Installation
 2. Features
 3. Tutorial
+4. Additional Media
+5. Credits
 
 ### Installation
 To run our app follow these steps
@@ -84,6 +86,12 @@ Set up a project with Firebase to setup permissions.json file
 6. View Discussion Forums surrounding popular Albums on Spotify
 7. See Artist Message and Like or Reply to a Specific Discussion
 8. Toggle Between Your Saved Songs, Artists, and Albums and Sort by Top Listens in The Library
+
+### Additional Media
+<img width="1194" alt="Screenshot 2024-06-25 at 6 57 19 PM" src="https://github.com/tiffanyfu7/launch24-swe-week2-team1/assets/71473099/0d72e040-dc26-4145-a7dc-08ee52465fe1">
+![3](https://github.com/tiffanyfu7/launch24-swe-week2-team1/assets/71473099/d18ac06e-4b1e-4642-a886-b869b24f0177)
+
+
 
 ### Credits
 Authors: Tiffany Fu, Pine, Abhinav, Anna, Anh
